@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Sobre a Agência | Guia</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+<!-- HEADER PADRÃO -->
 <header aria-label="Cabeçalho da Guia (Agência)">
   <div class="container nav">
-    <!-- Link volta sempre para o index.html -->
     <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
       <span class="dot" aria-hidden="true"></span>
       <span>Guia</span>
     </a>
 
-    <!-- Links para cada seção do index.html -->
     <nav class="menu" aria-label="Navegação do produto">
       <a href="pagina_empresa.html">Sobre a agência</a>
       <a href="index.html#como-funciona">Como funciona</a>
@@ -26,7 +25,6 @@
       <a href="index.html#faq">FAQ</a>
     </nav>
 
-    <!-- Botões -->
     <div style="display:flex; gap:12px; align-items:center">
       <a class="btn secondary" href="index.html#contato">Falar com a agência</a>
       <a class="btn primary" href="index.html#contato">Saiba mais</a>
@@ -37,25 +35,28 @@
 <main>
   <section class="section">
     <div class="container">
-      <h1 class="headline">Sobre Nossa Empresa</h1>
-      <p class="subhead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Donec nec leo vehicula, gravida nulla eu, egestas sapien.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Cras nec eros et nunc maximus placerat. Nullam blandit, ex a finibus faucibus, 
-        nisi justo condimentum massa, vitae suscipit nulla magna id eros.
-      </p>
-      <p>
-        Phasellus luctus felis nec bibendum suscipit. Quisque nec urna quis eros fermentum ultrices. 
-        Curabitur sed urna ac diam suscipit semper.
-      </p>
+      <div class="card" style="padding:32px">
+        <h1 class="headline">Sobre Nossa Empresa</h1>
+        <p class="subhead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec leo vehicula,
+          gravida nulla eu, egestas sapien.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec eros et nunc maximus
+          placerat. Nullam blandit, ex a finibus faucibus, nisi justo condimentum massa, vitae
+          suscipit nulla magna id eros.
+        </p>
+        <p>
+          Phasellus luctus felis nec bibendum suscipit. Quisque nec urna quis eros fermentum
+          ultrices. Curabitur sed urna ac diam suscipit semper. Nam nec augue sed ligula viverra
+          laoreet. In vel commodo urna.
+        </p>
+      </div>
     </div>
   </section>
 </main>
 
-<footer class="footer" style="text-align:center; padding:20px; background:var(--surface); color:var(--muted)">
+<footer class="footer">
   © <span id="ano"></span> Guia — Todos os direitos reservados
 </footer>
 
