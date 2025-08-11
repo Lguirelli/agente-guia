@@ -121,6 +121,9 @@
     nav.menu { justify-self: end; }
     nav.menu[hidden] { display: flex; } /* garante visível no desktop */
   }
+
+  /* Bloqueio de scroll quando menu aberto no mobile */
+  html.no-scroll, body.no-scroll { overflow: hidden; }
 </style>
 </head>
 <body>
@@ -162,15 +165,22 @@
 
     const mqDesktop = window.matchMedia('(min-width: 961px)');
 
+    function lockScroll(shouldLock) {
+      document.documentElement.classList.toggle('no-scroll', shouldLock);
+      document.body.classList.toggle('no-scroll', shouldLock);
+    }
+
     function setState(isOpen) {
       menuToggle.classList.toggle('is-open', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
       menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
-      // No mobile, controlamos o hidden; no desktop, sempre visível
+
       if (!mqDesktop.matches) {
         siteMenu.hidden = !isOpen;
+        lockScroll(isOpen);                 // bloqueia scroll no mobile quando aberto
       } else {
         siteMenu.hidden = false;
+        lockScroll(false);
       }
     }
 
@@ -187,14 +197,28 @@
       if (!mqDesktop.matches) setState(false);
     });
 
-    // Ajusta estado ao mudar o breakpoint (ex.: rotate, resize)
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuToggle.classList.contains('is-open')) {
+        setState(false);
+      }
+    });
+
+    // Click fora fecha no mobile
+    document.addEventListener('click', (e) => {
+      if (mqDesktop.matches) return;
+      const clickedInside = e.target.closest('nav.menu, .menu-toggle');
+      if (!clickedInside && menuToggle.classList.contains('is-open')) {
+        setState(false);
+      }
+    });
+
+    // Ajusta estado ao mudar o breakpoint
     mqDesktop.addEventListener('change', () => {
       if (mqDesktop.matches) {
-        // desktop: manter aberto
-        setState(true);
+        setState(true);   // desktop: manter aberto
       } else {
-        // mobile: iniciar fechado
-        setState(false);
+        setState(false);  // mobile: iniciar fechado
       }
     });
 
