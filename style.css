@@ -65,10 +65,12 @@ header{
   gap:20px; min-height:var(--header-h);
 }
 .brand{display:inline-flex; align-items:center; gap:10px; font-weight:700}
+/* Agora .dot é um <img src="icone.svg"> */
 .brand .dot{
-  width:12px; height:12px; border-radius:999px;
-  background:radial-gradient(circle at 30% 30%, #7fd1ff, var(--primary));
-  box-shadow:0 0 16px rgba(58,169,255,.8);
+  width:12px; height:12px; display:block;
+  object-fit:contain;
+  /* brilho sutil para manter o “glow” do antigo círculo */
+  filter: drop-shadow(0 0 6px rgba(58,169,255,.6));
 }
 
 /* menu desktop padrão */
@@ -149,6 +151,10 @@ header{
 /* ===== Responsivo ===== */
 @media (max-width: 860px){
   .nav{align-items:center; padding:10px 0}
+
+  /* mais espaço à esquerda do logo (ícone + “Guia”) */
+  .brand{ padding-left:12px; }
+
   /* mostra o hambúrguer e transforma o menu em overlay */
   .menu-toggle{display:inline-flex}
 
@@ -161,8 +167,17 @@ header{
     transform:translateY(-8px);
     opacity:0; pointer-events:none;
     transition:transform .18s ease, opacity .18s ease;
+    /* alinhar coluna inteira à direita */
+    align-items:flex-end;
   }
-  .menu a{padding:10px 12px; border-radius:10px}
+
+  /* links do dropdown alinhados à direita */
+  .menu a{
+    padding:10px 12px;
+    border-radius:10px;
+    text-align:right;
+  }
+
   .menu.open{transform:translateY(0); opacity:1; pointer-events:auto}
 
   /* CTA do menu empilhada */
