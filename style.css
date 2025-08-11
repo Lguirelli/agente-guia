@@ -80,8 +80,33 @@ header{
 .menu-toggle{
   display:none; width:44px; height:44px; border:1px solid var(--border);
   background:transparent; border-radius:12px; align-items:center; justify-content:center;
+  flex-direction:column; gap:5px; /* espaçamento vertical entre barras */
 }
-.menu-toggle .bar{display:block; width:20px; height:2px; background:var(--text); margin:3px 0; border-radius:2px}
+.menu-toggle .bar{
+  display:block;
+  width:20px; height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transition:transform 180ms ease, opacity 180ms ease, width 180ms ease; /* transições para animação */
+  transform-origin:center;
+}
+
+/* nomeando barras para animar separadamente */
+.menu-toggle .bar-top { }
+.menu-toggle .bar-middle { }
+.menu-toggle .bar-bottom { }
+
+/* estado aberto → vira X */
+.menu-toggle.is-open .bar-top {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.is-open .bar-middle {
+  opacity: 0;
+  width: 0;
+}
+.menu-toggle.is-open .bar-bottom {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ===== Botões ===== */
 .btn{
