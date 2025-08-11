@@ -18,15 +18,27 @@ fetch('header.html')
 
     const closeMenu = () => {
       btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('is-open');                 // ⬅ animação: volta para 3 barras
+      btn.setAttribute('aria-label', 'Abrir menu');    // ⬅ acessibilidade (opcional)
+
       document.documentElement.classList.remove('no-scroll');
       nav.classList.remove('open');
+      // Se usar [hidden] no mobile:
+      // nav.hidden = true;                             // ⬅ opcional
     };
 
     const toggleMenu = () => {
       const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      nav.classList.toggle('open', !open);
-      document.documentElement.classList.toggle('no-scroll', !open);
+      const next = !open;
+
+      btn.setAttribute('aria-expanded', String(next));
+      btn.classList.toggle('is-open', next);           // ⬅ animação: 3 barras ↔ X
+      btn.setAttribute('aria-label', next ? 'Fechar menu' : 'Abrir menu'); // ⬅ opcional
+
+      nav.classList.toggle('open', next);
+      document.documentElement.classList.toggle('no-scroll', next);
+      // Se usar [hidden] no mobile:
+      // nav.hidden = !next;                            // ⬅ opcional
     };
 
     btn.addEventListener('click', toggleMenu);
@@ -41,5 +53,8 @@ fetch('header.html')
     window.addEventListener('resize', () => {
       if (window.innerWidth > 860) closeMenu();
     });
+
+    // estado inicial (mobile começa fechado)
+    closeMenu(); // ⬅ garante que o botão e o menu comecem coerentes
   })
   .catch(err => console.error('Falha ao carregar header.html:', err));
