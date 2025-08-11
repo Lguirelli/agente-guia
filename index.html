@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Agente Guia 1.0 — Atendimento automatizado no WhatsApp</title>
+  <meta name="description" content="Agente Guia 1.0 automatiza o atendimento no WhatsApp: captação, qualificação e encaminhamento de leads com tom humanizado e operação simples." />
+  <meta name="theme-color" content="#0D0D0D" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0D0D0D; --surface:#151515; --text:#FFFFFF; --muted:#B3B3B3;
+      --primary:#007BFF; --primary-hover:#0066D6; --secondary:#00E6E6;
+      --border:#2A2A2A; --gradientPrimary: linear-gradient(135deg,#007BFF 0%,#00E6E6 100%);
+      --ff-display: Poppins, ui-sans-serif, system-ui; --ff-body: Poppins, ui-sans-serif, system-ui;
+      --fs-h1: clamp(32px,6vw,56px); --fs-h2: clamp(24px,4.5vw,40px); --fs-h3: clamp(20px,3.5vw,28px);
+      --fs-body: 16px; --fs-small:14px; --lh-tight:1.05; --lh-normal:1.35;
+      --radius-md:16px; --radius-lg:20px; --radius-pill:999px;
+      --shadow-md:0 10px 30px rgba(0,0,0,.35); --shadow-glow:0 0 24px rgba(0,123,255,.45);
+      --container:1200px; --gutter:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font:400 var(--fs-body)/var(--lh-normal) var(--ff-body); color:var(--text); background:var(--bg)}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+    .container{width:min(100% - var(--gutter), var(--container)); margin-inline:auto}
+    .section{padding: clamp(64px, 7vw, 96px) 0}
+    .grid{display:grid; gap:var(--gutter)}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width:1024px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+    /* Tipografia e utilitários */
+    .headline{text-transform:uppercase; font-family:var(--ff-display); font-size:var(--fs-h2); font-weight:800; letter-spacing:-0.01em; line-height:var(--lh-tight); margin:0}
+    .subhead{color:var(--muted); font-size:var(--fs-body); margin:8px 0 0 0}
+    .eyebrow{text-transform:uppercase; font-weight:700; color:var(--secondary); letter-spacing:.08em}
+    .muted{color:var(--muted)}
+
+    /* Componentes */
+    .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-md); padding:var(--gutter)}
+    .tag{display:inline-block; border:1px solid var(--border); border-radius:var(--radius-pill); padding:6px 10px; color:var(--muted)}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:var(--radius-pill); background:rgba(0,123,255,.12); color:var(--primary); font-weight:700}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:var(--radius-pill); padding:14px 20px; font-weight:700; border:1px solid transparent; transition:background .22s cubic-bezier(.22,.61,.36,1), transform .12s cubic-bezier(.22,.61,.36,1)}
+    .btn.primary{background:var(--primary); color:var(--text); box-shadow:var(--shadow-glow)}
+    .btn.primary:hover{background:var(--primary-hover); transform:translateY(-1px)}
+    .btn.secondary{background:transparent; color:var(--text); border:1px solid var(--border)}
+    .btn.secondary:hover{background:rgba(255,255,255,.06)}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(180%) blur(8px); background:rgba(13,13,13,.65); border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; height:72px}
+    .brand{display:flex; align-items:center; gap:.6rem; font-weight:900}
+    .brand .dot{width:12px; height:12px; border-radius:50%; background:var(--primary)}
+    .menu{display:flex; gap:12px; align-items:center}
+    .menu a{padding:.6rem .8rem; border-radius:10px; color:var(--muted); font-weight:600}
+    .menu a:hover{color:var(--text)}
+
+    /* Hero */
+    .hero{position:relative; overflow:hidden; padding: clamp(72px, 8vw, 140px) 0}
+    .hero::before{content:""; position:absolute; inset:-20% -10% auto -10%; height:80%; background:var(--gradientPrimary); filter:blur(28px); opacity:.22; pointer-events:none}
+    .h1{font-size:var(--fs-h1); line-height:1.1; font-weight:800; letter-spacing:-0.01em; margin:0 0 12px; text-transform:uppercase}
+    .lead{font-size:clamp(16px,1.4vw,20px); color:var(--muted); max-width:65ch}
+
+    /* Tabela simples */
+    .table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:var(--radius-lg); border:1px solid var(--border)}
+    .table th,.table td{padding:14px 16px; border-bottom:1px solid var(--border); text-align:left}
+    .table th{background:#111; font-weight:700}
+    .table tr:last-child td{border-bottom:none}
+
+    footer{padding:40px 0; border-top:1px solid var(--border); background:var(--surface); color:var(--muted)}
+    .input{width:100%; padding:14px 16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#0F0F0F; color:var(--text)}
+    .input:focus{outline:2px solid var(--primary)}
+  </style>
+</head>
+<body>
+  <a href="#conteudo" class="pill" style="position:absolute; left:-999px; top:-999px">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header aria-label="Cabeçalho da Guia (Agência)">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Voltar para o site da Guia (Agência)">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Guia</span>
+      </a>
+      <nav class="menu" aria-label="Navegação do produto">
+        <a href="/sobre">Sobre a agência</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#planos">Planos</a>
+        <a href="#seguranca">Segurança & LGPD</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div style="display:flex; gap:12px; align-items:center">
+        <a class="btn secondary" href="/contato">Falar com a agência</a>
+        <a class="btn primary" href="#contato">Saiba mais</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- HERO: FOCO WHATSAPP -->
+    <section class="hero" id="home">
+      <div class="container grid" style="grid-template-columns:1.15fr .85fr; align-items:center">
+        <div>
+          <span class="eyebrow">VERSÃO 1.0</span>
+          <h1 class="h1">AGENTE GUIA 1.0 — ATENDIMENTO AUTOMATIZADO NO WHATSAPP</h1>
+          <p class="lead">Captação, qualificação e encaminhamento de leads diretamente pelo WhatsApp. Tom humanizado, respostas rápidas e transferência para humano quando precisar.</p>
+          <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
+            <a class="btn primary" href="#como-funciona">Saiba mais</a>
+            <a class="btn secondary" href="#planos">Ver planos</a>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px">
+            <span class="tag">WhatsApp Business Platform</span>
+            <span class="tag">Templates oficiais</span>
+            <span class="tag">Handover humano</span>
+          </div>
+        </div>
+        <div class="card" aria-label="Mockup do Agente Guia 1.0 em ação">
+          <img src="./robo_hero.png" alt="Robo Agente Guia — imagem de capa" loading="eager" width="800" height="560" style="width:100%;height:auto;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE A AGÊNCIA (RESUMO) -->
+    <section class="section" id="sobre-agencia">
+      <div class="container card" style="text-align:center">
+        <h2 class="headline">UM PARCEIRO ESTRATÉGICO, ALÉM DO BOT</h2>
+        <p class="subhead" style="max-width:720px; margin:0 auto">Implementamos e cuidamos da operação para que o atendimento no WhatsApp funcione sem atritos. Você foca no que importa: vender.</p>
+        <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-top:20px">
+          <div class="tag">+120 empresas</div>
+          <div class="tag">98% de satisfação</div>
+          <div class="tag">Suporte 24/7</div>
+        </div>
+        <div style="margin-top:24px; text-align:center">
+          <a class="btn primary" href="#como-funciona">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA (WHATSAPP-ONLY) -->
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <h2 class="headline">COMO FUNCIONA NO WHATSAPP</h2>
+        <div class="grid grid-4" style="margin-top:12px">
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">1) DIAGNÓSTICO</h3><p class="muted">Levantamos seus principais motivos de contato e definimos o fluxo inicial (v1.0).</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">2) CONFIGURAÇÃO</h3><p class="muted">Ajuste de provedor/numeração, templates Meta e políticas de envio.</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">3) FLUXOS & TOM</h3><p class="muted">Rotas de qualificação, perguntas-chave, links úteis e tom humanizado.</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">4) GO LIVE</h3><p class="muted">Publicação, monitoramento em tempo real e ajustes na primeira semana.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECURSOS DO 1.0 -->
+    <section class="section" id="recursos">
+      <div class="container">
+        <h2 class="headline">RECURSOS ESSENCIAIS DA VERSÃO 1.0</h2>
+        <div class="grid grid-3" style="margin-top:12px">
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">QUALIFICAÇÃO RÁPIDA</h3><p class="muted">Coleta nome, intenção e região em 3–5 interações.</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">RESPOSTAS PRONTAS</h3><p class="muted">Catálogo, horários, entrega, preços e políticas em um toque.</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">HANDOVER HUMANO</h3><p class="muted">Encaminhamento para atendente em casos sensíveis ou fechamento.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS (WHATSAPP) -->
+    <section class="section" id="planos">
+      <div class="container">
+        <h2 class="headline">PLANOS PARA COMEÇAR AGORA</h2>
+        <p class="subhead">Escolha o volume e o nível de suporte. Evolua quando precisar.</p>
+        <div class="grid grid-3" style="margin-top:16px">
+          <div class="card">
+            <h3 class="headline" style="font-size:var(--fs-h3)">ESSENCIAL</h3>
+            <p class="muted">WhatsApp único • Fluxo base</p>
+            <p class="price">R$ 790/mês</p>
+            <ul class="muted" style="margin:8px 0 12px 16px">
+              <li>Configuração inicial</li>
+              <li>Qualificação padrão</li>
+              <li>Suporte por e-mail</li>
+            </ul>
+            <a class="btn primary" href="#contato">Assinar</a>
+          </div>
+          <div class="card">
+            <h3 class="headline" style="font-size:var(--fs-h3)">PRO</h3>
+            <p class="muted">Volume maior • Ajustes mensais</p>
+            <p class="price">R$ 1.490/mês</p>
+            <ul class="muted" style="margin:8px 0 12px 16px">
+              <li>Templates promocionais</li>
+              <li>Relatório mensal simples</li>
+              <li>Suporte prioritário</li>
+            </ul>
+            <a class="btn primary" href="#contato">Assinar</a>
+          </div>
+          <div class="card">
+            <h3 class="headline" style="font-size:var(--fs-h3)">EMPRESARIAL</h3>
+            <p class="muted">SLAs • Governança</p>
+            <p class="price">Sob consulta</p>
+            <ul class="muted" style="margin:8px 0 12px 16px">
+              <li>Políticas e aprovações</li>
+              <li>Supervisão e treinos</li>
+              <li>Multi-equipe</li>
+            </ul>
+            <a class="btn primary" href="#contato">Falar com vendas</a>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:8px; font-size:12px">Valores indicativos. Sujeito a impostos e provedor WhatsApp.</p>
+      </div>
+    </section>
+
+    <!-- SEGURANÇA / LGPD (FOCO WHATSAPP) -->
+    <section class="section" id="seguranca">
+      <div class="container">
+        <h2 class="headline">SEGURANÇA & LGPD</h2>
+        <table class="table" aria-label="Práticas de segurança e privacidade">
+          <thead><tr><th>Área</th><th>Prática</th></tr></thead>
+          <tbody>
+            <tr><td>Consentimento</td><td>Opt-in pelo WhatsApp e controle de opt-out.</td></tr>
+            <tr><td>Retenção</td><td>Política de prazo conforme uso; descarte periódico.</td></tr>
+            <tr><td>Criptografia</td><td>Trânsito TLS; armazenamento conforme provedor.</td></tr>
+            <tr><td>Acesso</td><td>Perfis autorizados, logs básicos e revisões regulares.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <h2 class="headline">PERGUNTAS FREQUENTES</h2>
+        <div class="grid grid-3" style="margin-top:16px">
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">EM QUANTO TEMPO PUBLICA?</h3><p class="muted">A v1.0 costuma ir ao ar em poucos dias após a configuração do número.</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">FUNCIONA NO MEU NÚMERO?</h3><p class="muted">Sim, via WhatsApp Business Platform (provedor oficial).</p></div>
+          <div class="card"><h3 class="headline" style="font-size:var(--fs-h3)">PRECISO SABER DE IA?</h3><p class="muted">Não. Cuidamos da implementação, dos fluxos e dos ajustes iniciais.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" id="cta" style="padding:56px 0; background:var(--gradientPrimary)">
+      <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; color:#0D0D0D">
+        <div>
+          <h2 class="headline" style="color:#0D0D0D">PRONTO PARA TESTAR O AGENTE GUIA 1.0?</h2>
+          <p class="subhead" style="color:#0D0D0D">Marque uma conversa e veja como fica no seu WhatsApp.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn primary" href="#contato" style="background:#0D0D0D; color:#fff; box-shadow:none">Saiba mais</a>
+          <a class="btn secondary" href="#planos">Ver planos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section" id="contato">
+      <div class="container grid grid-2">
+        <div>
+          <h2 class="headline">FALE COM A GUIA</h2>
+          <p class="subhead">Tire dúvidas e peça uma apresentação rápida pelo WhatsApp.</p>
+          <ul class="muted" style="margin-top:8px">
+            <li>E-mail: contato@guia.ag</li>
+            <li>WhatsApp: (11) 99999-9999</li>
+          </ul>
+        </div>
+        <form class="card" aria-label="Formulário de contato" onsubmit="event.preventDefault(); alert('Enviado! Substituir por backend.');">
+          <label>Nome<br><input class="input" required name="name" autocomplete="name"></label>
+          <div style="height:8px"></div>
+          <label>Empresa<br><input class="input" required name="company" autocomplete="organization"></label>
+          <div style="height:8px"></div>
+          <label>WhatsApp<br><input class="input" required type="tel" name="whatsapp" autocomplete="tel"></label>
+          <div style="height:8px"></div>
+          <label>E-mail (opcional)<br><input class="input" type="email" name="email" autocomplete="email"></label>
+          <div style="height:12px"></div>
+          <button class="btn primary" type="submit">Quero testar o Agente Guia 1.0</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap">
+      <small class="muted">© <span id="y"></span> Guia — Todos os direitos reservados</small>
+      <div style="display:flex; gap:12px">
+        <a class="tag" href="#">LinkedIn</a>
+        <a class="tag" href="#">Instagram</a>
+        <a class="tag" href="#">Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
