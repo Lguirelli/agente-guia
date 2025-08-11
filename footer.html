@@ -1,0 +1,13 @@
+<footer class="footer">
+  <div class="container" style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap">
+    <small class="muted">© <span id="footer-year"></span> Guia — Todos os direitos reservados</small>
+    <div style="display:flex; gap:12px">
+      <a class="tag" href="https://www.instagram.com" target="_blank" aria-label="Instagram">Instagram</a>
+      <a class="tag" href="https://wa.me/5511999999999" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+      <a class="tag" href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
