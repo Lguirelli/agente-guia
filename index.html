@@ -9,13 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <!-- seu CSS global com as regras responsivas do header -->
+  <!-- CSS global -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a href="#conteudo" class="btn secondary" style="position:absolute; left:-999px; top:-999px">Pular para o conteúdo</a>
 
-  <!-- Header compartilhado (carregado via fetch em header.js) -->
+  <!-- Header compartilhado -->
   <div id="site-header"></div>
   <script src="header.js" defer></script>
 
@@ -47,10 +47,22 @@
       <div class="container">
         <h2 class="headline">COMO FUNCIONA NO WHATSAPP</h2>
         <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:12px">
-          <div class="card" style="padding:20px"><h3 class="headline" style="font-size:20px">1) DIAGNÓSTICO</h3><p class="subhead">Levantamos motivos de contato e definimos o fluxo v1.0.</p></div>
-          <div class="card" style="padding:20px"><h3 class="headline" style="font-size:20px">2) CONFIGURAÇÃO</h3><p class="subhead">Provedor/numeração, templates e políticas.</p></div>
-          <div class="card" style="padding:20px"><h3 class="headline" style="font-size:20px">3) FLUXOS & TOM</h3><p class="subhead">Rotas de qualificação e tom humanizado.</p></div>
-          <div class="card" style="padding:20px"><h3 class="headline" style="font-size:20px">4) GO LIVE</h3><p class="subhead">Publicação e ajustes iniciais.</p></div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px">1) DIAGNÓSTICO</h3>
+            <p class="subhead">Levantamos motivos de contato e definimos o fluxo v1.0.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px">2) CONFIGURAÇÃO</h3>
+            <p class="subhead">Provedor/numeração, templates e políticas.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px">3) FLUXOS & TOM</h3>
+            <p class="subhead">Rotas de qualificação e tom humanizado.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px">4) GO LIVE</h3>
+            <p class="subhead">Publicação e ajustes iniciais.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -112,7 +124,6 @@
   </footer>
 
   <script>
-    // não precisamos injetar o header aqui, já vem via header.js
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
