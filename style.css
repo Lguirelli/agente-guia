@@ -1,4 +1,3 @@
-
 /* ===== Guia • Design tokens ===== */
 :root{
   --bg:#0b0c10;
@@ -18,6 +17,8 @@
 
   --radius:16px;
   --shadow:0 10px 30px rgba(0,0,0,.35);
+
+  --header-h:64px; /* altura do header */
 }
 
 /* ===== Reset básico ===== */
@@ -31,7 +32,6 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
-
 a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
 
@@ -42,16 +42,15 @@ img{max-width:100%; display:block}
   margin:0 auto;
   padding:0 20px;
 }
-
 .section{
-  padding:72px 0;
+  padding:clamp(56px, 7vw, 72px) 0;
 }
-
 .card{
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
 /* ===== Header / Navbar ===== */
@@ -61,12 +60,10 @@ header{
   background:linear-gradient(180deg, rgba(19,21,26,.9), rgba(19,21,26,.6));
   border-bottom:1px solid var(--border);
 }
-
 .nav{
   display:flex; align-items:center; justify-content:space-between;
-  gap:20px; min-height:64px;
+  gap:20px; min-height:var(--header-h);
 }
-
 .brand{display:inline-flex; align-items:center; gap:10px; font-weight:700}
 .brand .dot{
   width:12px; height:12px; border-radius:999px;
@@ -74,11 +71,17 @@ header{
   box-shadow:0 0 16px rgba(58,169,255,.8);
 }
 
+/* menu desktop padrão */
 .menu{display:flex; gap:18px; align-items:center; flex-wrap:wrap}
-.menu a{
-  padding:8px 10px; border-radius:10px; color:var(--muted);
-}
+.menu a{padding:8px 10px; border-radius:10px; color:var(--muted)}
 .menu a:hover{color:var(--text); background:rgba(255,255,255,.04)}
+
+/* botão hamburguer (escondido no desktop) */
+.menu-toggle{
+  display:none; width:44px; height:44px; border:1px solid var(--border);
+  background:transparent; border-radius:12px; align-items:center; justify-content:center;
+}
+.menu-toggle .bar{display:block; width:20px; height:2px; background:var(--text); margin:3px 0; border-radius:2px}
 
 /* ===== Botões ===== */
 .btn{
@@ -91,22 +94,20 @@ header{
   box-shadow:0 6px 18px rgba(58,169,255,.35);
 }
 .btn.primary:hover{background:var(--primary-strong); transform:translateY(-1px)}
-.btn.secondary{
-  background:transparent; color:var(--text); border-color:var(--border);
-}
+.btn.secondary{background:transparent; color:var(--text); border-color:var(--border)}
 .btn.secondary:hover{background:rgba(255,255,255,.05)}
 
 /* ===== Tipografia ===== */
 .headline{
   margin:0 0 12px;
   font-weight:800;
-  text-transform:uppercase;                /* títulos em CAIXA ALTA */
+  text-transform:uppercase;
   letter-spacing:.6px;
   font-size:clamp(28px, 4vw, 44px);
 }
 .subhead{
   margin:0 0 26px; color:var(--muted);
-  font-size:clamp(16px, 2.2vw, 18px);      /* texto complementar normal */
+  font-size:clamp(15px, 2.2vw, 18px);
 }
 
 /* ===== Footer ===== */
@@ -117,8 +118,30 @@ header{
 }
 
 /* ===== Responsivo ===== */
-@media (max-width:800px){
-  .nav{align-items:flex-start; padding:10px 0}
-  .menu{gap:10px}
+@media (max-width: 860px){
+  .nav{align-items:center; padding:10px 0}
+  /* mostra o hambúrguer e transforma o menu em overlay */
+  .menu-toggle{display:inline-flex}
+
+  .menu{
+    position:fixed; left:0; right:0; top:var(--header-h);
+    display:flex; flex-direction:column; gap:8px;
+    padding:16px;
+    background:rgba(19,21,26,.96);
+    border-top:1px solid var(--border);
+    transform:translateY(-8px);
+    opacity:0; pointer-events:none;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .menu a{padding:10px 12px; border-radius:10px}
+  .menu.open{transform:translateY(0); opacity:1; pointer-events:auto}
+
+  /* CTA do menu empilhada */
+  .menu .btn{width:100%; height:44px}
+
+  /* botões em geral um pouco menores */
   .btn{height:38px; padding:0 14px}
 }
+
+/* bloqueio de scroll quando menu aberto */
+html.no-scroll, body.no-scroll{overflow:hidden}
