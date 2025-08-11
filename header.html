@@ -1,3 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Guia — Header com Menu Animado</title>
+<style>
+  :root{
+    --nav-h: 64px;
+    --bar-w: 28px;
+    --bar-h: 2.5px;
+    --bar-gap: 6px;
+    --anim: 180ms ease;
+    --fg: #0f172a; /* slate-900 */
+    --fg-inv: #fff;
+    --bg: #ffffff;
+    --accent: #2563eb; /* azul */
+    --accent-2: #0ea5e9; /* ciano */
+    --btn-r: 999px;
+    --container: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", "Apple Color Emoji", "Segoe UI Emoji"; color: var(--fg); background: var(--bg); }
+
+  /* Layout do header */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(2,6,23,.06);
+  }
+  .container.nav {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 16px;
+    height: var(--nav-h);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Marca */
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: inherit; text-decoration: none; font-weight: 700; letter-spacing: .2px;
+    font-size: 18px;
+  }
+  .brand .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  }
+
+  /* Botão hamburguer */
+  .menu-toggle {
+    -webkit-tap-highlight-color: transparent;
+    background: transparent; border: 0; cursor: pointer;
+    padding: 10px; margin: 0; justify-self: end;
+    display: inline-flex; flex-direction: column; justify-content: center; gap: var(--bar-gap);
+  }
+  .menu-toggle .bar {
+    display: block;
+    width: var(--bar-w); height: var(--bar-h);
+    background: var(--fg);
+    border-radius: 2px;
+    transition: transform var(--anim), opacity var(--anim), width var(--anim), background-color var(--anim);
+    transform-origin: center;
+  }
+  /* Estado aberto → vira X */
+  .menu-toggle.is-open .bar-top    { transform: translateY(calc(var(--bar-gap) + var(--bar-h))) rotate(45deg); }
+  .menu-toggle.is-open .bar-middle { opacity: 0; width: 0; }
+  .menu-toggle.is-open .bar-bottom { transform: translateY(calc(-1 * (var(--bar-gap) + var(--bar-h)))) rotate(-45deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle .bar { transition: none; }
+  }
+
+  /* Navegação */
+  nav.menu {
+    display: flex; align-items: center; gap: 16px;
+  }
+  nav.menu a {
+    text-decoration: none; color: var(--fg);
+    padding: 8px 10px; border-radius: 8px; font-size: 15px;
+  }
+  nav.menu a:hover { background: rgba(2,6,23,.06); }
+
+  .menu-cta { display: flex; gap: 10px; margin-left: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 14px; border-radius: var(--btn-r); text-decoration: none; font-weight: 600; font-size: 14px;
+    line-height: 1;
+    border: 1px solid transparent;
+  }
+  .btn.primary   { background: var(--accent); color: var(--fg-inv); }
+  .btn.primary:hover { filter: brightness(0.95); }
+  .btn.secondary { background: transparent; color: var(--fg); border-color: rgba(2,6,23,.12); }
+  .btn.secondary:hover { background: rgba(2,6,23,.06); }
+
+  /* Responsivo: no mobile o nav fica oculto e abre via botão */
+  @media (max-width: 960px) {
+    .container.nav { grid-template-columns: auto auto auto; }
+    nav.menu {
+      position: fixed; inset: calc(var(--nav-h) + 6px) 12px auto 12px;
+      display: grid; gap: 8px;
+      padding: 12px; border-radius: 14px;
+      background: #fff; border: 1px solid rgba(2,6,23,.08);
+      box-shadow: 0 10px 30px rgba(2,6,23,.12);
+    }
+    nav.menu[hidden] { display: none; }
+    .menu-cta { margin-top: 4px; }
+  }
+
+  /* Desktop: menu sempre visível, botão escondido */
+  @media (min-width: 961px) {
+    .menu-toggle { display: none; }
+    nav.menu { justify-self: end; }
+    nav.menu[hidden] { display: flex; } /* garante visível no desktop */
+  }
+</style>
+</head>
+<body>
+
 <header aria-label="Cabeçalho da Guia (Agência)">
   <div class="container nav">
     <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
@@ -7,10 +134,12 @@
 
     <!-- Botão hamburguer (mobile) -->
     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      <span class="bar bar-top"></span>
+      <span class="bar bar-middle"></span>
+      <span class="bar bar-bottom"></span>
     </button>
 
-    <nav id="site-menu" class="menu" aria-label="Navegação do produto">
+    <nav id="site-menu" class="menu" aria-label="Navegação do produto" hidden>
       <a href="pagina_empresa.html">Sobre a agência</a>
       <a href="index.html#como-funciona">Como funciona</a>
       <a href="index.html#planos">Planos</a>
@@ -24,3 +153,55 @@
     </nav>
   </div>
 </header>
+
+<script>
+  (function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const siteMenu   = document.getElementById('site-menu');
+    if (!menuToggle || !siteMenu) return;
+
+    const mqDesktop = window.matchMedia('(min-width: 961px)');
+
+    function setState(isOpen) {
+      menuToggle.classList.toggle('is-open', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      // No mobile, controlamos o hidden; no desktop, sempre visível
+      if (!mqDesktop.matches) {
+        siteMenu.hidden = !isOpen;
+      } else {
+        siteMenu.hidden = false;
+      }
+    }
+
+    // Toggle no clique
+    menuToggle.addEventListener('click', () => {
+      const isOpen = !menuToggle.classList.contains('is-open');
+      setState(isOpen);
+    });
+
+    // Fechar ao clicar em links (mobile)
+    siteMenu.addEventListener('click', (e) => {
+      const clickedLink = e.target.closest('a');
+      if (!clickedLink) return;
+      if (!mqDesktop.matches) setState(false);
+    });
+
+    // Ajusta estado ao mudar o breakpoint (ex.: rotate, resize)
+    mqDesktop.addEventListener('change', () => {
+      if (mqDesktop.matches) {
+        // desktop: manter aberto
+        setState(true);
+      } else {
+        // mobile: iniciar fechado
+        setState(false);
+      }
+    });
+
+    // Estado inicial por viewport
+    if (mqDesktop.matches) setState(true);
+  })();
+</script>
+
+</body>
+</html>
