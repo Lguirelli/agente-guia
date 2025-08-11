@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Agente Guia 1.0 — Atendimento automatizado no WhatsApp</title>
+  <meta name="description" content="Agente Guia 1.0 automatiza o atendimento no WhatsApp: captação, qualificação e encaminhamento de leads com tom humanizado e operação simples." />
+  <meta name="theme-color" content="#0D0D0D" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0D0D0D; --surface:#151515; --text:#FFFFFF; --muted:#B3B3B3;
+      --primary:#007BFF; --primary-hover:#0066D6; --secondary:#00E6E6;
+      --border:#2A2A2A; --gradientPrimary: linear-gradient(135deg,#007BFF 0%,#00E6E6 100%);
+      --ff-display: Poppins, ui-sans-serif, system-ui; --ff-body: Poppins, ui-sans-serif, system-ui;
+      --fs-h1: clamp(32px,6vw,56px); --fs-h2: clamp(24px,4.5vw,40px); --fs-h3: clamp(20px,3.5vw,28px);
+      --fs-body: 16px; --fs-small:14px; --lh-tight:1.05; --lh-normal:1.35;
+      --radius-md:16px; --radius-lg:20px; --radius-pill:999px;
+      --shadow-md:0 10px 30px rgba(0,0,0,.35); --shadow-glow:0 0 24px rgba(0,123,255,.45);
+      --container:1200px; --gutter:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font:400 var(--fs-body)/var(--lh-normal) var(--ff-body); color:var(--text); background:var(--bg)}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+    .container{width:min(100% - var(--gutter), var(--container)); margin-inline:auto}
+    .section{padding: clamp(64px, 7vw, 96px) 0}
+    .grid{display:grid; gap:var(--gutter)}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width:1024px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+    /* Tipografia e utilitários */
+    .headline{text-transform:uppercase; font-family:var(--ff-display); font-size:var(--fs-h2); font-weight:800; letter-spacing:-0.01em; line-height:var(--lh-tight); margin:0}
+    .subhead{color:var(--muted); font-size:var(--fs-body); margin:8px 0 0 0}
+    .eyebrow{text-transform:uppercase; font-weight:700; color:var(--secondary); letter-spacing:.08em}
+    .muted{color:var(--muted)}
+
+    /* Componentes */
+    .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-md); padding:var(--gutter)}
+    .tag{display:inline-block; border:1px solid var(--border); border-radius:var(--radius-pill); padding:6px 10px; color:var(--muted)}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:var(--radius-pill); background:rgba(0,123,255,.12); color:var(--primary); font-weight:700}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:var(--radius-pill); padding:14px 20px; font-weight:700; border:1px solid transparent; transition:background .22s cubic-bezier(.22,.61,.36,1), transform .12s cubic-bezier(.22,.61,.36,1)}
+    .btn.primary{background:var(--primary); color:var(--text); box-shadow:var(--shadow-glow)}
+    .btn.primary:hover{background:var(--primary-hover); transform:translateY(-1px)}
+    .btn.secondary{background:transparent; color:var(--text); border:1px solid var(--border)}
+    .btn.secondary:hover{background:rgba(255,255,255,.06)}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(180%) blur(8px); background:rgba(13,13,13,.65); border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; height:72px}
+    .brand{display:flex; align-items:center; gap:.6rem; font-weight:900}
+    .brand .dot{width:12px; height:12px; border-radius:50%; background:var(--primary)}
+    .menu{display:flex; gap:12px; align-items:center}
+    .menu a{padding:.6rem .8rem; border-radius:10px; color:var(--muted); font-weight:600}
+    .menu a:hover{color:var(--text)}
+
+    /* Hero */
+    .hero{position:relative; overflow:hidden; padding: clamp(72px, 8vw, 140px) 0}
+    .hero::before{content:""; position:absolute; inset:-20% -10% auto -10%; height:80%; background:var(--gradientPrimary); filter:blur(28px); opacity:.22; pointer-events:none}
+    .h1{font-size:var(--fs-h1); line-height:1.1; font-weight:800; letter-spacing:-0.01em; margin:0 0 12px; text-transform:uppercase}
+    .lead{font-size:clamp(16px,1.4vw,20px); color:var(--muted); max-width:65ch}
+
+    /* Tabela simples */
+    .table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:var(--radius-lg); border:1px solid var(--border)}
+    .table th,.table td{padding:14px 16px; border-bottom:1px solid var(--border); text-align:left}
+    .table th{background:#111; font-weight:700}
+    .table tr:last-child td{border-bottom:none}
+
+    footer{padding:40px 0; border-top:1px solid var(--border); background:var(--surface); color:var(--muted)}
+    .input{width:100%; padding:14px 16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#0F0F0F; color:var(--text)}
+    .input:focus{outline:2px solid var(--primary)}
+  </style>
+</head>
+<body>
+  <a href="#conteudo" class="pill" style="position:absolute; left:-999px; top:-999px">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header aria-label="Cabeçalho da Guia (Agência)">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Voltar para o site da Guia (Agência)">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Guia</span>
+      </a>
+      <nav class="menu" aria-label="Navegação do produto">
+        <a href="/sobre">Sobre a agência</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#planos">Planos</a>
+        <a href="#seguranca">Segurança & LGPD</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div style="display:flex; gap:12px; align-items:center">
+        <a class="btn secondary" href="/contato">Falar com a agência</a>
+        <a class="btn primary" href="#contato">Saiba mais</a>
+      </div>
+    </div>
+  </header>
+
+<header>
+  <div class="container nav">
+    <a href="/" class="brand"><span class="dot"></span><span>Nome da Empresa</span></a>
+    <nav class="menu">
+      <a href="/sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <h1 class="headline">Sobre Nossa Empresa</h1>
+      <p class="subhead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec leo vehicula, gravida nulla eu, egestas sapien. Integer volutpat, justo ac tincidunt facilisis, sapien lorem pretium turpis, nec ultricies mi urna vel nisi.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec eros et nunc maximus placerat. Nullam blandit, ex a finibus faucibus, nisi justo condimentum massa, vitae suscipit nulla magna id eros. Sed eu diam eu ligula placerat convallis. Suspendisse tempor libero vitae erat bibendum bibendum. Duis feugiat, ipsum sed cursus commodo, justo sapien gravida tortor, et pretium justo leo a est.</p>
+      <p>Phasellus luctus felis nec bibendum suscipit. Quisque nec urna quis eros fermentum ultrices. Curabitur sed urna ac diam suscipit semper. Nam nec augue sed ligula viverra laoreet. In vel commodo urna. Sed suscipit sodales mi. Nulla vel lacus eu dolor tempor ultrices. Proin id mauris ac arcu sagittis facilisis. Vestibulum id odio non ex vulputate placerat.</p>
+    </div>
+  </section>
+</main>
+
+<footer style="text-align:center; padding:20px; background:var(--surface); color:var(--muted)">
+  © <span id="ano"></span> Nome da Empresa — Todos os direitos reservados
+</footer>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
