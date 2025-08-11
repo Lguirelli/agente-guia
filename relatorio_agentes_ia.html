@@ -1,0 +1,148 @@
+<!-- HEADER PADRÃO PARA NOVAS PÁGINAS -->
+<header aria-label="Cabeçalho da Guia (Agência)">
+  <div class="container nav">
+    <!-- Link volta sempre para o index.html -->
+    <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Guia</span>
+    </a>
+
+    <!-- Links para cada seção do index.html -->
+    <nav class="menu" aria-label="Navegação do produto">
+      <a href="pagina_empresa.html">Sobre a agência</a>
+      <a href="index.html#como-funciona">Como funciona</a>
+      <a href="index.html#planos">Planos</a>
+      <a href="index.html#seguranca">Segurança & LGPD</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+
+    <!-- Botões -->
+    <div style="display:flex; gap:12px; align-items:center">
+      <a class="btn secondary" href="index.html#contato">Falar com a agência</a>
+      <a class="btn primary" href="index.html#contato">Saiba mais</a>
+    </div>
+  </div>
+</header>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Agente Guia | Relatório Completo IA</title>
+  <meta name="description" content="Relatório educativo sobre agentes de IA para atendimento ao cliente no Brasil e no mundo, incluindo métricas, casos de uso, ROI e LGPD." />
+  <meta name="theme-color" content="#0D0D0D" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0D0D0D; --surface:#151515; --text:#FFFFFF; --muted:#B3B3B3; --primary:#007BFF; --primary-hover:#0066D6; --secondary:#00E6E6; --border:#2A2A2A; --gradientPrimary:linear-gradient(135deg, #007BFF 0%, #00E6E6 100%); --ff-display:Poppins,ui-sans-serif,system-ui; --ff-body:Poppins,ui-sans-serif,system-ui; --fs-h1:clamp(32px,6vw,56px); --fs-h2:clamp(24px,4.5vw,40px); --fs-h3:clamp(18px,2.8vw,24px); --fs-body:16px; --lh-normal:1.35; --radius-lg:20px; --space-lg:24px; --space-xl:32px; --space-2xl:56px; }
+    body { margin:0; font:400 var(--fs-body)/var(--lh-normal) var(--ff-body); background:var(--bg); color:var(--text) }
+    .container { width:min(100% - 24px, 1200px); margin-inline:auto }
+    .section { padding:var(--space-2xl) 0 }
+    .h1 { font-size:var(--fs-h1); font-weight:800 }
+    .h2 { font-size:var(--fs-h2); font-weight:800 }
+    .h3 { font-size:var(--fs-h3); font-weight:700 }
+    .lead { font-size:18px; color:var(--muted) }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-lg) }
+    header { padding:16px 0; border-bottom:1px solid var(--border) }
+    ul,ol { padding-left:20px }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="h1">Relatório Completo: Agentes de IA no Atendimento ao Cliente</h1>
+      <p class="lead">Estudo detalhado sobre mercado, métricas, casos de uso e governança.</p>
+    </div>
+  </header>
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">Resumo Executivo</h2>
+        <ul>
+          <li>Mercado global: US$ 13 bi em 2024 → US$ 83,9 bi em 2033 (CAGR 23%).</li>
+          <li>Brasil: US$ 3,2 bi em 2023, crescimento previsto de 30% a.a.</li>
+          <li>Impacto: -87% no tempo de resposta, +25 pontos no CSAT.</li>
+          <li>Payback: 3 a 6 meses, até 40% de economia.</li>
+          <li>Casos de uso variados e comprovados.</li>
+          <li>Riscos: privacidade, vieses e segurança (LGPD).</li>
+          <li>Implementação de MVP em 30 dias.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">1. O que é um agente de IA de atendimento</h2>
+        <p>Sistema que entende linguagem natural, responde e executa ações como consultas e agendamentos. Aprende com interações e integra dados de múltiplas fontes.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">2. Por que agora</h2>
+        <p>Avanços da IA generativa, APIs maduras e custo acessível viabilizam sua aplicação em escala. Consumidores exigem rapidez e presença multicanal.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">3. Casos de uso por setor</h2>
+        <ul>
+          <li><b>Varejo:</b> atendimento 24/7, rastreio, promoções.</li>
+          <li><b>Serviços:</b> agendamento automático, suporte técnico.</li>
+          <li><b>Saúde:</b> triagem, lembretes de consultas.</li>
+          <li><b>Educação:</b> FAQ, suporte a matrícula.</li>
+          <li><b>Financeiro:</b> consultas, desbloqueio de cartões.</li>
+          <li><b>Turismo:</b> reservas e suporte durante viagens.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">4. Benefícios com números</h2>
+        <ul>
+          <li>Redução FRT: até 87%.</li>
+          <li>Aumento FCR: 70% → 90%.</li>
+          <li>Deflexão: até 30%.</li>
+          <li>CSAT: +25 pontos.</li>
+          <li>Economia: até 40% no custo por atendimento.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">5. Riscos e limitações</h2>
+        <ul>
+          <li>Respostas incorretas (alucinações).</li>
+          <li>Privacidade e segurança de dados.</li>
+          <li>Vieses nas respostas.</li>
+          <li>Compliance com LGPD.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">6. Como começar em 30 dias</h2>
+        <ol>
+          <li>Definir objetivos e KPIs.</li>
+          <li>Escolher fornecedor.</li>
+          <li>Integrar canais prioritários.</li>
+          <li>Treinar com dados internos.</li>
+          <li>Testar e ajustar fluxos.</li>
+          <li>Lançar piloto.</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">Conclusão</h2>
+        <p>Agentes de IA oferecem ganhos claros em velocidade, satisfação e custos. A adoção estratégica com governança pode posicionar empresas à frente no mercado.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Guia. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
