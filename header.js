@@ -3,13 +3,19 @@ fetch('header.html')
   .then(r => r.text())
   .then(html => {
     const mount = document.getElementById('site-header');
-    if (!mount) { console.error('Elemento #site-header não encontrado.'); return; }
+    if (!mount) {
+      console.error('Elemento #site-header não encontrado.');
+      return;
+    }
 
     mount.innerHTML = html;
 
     const btn = mount.querySelector('.menu-toggle');
     const nav = mount.querySelector('#site-menu');
-    if (!btn || !nav) { console.error('menu-toggle ou #site-menu não encontrados dentro do header.'); return; }
+    if (!btn || !nav) {
+      console.error('menu-toggle ou #site-menu não encontrados dentro do header.');
+      return;
+    }
 
     // Breakpoint alinhado ao CSS: mobile <= 860px
     const mqDesktop = window.matchMedia('(min-width: 861px)');
@@ -20,17 +26,20 @@ fetch('header.html')
     };
 
     const applyState = (isOpen) => {
-      // Ícone (3 barras ↔ X)
+      // Alterna classe para animação do hambúrguer → X
       btn.classList.toggle('is-open', isOpen);
       btn.setAttribute('aria-expanded', String(isOpen));
       btn.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
 
-      // Menu (no mobile, usamos a classe .open do seu CSS)
       if (mqDesktop.matches) {
-        nav.classList.remove('open'); // desktop: menu já é visível pelo CSS
+        // No desktop o menu é sempre visível, sem .open
+        nav.classList.remove('open');
+        nav.hidden = false;
         lockScroll(false);
       } else {
+        // No mobile controlamos via .open + hidden
         nav.classList.toggle('open', isOpen);
+        nav.hidden = !isOpen;
         lockScroll(isOpen);
       }
     };
@@ -42,32 +51,50 @@ fetch('header.html')
 
     const closeMenu = () => applyState(false);
 
-    // Eventos
+    // Evento clique no botão hamburguer
     btn.addEventListener('click', toggleMenu);
 
-    // fecha ao clicar em link (somente no mobile)
+    // Fecha ao clicar em link (somente no mobile)
     nav.addEventListener('click', (e) => {
-      if (!mqDesktop.matches && e.target.closest('a')) closeMenu();
+      if (!mqDesktop.matches && e.target.closest('a')) {
+        closeMenu();
+      }
     });
 
-    // fecha com ESC
-    mount.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    // Fecha com tecla ESC
+    mount.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
 
-    // clique fora fecha (mobile)
+    // Clique fora do menu no mobile fecha
     document.addEventListener('click', (e) => {
       if (mqDesktop.matches) return;
       const inside = e.target.closest('#site-menu, .menu-toggle');
-      if (!inside && btn.classList.contains('is-open')) closeMenu();
+      if (!inside && btn.classList.contains('is-open')) {
+        closeMenu();
+      }
     });
 
-    // reage à mudança de viewport
+    // Reage à mudança de viewport
     mqDesktop.addEventListener('change', () => {
-      // ao entrar no desktop, garante menu “normal” e ícone fechado
-      if (mqDesktop.matches) { btn.classList.remove('is-open'); applyState(false); }
+      if (mqDesktop.matches) {
+        // Desktop: ícone fechado, menu visível
+        btn.classList.remove('is-open');
+        nav.hidden = false;
+        lockScroll(false);
+      } else {
+        // Mobile: menu fechado inicialmente
+        closeMenu();
+      }
     });
 
-    // estado inicial: desktop “normal”, mobile fechado
-    if (mqDesktop.matches) { btn.classList.remove('is-open'); applyState(false); }
-    else { closeMenu(); }
+    // Estado inicial conforme viewport
+    if (mqDesktop.matches) {
+      btn.classList.remove('is-open');
+      nav.hidden = false;
+      lockScroll(false);
+    } else {
+      closeMenu();
+    }
   })
   .catch(err => console.error('Falha ao carregar header.html:', err));
