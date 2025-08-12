@@ -208,3 +208,25 @@ html.no-scroll, body.no-scroll{ overflow:hidden }
 @media (prefers-reduced-motion: reduce){
   .menu-toggle .bar{ transition:none }
 }
+<head>
+  ...
+  <link rel="stylesheet" href="style.css"> <!-- seu CSS principal -->
+  <style>
+    /* Parallax JS */
+    .hero-media-wrap{
+      position:relative;
+      height:560px;
+      overflow:visible;
+    }
+    #roboHero{
+      display:block;
+      width:100%;
+      height:auto;
+      will-change:transform;
+      transition:transform 0.06s linear;
+    }
+    @media (max-width: 900px){
+      .hero-media-wrap{ height:420px; }
+    }
+  </style>
+</head>
