@@ -1,18 +1,21 @@
 <header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
-  <div class="container nav">
-    
-    <!-- Botão hamburguer (mobile) -->
-    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
+  <!-- position:relative permite centralizar a brand sem quebrar o layout -->
+  <div class="container nav" style="position:relative">
+
+    <!-- Marca centralizada -->
+    <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)"
+       style="position:absolute; left:50%; transform:translateX(-50%);">
+      <img src="icone.svg" alt="" class="dot" width="12" height="12" aria-hidden="true" />
+      <span>Guia</span>
+    </a>
+
+    <!-- Botão hamburguer (mobile) — empurrado para a DIREITA -->
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu"
+            style="margin-left:auto;">
       <span class="bar bar-top"></span>
       <span class="bar bar-middle"></span>
       <span class="bar bar-bottom"></span>
     </button>
-
-    <!-- Marca centralizada -->
-    <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
-      <img src="icone.svg" alt="" class="dot" width="12" height="12" aria-hidden="true" />
-      <span>Guia</span>
-    </a>
 
     <nav id="site-menu" class="menu" aria-label="Navegação do produto" hidden>
       <a href="pagina_empresa.html">Sobre a agência</a>
