@@ -1,31 +1,28 @@
 <header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
-  <div class="container nav" style="position:relative">
-
+  <div class="container nav">
     <!-- Marca centralizada -->
-    <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)"
-       style="position:absolute; left:50%; transform:translateX(-50%);">
+    <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
       <img src="icone.svg" alt="" class="dot" width="12" height="12" aria-hidden="true" />
       <span>Guia</span>
     </a>
 
-    <!-- Botão hamburguer (sempre visível agora) -->
-    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu"
-            style="margin-left:auto;">
-      <span class="bar bar-top"></span>
-      <span class="bar bar-middle"></span>
-      <span class="bar bar-bottom"></span>
-    </button>
+    <!-- Botão + Dropdown agrupados -->
+    <div class="menu-wrap">
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
+        <span class="bar bar-top"></span>
+        <span class="bar bar-middle"></span>
+        <span class="bar bar-bottom"></span>
+      </button>
 
-    <nav id="site-menu" class="menu" aria-label="Navegação do produto" hidden>
-      <a href="pagina_empresa.html">Sobre a agência</a>
-      <a href="index.html#como-funciona">Como funciona</a>
-      <a href="index.html#planos">Planos</a>
-      <a href="index.html#seguranca">Segurança &amp; LGPD</a>
-      <a href="index.html#faq">FAQ</a>
-      <!-- CTAs viraram itens normais -->
-      <a href="index.html#contato">Falar com a agência</a>
-      <a href="index.html#contato">Saiba mais</a>
-    </nav>
-
+      <nav id="site-menu" class="menu" aria-label="Navegação do produto" hidden>
+        <a href="pagina_empresa.html">Sobre a agência</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="index.html#seguranca">Segurança &amp; LGPD</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contato">Falar com a agência</a>
+        <a href="index.html#contato">Saiba mais</a>
+      </nav>
+    </div>
   </div>
 </header>
