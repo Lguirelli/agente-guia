@@ -4,27 +4,27 @@
 /* ===== Guia • Design tokens (nova paleta) ===== */
 :root{
   /* Cores base */
-  --bg:#272c39;          /* fundo escuro */
-  --surface:#2d3343;     /* painéis/surface */
-  --card:#32394d;        /* cards */
-  --border:#3d455c;      /* bordas sutis */
+  --bg:#272c39;
+  --surface:#2d3343;
+  --card:#32394d;
+  --border:#3d455c;
 
   /* Paleta */
-  --primary:#7269e3;           /* roxo principal */
-  --primary-strong:#625bd6;    /* roxo hover */
+  --primary:#7269e3;
+  --primary-strong:#625bd6;
   --primary-contrast:#ffffff;
 
-  --accent:#98dea3;            /* menta (destaques) */
+  --accent:#98dea3;
   --accent-strong:#77cf86;
 
-  --neutral:#a783a6;           /* malva para detalhes secundários */
+  --neutral:#a783a6;
 
   /* Tipografia e estados */
-  --text:#ffffff;              /* títulos e corpo em branco */
-  --muted:rgba(255,255,255,.72); /* texto secundário */
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.72);
   --success:#98dea3;
-  --warning:#f59e0b; /* mantido */
-  --danger:#ef4444;  /* mantido */
+  --warning:#f59e0b;
+  --danger:#ef4444;
 
   /* UI */
   --radius:16px;
@@ -34,11 +34,6 @@
   /* Fonts */
   --font-heading:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-body:'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-
-  /* Novas variáveis para links clicáveis */
-  --link: var(--primary);
-  --link-hover: var(--accent);
-  --link-active: var(--accent-strong);
 }
 
 /* ===== Reset básico ===== */
@@ -81,7 +76,7 @@ header{
 .nav{
   display:flex; align-items:center; justify-content:space-between;
   gap:20px; min-height:var(--header-h);
-  position: relative; /* centraliza marca e ancora menu */
+  position: relative;
 }
 
 /* Marca centralizada */
@@ -95,21 +90,22 @@ header{
   filter: drop-shadow(0 0 6px rgba(114,105,227,.8));
 }
 
-/* Agrupador do botão + dropdown (ancora a caixinha flutuante) */
+/* Agrupador do botão + dropdown */
 .menu-wrap{
   margin-left:auto;
   position:relative;
   display:inline-flex; align-items:center;
 }
 
-/* Links do menu (estilo base) */
+/* Links do menu */
 .menu{gap:18px; align-items:center; flex-wrap:wrap}
 .menu a{
-  padding:8px 10px; border-radius:10px; color:var(--muted);
+  padding:8px 10px; border-radius:10px; color:var(--text);
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
-.menu a:hover{ color:var(--text); background:rgba(255,255,255,.06); }
+.menu a:hover{ color:var(--primary); background:rgba(255,255,255,.06); }
 
-/* Botão hamburguer (sempre visível) */
+/* Botão hamburguer */
 .menu-toggle{
   display:inline-flex;
   width:44px; height:44px;
@@ -147,7 +143,7 @@ header{
   font-size:clamp(15px, 2.2vw, 18px);
 }
 
-/* ===== Botões genéricos ===== */
+/* ===== Botões ===== */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
   height:40px; padding:0 16px; border-radius:12px; font-weight:700;
@@ -169,133 +165,15 @@ header{
   border-top:1px solid var(--border);
 }
 
-/* ===== Dropdown flutuante alinhado ao botão (mobile e desktop) ===== */
+/* ===== Dropdown flutuante ===== */
 .site-header .menu-wrap .menu{
-  position:absolute;            /* flutuante sob o botão */
+  position:absolute;
   top:calc(100% + 8px);
-  right:0;                      /* alinhado à direita do botão */
+  right:0;
   width:min(360px, calc(100vw - 24px));
   padding:12px;
   background:linear-gradient(180deg, rgba(50,57,77,.98), rgba(45,51,67,.98));
   border:1px solid var(--border);
   border-radius:14px;
   box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
-  display:flex; flex-direction:column; gap:8px;
-  align-items:stretch;
-  text-align:right;
-  transform:translateY(-8px);
-  opacity:0; pointer-events:none;
-  transition:transform .18s ease, opacity .18s ease;
-  z-index:60;
-}
-.site-header .menu-wrap .menu a{
-  padding:10px 12px;
-  border-radius:10px;
-}
-.site-header .menu-wrap .menu a:hover{
-  background:rgba(114,105,227,.16); /* hover com roxo translúcido */
-}
-.site-header .menu-wrap .menu.open{
-  transform:translateY(0);
-  opacity:1; pointer-events:auto;
-}
-.site-header .menu-wrap .menu[hidden]{ display:none; }
-
-/* ===== Responsivo ===== */
-@media (max-width: 860px){
-  .nav{align-items:center; padding:10px 0}
-  .brand{padding-left:0}
-  .btn{height:38px; padding:0 14px}
-}
-html.no-scroll, body.no-scroll{ overflow:hidden }
-
-/* ===== Acessibilidade: animação reduzida ===== */
-@media (prefers-reduced-motion: reduce){
-  .menu-toggle .bar{ transition:none }
-}
-
-/* =================================================================== */
-/* ========== Clickable Text • Color Swap (links e itens do menu) ===== */
-/* =================================================================== */
-
-/* Estilo base para textos clicáveis */
-a, .text-link, .menu a {
-  color: var(--link);
-  transition: color .18s ease, background-size .22s ease, text-shadow .22s ease;
-}
-
-/* Hover: troca para a cor de destaque (menta) */
-a:hover, .text-link:hover, .menu a:hover {
-  color: var(--link-hover);
-}
-
-/* Press/click: flash rápido para accent-strong (efeito de clique) */
-a:active, .text-link:active, .menu a:active {
-  color: var(--link-active);
-  text-shadow: 0 0 0px transparent;
-  animation: link-press 200ms ease;
-}
-
-/* Foco acessível (teclado) */
-a:focus-visible, .text-link:focus-visible, .menu a:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--primary) 60%, #ffffff 40%);
-  outline-offset: 2px;
-  border-radius: 8px;
-}
-
-/* Estado "ativo/selecionado" (ex.: página atual) com gradiente no texto */
-a[aria-current="page"],
-a[aria-selected="true"],
-a[data-active="true"],
-.menu a[aria-current="page"],
-.menu a[aria-selected="true"],
-.menu a[data-active="true"],
-.text-link.is-active {
-  /* texto em gradiente roxo→menta */
-  background-image: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent; /* mostra o gradiente */
-  text-shadow: none;
-}
-
-/* Sub-linha animada opcional para .text-link (use <a class="text-link">) */
-.text-link {
-  position: relative;
-  font-weight: 700;
-}
-.text-link::after{
-  content:"";
-  position:absolute; left:0; bottom:-2px;
-  width:0%; height:2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  transition: width .22s ease;
-}
-.text-link:hover::after, .text-link:focus-visible::after, .text-link.is-active::after{
-  width:100%;
-}
-
-/* Keyframe do “flash” de clique */
-@keyframes link-press{
-  0%   { color: var(--link-active); }
-  100% { color: var(--link-hover); }
-}
-
-/* =================================================================== */
-/* ===== Parallax (apenas estilos; JS fica no arquivo de scripts) ===== */
-/* =================================================================== */
-.hero-media-wrap{
-  position:relative;
-  height:560px;
-  overflow:visible;
-}
-#roboHero{
-  display:block;
-  width:100%;
-  height:auto;
-  will-change:transform;
-  transition:transform 0.06s linear;
-}
-@media (max-width: 900px){
-  .hero-media-wrap{ height:420px; }
-}
+  display:flex; flex-direction
