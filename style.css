@@ -182,8 +182,8 @@ header{
 
   /* >>> Grid 2 colunas: “ordem de tabela” */
   display:grid;
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-  gap:12px 24px;
+  grid-template-columns: 1fr;   /* <— uma coluna */
+  gap: 12px;                    /* gap único para linhas */
   align-items:start;
   text-align:left;
 
