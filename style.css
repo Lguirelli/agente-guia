@@ -4,8 +4,8 @@
 /* ===== Guia • Design tokens (nova paleta) ===== */
 :root{
   /* Cores base */
-  --bg:#272c39;
-  --surface:#2d3343;
+  --bg:transparent; /* fundo totalmente transparente */
+  --surface:transparent;
   --card:#32394d;
   --border:#3d455c;
 
@@ -41,7 +41,7 @@
 html,body{height:100%}
 body{
   margin:0;
-  background:var(--bg);
+  background:transparent; /* fundo do body transparente */
   color:var(--text);
   font:400 16px/1.6 var(--font-body);
   -webkit-font-smoothing:antialiased;
@@ -57,7 +57,10 @@ img{max-width:100%; display:block}
   margin:0 auto;
   padding:0 20px;
 }
-.section{ padding:clamp(56px, 7vw, 72px) 0; }
+.section{
+  padding:clamp(56px, 7vw, 72px) 0;
+  background: transparent; /* fundo transparente em todas as seções */
+}
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -70,7 +73,7 @@ img{max-width:100%; display:block}
 header{
   position:sticky; top:0; z-index:50;
   backdrop-filter:saturate(140%) blur(8px);
-  background:linear-gradient(180deg, rgba(39,44,57,.92), rgba(39,44,57,.66));
+  background:transparent;
   border-bottom:1px solid var(--border);
 }
 .nav{
@@ -97,7 +100,7 @@ header{
   display:inline-flex; align-items:center;
 }
 
-/* Links do menu (botão/trigger e estilos globais para itens) */
+/* Links do menu */
 .menu{gap:18px; align-items:center; flex-wrap:wrap}
 .menu a{
   padding:8px 10px; border-radius:10px; color:var(--text);
@@ -110,7 +113,7 @@ header{
   display:inline-flex;
   width:44px; height:44px;
   border:1px solid var(--border);
-  background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+  background:transparent;
   border-radius:12px;
   align-items:center; justify-content:center;
   flex-direction:column; gap:5px;
@@ -161,33 +164,32 @@ header{
 /* ===== Footer ===== */
 .footer{
   text-align:center; padding:28px 20px;
-  background:var(--surface); color:var(--muted);
+  background:transparent;
+  color:var(--muted);
   border-top:1px solid var(--border);
 }
 
 /* ===== Regras utilitárias ===== */
 [hidden]{ display:none !important; }
 
-/* ===== Dropdown flutuante (correção) ===== */
+/* ===== Dropdown flutuante ===== */
 .site-header .menu-wrap .menu{
   position:absolute;
   top:calc(100% + 8px);
   right:0;
   width:min(480px, calc(100vw - 24px));
   padding:16px 18px;
-  background:linear-gradient(180deg, rgba(50,57,77,.98), rgba(45,51,67,.98));
+  background:transparent;
   border:1px solid var(--border);
   border-radius:14px;
   box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
 
-  /* >>> Grid 2 colunas: “ordem de tabela” */
   display:grid;
-  grid-template-columns: 1fr;   /* <— uma coluna */
-  gap: 12px;                    /* gap único para linhas */
+  grid-template-columns: 1fr;
+  gap: 12px;
   align-items:start;
   text-align:left;
 
-  /* fechado por padrão; abre via .open (JS) */
   transform:translateY(-8px);
   opacity:0; pointer-events:none;
   transition:transform .18s ease, opacity .18s ease;
@@ -214,17 +216,16 @@ header{
   .brand{padding-left:0}
   .btn{height:38px; padding:0 14px}
 
-  /* Dropdown em 1 coluna no mobile */
   .site-header .menu-wrap .menu{
     left:12px; right:12px; width:auto;
     grid-template-columns: 1fr;
-    text-align:right; /* combina com ícone à direita */
+    text-align:right;
   }
 }
 
 html.no-scroll, body.no-scroll{ overflow:hidden }
 
-/* ===== Acessibilidade: animação reduzida ===== */
+/* ===== Acessibilidade ===== */
 @media (prefers-reduced-motion: reduce){
   .menu-toggle .bar{ transition:none }
 }
