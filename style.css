@@ -97,7 +97,7 @@ header{
   display:inline-flex; align-items:center;
 }
 
-/* Links do menu */
+/* Links do menu (botão/trigger e estilos globais para itens) */
 .menu{gap:18px; align-items:center; flex-wrap:wrap}
 .menu a{
   padding:8px 10px; border-radius:10px; color:var(--text);
@@ -117,63 +117,4 @@ header{
   margin-left:auto;
 }
 .menu-toggle .bar{
-  display:block; width:20px; height:2px;
-  background:var(--text);
-  border-radius:2px;
-  transition:transform 180ms ease, opacity 180ms ease, width 180ms ease, background-color 180ms ease;
-  transform-origin:center;
-}
-.menu-toggle.is-open .bar-top{    transform: translateY(7px) rotate(45deg); }
-.menu-toggle.is-open .bar-middle{ opacity: 0; width: 0; }
-.menu-toggle.is-open .bar-bottom{ transform: translateY(-7px) rotate(-45deg); }
-
-/* ===== Tipografia ===== */
-.headline{
-  margin:0 0 12px;
-  font-family:var(--font-heading);
-  font-weight:400;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-size:clamp(28px, 4vw, 44px);
-  color:var(--text);
-}
-.subhead{
-  margin:0 0 26px; color:var(--muted);
-  font-family:var(--font-body);
-  font-size:clamp(15px, 2.2vw, 18px);
-}
-
-/* ===== Botões ===== */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  height:40px; padding:0 16px; border-radius:12px; font-weight:700;
-  border:1px solid transparent; transition:all .2s ease;
-  font-family:var(--font-body);
-}
-.btn.primary{
-  background:var(--primary); color:var(--primary-contrast);
-  box-shadow:0 6px 18px rgba(114,105,227,.35);
-}
-.btn.primary:hover{ background:var(--primary-strong); transform:translateY(-1px) }
-.btn.secondary{ background:transparent; color:var(--text); border-color:var(--border) }
-.btn.secondary:hover{ background:rgba(255,255,255,.06) }
-
-/* ===== Footer ===== */
-.footer{
-  text-align:center; padding:28px 20px;
-  background:var(--surface); color:var(--muted);
-  border-top:1px solid var(--border);
-}
-
-/* ===== Dropdown flutuante ===== */
-.site-header .menu-wrap .menu{
-  position:absolute;
-  top:calc(100% + 8px);
-  right:0;
-  width:min(360px, calc(100vw - 24px));
-  padding:12px;
-  background:linear-gradient(180deg, rgba(50,57,77,.98), rgba(45,51,67,.98));
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
-  display:flex; flex-direction
+  display:block; width:20px; h
