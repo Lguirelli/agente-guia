@@ -1,24 +1,39 @@
-/* ===== Guia • Design tokens ===== */
-:root{
-  --bg:#0b0c10;
-  --surface:#13151a;
-  --card:#1a1d24;
-  --border:#252a33;
+/* ===== Fonts (Google) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@300;400;500;600;700;800&display=swap');
 
-  --primary:#3AA9FF;
-  --primary-strong:#1188ee;
+/* ===== Guia • Design tokens (nova paleta) ===== */
+:root{
+  /* Cores base */
+  --bg:#272c39;          /* fundo escuro */
+  --surface:#2d3343;     /* painéis/surface */
+  --card:#32394d;        /* cards */
+  --border:#3d455c;      /* bordas sutis */
+
+  /* Paleta */
+  --primary:#7269e3;           /* roxo principal */
+  --primary-strong:#625bd6;    /* roxo hover */
   --primary-contrast:#ffffff;
 
-  --text:#e8eef9;
-  --muted:#9aa6b2;
-  --success:#22c55e;
-  --warning:#f59e0b;
-  --danger:#ef4444;
+  --accent:#98dea3;            /* menta (destaques) */
+  --accent-strong:#77cf86;
 
+  --neutral:#a783a6;           /* malva para detalhes secundários */
+
+  /* Tipografia e estados */
+  --text:#ffffff;              /* títulos e corpo em branco */
+  --muted:rgba(255,255,255,.72); /* texto secundário */
+  --success:#98dea3;
+  --warning:#f59e0b; /* mantido */
+  --danger:#ef4444;  /* mantido */
+
+  /* UI */
   --radius:16px;
   --shadow:0 10px 30px rgba(0,0,0,.35);
+  --header-h:64px;
 
-  --header-h:64px; /* altura do header */
+  /* Fonts */
+  --font-heading:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-body:'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 /* ===== Reset básico ===== */
@@ -28,7 +43,7 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font:400 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font:400 16px/1.6 var(--font-body);
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -42,9 +57,7 @@ img{max-width:100%; display:block}
   margin:0 auto;
   padding:0 20px;
 }
-.section{
-  padding:clamp(56px, 7vw, 72px) 0;
-}
+.section{ padding:clamp(56px, 7vw, 72px) 0; }
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -57,97 +70,92 @@ img{max-width:100%; display:block}
 header{
   position:sticky; top:0; z-index:50;
   backdrop-filter:saturate(140%) blur(8px);
-  background:linear-gradient(180deg, rgba(19,21,26,.9), rgba(19,21,26,.6));
+  background:linear-gradient(180deg, rgba(39,44,57,.92), rgba(39,44,57,.66));
   border-bottom:1px solid var(--border);
 }
 .nav{
   display:flex; align-items:center; justify-content:space-between;
   gap:20px; min-height:var(--header-h);
-  position: relative; /* para centralizar a marca e ancorar elementos */
+  position: relative; /* centraliza marca e ancora menu */
 }
 
 /* Marca centralizada */
 .brand{
-  display:inline-flex; align-items:center; gap:10px; font-weight:700;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  display:inline-flex; align-items:center; gap:10px; font-weight:800;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  letter-spacing:.4px;
 }
 .brand .dot{
   width:12px; height:12px; display:block; object-fit:contain;
-  filter: drop-shadow(0 0 6px rgba(58,169,255,.6));
+  filter: drop-shadow(0 0 6px rgba(114,105,227,.8));
 }
 
-/* Agrupador do botão + dropdown (ancora a caixinha) */
+/* Agrupador do botão + dropdown (ancora a caixinha flutuante) */
 .menu-wrap{
   margin-left:auto;
   position:relative;
   display:inline-flex; align-items:center;
 }
 
-/* Estilo base de links do menu (mantém seu visual) */
+/* Links do menu (estilo base) */
 .menu{gap:18px; align-items:center; flex-wrap:wrap}
-.menu a{padding:8px 10px; border-radius:10px; color:var(--muted)}
-.menu a:hover{color:var(--text); background:rgba(255,255,255,.04)}
+.menu a{
+  padding:8px 10px; border-radius:10px; color:var(--muted);
+}
+.menu a:hover{ color:var(--text); background:rgba(255,255,255,.06); }
 
 /* Botão hamburguer (sempre visível) */
 .menu-toggle{
   display:inline-flex;
   width:44px; height:44px;
   border:1px solid var(--border);
-  background:transparent;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
   border-radius:12px;
   align-items:center; justify-content:center;
-  flex-direction:column;
-  gap:5px;
-  margin-left: auto; /* garante ficar à direita */
+  flex-direction:column; gap:5px;
+  margin-left:auto;
 }
 .menu-toggle .bar{
-  display:block;
-  width:20px; height:2px;
+  display:block; width:20px; height:2px;
   background:var(--text);
-  margin:0;
   border-radius:2px;
-  transition:transform 180ms ease, opacity 180ms ease, width 180ms ease;
+  transition:transform 180ms ease, opacity 180ms ease, width 180ms ease, background-color 180ms ease;
   transform-origin:center;
 }
-.menu-toggle.is-open .bar-top{
-  transform: translateY(7px) rotate(45deg);
-}
-.menu-toggle.is-open .bar-middle{
-  opacity: 0;
-  width: 0;
-}
-.menu-toggle.is-open .bar-bottom{
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ===== Botões (genéricos) ===== */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  height:40px; padding:0 16px; border-radius:12px; font-weight:600;
-  border:1px solid transparent; transition:all .2s ease;
-}
-.btn.primary{
-  background:var(--primary); color:var(--primary-contrast);
-  box-shadow:0 6px 18px rgba(58,169,255,.35);
-}
-.btn.primary:hover{background:var(--primary-strong); transform:translateY(-1px)}
-.btn.secondary{background:transparent; color:var(--text); border-color:var(--border)}
-.btn.secondary:hover{background:rgba(255,255,255,.05)}
+.menu-toggle.is-open .bar-top{    transform: translateY(7px) rotate(45deg); }
+.menu-toggle.is-open .bar-middle{ opacity: 0; width: 0; }
+.menu-toggle.is-open .bar-bottom{ transform: translateY(-7px) rotate(-45deg); }
 
 /* ===== Tipografia ===== */
 .headline{
   margin:0 0 12px;
-  font-weight:800;
+  font-family:var(--font-heading);
+  font-weight:400;
   text-transform:uppercase;
   letter-spacing:.6px;
   font-size:clamp(28px, 4vw, 44px);
+  color:var(--text);
 }
 .subhead{
   margin:0 0 26px; color:var(--muted);
+  font-family:var(--font-body);
   font-size:clamp(15px, 2.2vw, 18px);
 }
+
+/* ===== Botões genéricos ===== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:40px; padding:0 16px; border-radius:12px; font-weight:700;
+  border:1px solid transparent; transition:all .2s ease;
+  font-family:var(--font-body);
+}
+.btn.primary{
+  background:var(--primary); color:var(--primary-contrast);
+  box-shadow:0 6px 18px rgba(114,105,227,.35);
+}
+.btn.primary:hover{ background:var(--primary-strong); transform:translateY(-1px) }
+.btn.secondary{ background:transparent; color:var(--text); border-color:var(--border) }
+.btn.secondary:hover{ background:rgba(255,255,255,.06) }
 
 /* ===== Footer ===== */
 .footer{
@@ -163,10 +171,10 @@ header{
   right:0;                      /* alinhado à direita do botão */
   width:min(360px, calc(100vw - 24px));
   padding:12px;
-  background:rgba(19,21,26,.96);
+  background:linear-gradient(180deg, rgba(50,57,77,.98), rgba(45,51,67,.98));
   border:1px solid var(--border);
   border-radius:14px;
-  box-shadow:var(--shadow);
+  box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
   display:flex; flex-direction:column; gap:8px;
   align-items:stretch;
   text-align:right;
@@ -179,6 +187,9 @@ header{
   padding:10px 12px;
   border-radius:10px;
 }
+.site-header .menu-wrap .menu a:hover{
+  background:rgba(114,105,227,.16); /* hover com roxo translúcido */
+}
 .site-header .menu-wrap .menu.open{
   transform:translateY(0);
   opacity:1; pointer-events:auto;
@@ -188,11 +199,12 @@ header{
 /* ===== Responsivo ===== */
 @media (max-width: 860px){
   .nav{align-items:center; padding:10px 0}
-  .brand{padding-left:0} /* já centralizada */
+  .brand{padding-left:0}
+  .btn{height:38px; padding:0 14px}
 }
-html.no-scroll, body.no-scroll{overflow:hidden}
+html.no-scroll, body.no-scroll{ overflow:hidden }
 
-/* ===== Animação reduzida ===== */
+/* ===== Acessibilidade: animação reduzida ===== */
 @media (prefers-reduced-motion: reduce){
-  .menu-toggle .bar{transition:none}
+  .menu-toggle .bar{ transition:none }
 }
