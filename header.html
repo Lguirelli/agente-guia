@@ -1,76 +1,199 @@
-<header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
-  <div class="container nav">
-    <!-- Marca centralizada -->
-    <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
-      <svg class="dot" width="12" height="12" aria-hidden="true" xmlns="icone.svg" viewBox="0 0 12 12">
-      <span>Guia</span>
-    </a>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia — Agência</title>
 
-    <!-- Botão + Dropdown -->
-    <div class="menu-wrap">
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
-        <span class="bar bar-top"></span>
-        <span class="bar bar-middle"></span>
-        <span class="bar bar-bottom"></span>
-      </button>
+  <style>
+    /* ===== Reset e Base ===== */
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: #0b0c10;
+      color: #fff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+    }
 
-      <!-- Fechado por padrão -->
-      <nav id="site-menu" class="menu" aria-label="Navegação do produto" hidden>
-        <a href="pagina_empresa.html">Sobre a agência</a>
-        <a href="index.html#como-funciona">Como funciona</a>
-        <a href="index.html#planos">Planos</a>
-        <a href="index.html#seguranca">Segurança &amp; LGPD</a>
-        <a href="index.html#faq">FAQ</a>
-        <a href="index.html#contato">Falar com a agência</a>
-        <a href="index.html#contato">Saiba mais</a>
-      </nav>
+    /* ===== Camada do Dark Veil ===== */
+    #dark-veil {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none; /* não bloqueia cliques */
+    }
+
+    /* ===== Header ===== */
+    .site-header { position: relative; z-index: 2; background: transparent; }
+    .container.nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
+    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #fff; font-weight: 600; }
+    .menu-wrap .menu { display: flex; gap: 16px; }
+    .menu-wrap .menu a { color: #fff; text-decoration: none; opacity: 0.9; }
+    .menu-toggle { display: inline-flex; flex-direction: column; gap: 4px; width: 40px; height: 40px; background: transparent; border: 0; cursor: pointer; }
+    .bar { display: block; height: 2px; width: 20px; background: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Dark Veil BG ===== -->
+  <div id="dark-veil" aria-hidden="true"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
+    <div class="container nav">
+      <!-- Marca centralizada -->
+      <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
+        <img src="icone.svg" alt="" class="dot" width="12" height="12" aria-hidden="true" />
+        <span>Guia</span>
+      </a>
+
+      <!-- Botão + Dropdown -->
+      <div class="menu-wrap">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
+          <span class="bar bar-top"></span>
+          <span class="bar bar-middle"></span>
+          <span class="bar bar-bottom"></span>
+        </button>
+
+        <!-- Fechado por padrão -->
+        <nav id="site-menu" class="menu" aria-label="Navegação do produto" hidden>
+          <a href="pagina_empresa.html">Sobre a agência</a>
+          <a href="index.html#como-funciona">Como funciona</a>
+          <a href="index.html#planos">Planos</a>
+          <a href="index.html#seguranca">Segurança &amp; LGPD</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="index.html#contato">Falar com a agência</a>
+          <a href="index.html#contato">Saiba mais</a>
+        </nav>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<script>
-(function () {
-  const header = document.querySelector('.site-header');
-  if (!header) return;
+  <!-- ===== SCRIPT DO MENU ===== -->
+  <script>
+  (function () {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
 
-  const btn  = header.querySelector('.menu-toggle');
-  const menu = header.querySelector('#site-menu');
+    const btn  = header.querySelector('.menu-toggle');
+    const menu = header.querySelector('#site-menu');
 
-  if (!btn || !menu) return;
+    if (!btn || !menu) return;
 
-  function setOpen(open) {
-    btn.classList.toggle('is-open', open);
-    menu.classList.toggle('open', open);
-    menu.hidden = !open;
-    btn.setAttribute('aria-expanded', String(open));
-    document.documentElement.classList.toggle('no-scroll', open);
-    document.body.classList.toggle('no-scroll', open);
-  }
+    function setOpen(open) {
+      btn.classList.toggle('is-open', open);
+      menu.classList.toggle('open', open);
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      document.documentElement.classList.toggle('no-scroll', open);
+      document.body.classList.toggle('no-scroll', open);
+    }
 
-  // estado inicial: fechado
-  setOpen(false);
+    setOpen(false);
 
-  // alterna no clique do botão
-  btn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+    btn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
 
-  // fecha ao clicar fora
-  document.addEventListener('click', (e) => {
-    if (!menu.classList.contains('open')) return;
-    if (!menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
-  });
+    document.addEventListener('click', (e) => {
+      if (!menu.classList.contains('open')) return;
+      if (!menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+    });
 
-  // fecha com ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
-  });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
+    });
 
-  // fecha ao mudar de breakpoint (evita ficar “preso” aberto)
-  const MQ = 860;
-  let prevW = window.innerWidth;
-  window.addEventListener('resize', () => {
-    const w = window.innerWidth;
-    if ((prevW <= MQ && w > MQ) || (prevW > MQ && w <= MQ)) setOpen(false);
-    prevW = w;
-  });
-})();
-</script>
+    const MQ = 860;
+    let prevW = window.innerWidth;
+    window.addEventListener('resize', () => {
+      const w = window.innerWidth;
+      if ((prevW <= MQ && w > MQ) || (prevW > MQ && w <= MQ)) setOpen(false);
+      prevW = w;
+    });
+  })();
+  </script>
+
+  <!-- ===== SCRIPT DO DARK VEIL ===== -->
+  <script type="module">
+    import { Renderer, Program, Mesh, Triangle, Vec2 } from "https://cdn.jsdelivr.net/npm/ogl@latest/dist/ogl.mjs";
+
+    const container = document.getElementById("dark-veil");
+    const renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), alpha: true, antialias: true });
+    const gl = renderer.gl;
+    container.appendChild(gl.canvas);
+
+    const vertex = `
+      attribute vec2 position;
+      varying vec2 vUv;
+      void main() {
+        vUv = position * 0.5 + 0.5;
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    const fragment = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform vec2 uResolution;
+      uniform float uTime;
+      uniform vec2 uMouse;
+
+      float hash(vec2 p){ p = fract(p*vec2(123.34,345.45)); p += dot(p,p+34.345); return fract(p.x*p.y); }
+      float noise(vec2 p){
+        vec2 i=floor(p), f=fract(p);
+        float a=hash(i), b=hash(i+vec2(1.,0.)), c=hash(i+vec2(0.,1.)), d=hash(i+vec2(1.,1.));
+        vec2 u=f*f*(3.-2.*f);
+        return mix(a,b,u.x)+(c-a)*u.y*(1.-u.x)+(d-b)*u.x*u.y;
+      }
+      float fbm(vec2 p){
+        float v=0., a=.5; mat2 m=mat2(1.6,1.2,-1.2,1.6);
+        for(int i=0;i<5;i++){ v+=a*noise(p); p=m*p+.1; a*=.5; } return v;
+      }
+
+      void main(){
+        vec2 uv = gl_FragCoord.xy / uResolution;
+        vec2 p = uv*2.0 - 1.0;
+
+        vec2 mouse = uMouse / uResolution;
+        float pull = smoothstep(0.4, 0.0, distance(uv, mouse));
+
+        float t = uTime * 0.1;
+        float n = fbm(uv * 3.0 + t);
+        float scan = 0.03 * sin((uv.y + t * 0.5) * 500.0);
+
+        float vignette = smoothstep(1.2, 0.2, length(p));
+        vec3 base = mix(vec3(0.06,0.05,0.09), vec3(0.16,0.14,0.21), n);
+        base += scan;
+
+        float alpha = 0.55 * vignette * (0.7 + 0.3 * pull);
+        gl_FragColor = vec4(base, alpha);
+      }
+    `;
+
+    const uniforms = {
+      uTime: { value: 0 },
+      uResolution: { value: new Vec2(1,1) },
+      uMouse: { value: new Vec2(0,0) }
+    };
+
+    const program = new Program(gl, { vertex, fragment, uniforms });
+    const mesh = new Mesh(gl, { geometry: new Triangle(gl), program });
+
+    function resize(){
+      const w=window.innerWidth, h=window.innerHeight;
+      renderer.setSize(w,h);
+      uniforms.uResolution.value.set(w,h);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    window.addEventListener("pointermove", (e)=> uniforms.uMouse.value.set(e.clientX, e.clientY));
+
+    requestAnimationFrame(function update(t){
+      uniforms.uTime.value = t/1000;
+      renderer.render({ scene: mesh });
+      requestAnimationFrame(update);
+    });
+  </script>
+
+</body>
+</html>
