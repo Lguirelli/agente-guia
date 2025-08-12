@@ -13,6 +13,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
+<!-- seu conteúdo -->
+<script>
+(function(){
+  const img = document.getElementById('roboHero');
+  if(!img) return;
+
+  let ticking = false;
+
+  function update(){
+    const rect = img.getBoundingClientRect();
+    const vh = window.innerHeight || 800;
+    const center = rect.top + rect.height/2;
+    const progress = (center - vh/2) / vh;
+    const move = -progress * 40;
+    img.style.transform = `translateY(${move}px)`;
+    ticking = false;
+  }
+
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  update();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', update);
+})();
+</script>
+</body>
+
 <body>
   <a href="#conteudo" class="btn secondary" style="position:absolute; left:-999px; top:-999px">Pular para o conteúdo</a>
 
