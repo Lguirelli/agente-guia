@@ -1,4 +1,4 @@
-// injeta o header e ativa o dropdown responsivo (agora também no desktop)
+// injeta o header e ativa o dropdown (mobile e desktop)
 fetch('header.html')
   .then(r => r.text())
   .then(html => {
@@ -11,7 +11,6 @@ fetch('header.html')
     const nav = mount.querySelector('#site-menu');
     if (!btn || !nav) { console.error('menu-toggle ou #site-menu não encontrados dentro do header.'); return; }
 
-    // Mobile é até 860px — só para decidir bloquear scroll
     const mqMobile = window.matchMedia('(max-width: 860px)');
 
     const lockScroll = (on) => {
@@ -20,40 +19,42 @@ fetch('header.html')
       document.body.classList.toggle('no-scroll', shouldLock);
     };
 
-    const applyState = (isOpen) => {
+    function applyState(isOpen) {
+      // Ícone (3 barras ↔ X)
       btn.classList.toggle('is-open', isOpen);
       btn.setAttribute('aria-expanded', String(isOpen));
       btn.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
 
+      // Mostrar/ocultar via classe .open em TODAS as larguras
       nav.classList.toggle('open', isOpen);
-      nav.hidden = !isOpen;
+
+      // Usar [hidden] só no mobile (evita conflito no desktop)
+      nav.hidden = mqMobile.matches ? !isOpen : false;
 
       lockScroll(isOpen);
-    };
+    }
 
     const toggleMenu = () => applyState(!btn.classList.contains('is-open'));
-    const closeMenu = () => applyState(false);
+    const closeMenu  = () => applyState(false);
 
+    // eventos
     btn.addEventListener('click', toggleMenu);
-
-    // fecha ao clicar em link
-    nav.addEventListener('click', (e) => {
-      if (e.target.closest('a')) closeMenu();
-    });
-
-    // fecha com ESC
+    nav.addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(); });
     mount.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
-
-    // clique fora fecha
     document.addEventListener('click', (e) => {
       const inside = e.target.closest('#site-menu, .menu-toggle');
       if (!inside && btn.classList.contains('is-open')) closeMenu();
     });
 
-    // mudança de viewport: só reavalia bloqueio de scroll
-    mqMobile.addEventListener('change', () => lockScroll(btn.classList.contains('is-open')));
+    // reavaliar quando trocar de viewport
+    mqMobile.addEventListener('change', () => {
+      // no desktop, garantir que o [hidden] fique falso
+      if (!mqMobile.matches) nav.hidden = false;
+      lockScroll(btn.classList.contains('is-open'));
+    });
 
-    // começa fechado
-    closeMenu();
+    // estado inicial: fechado (removendo hidden no desktop)
+    applyState(false);
+    if (!mqMobile.matches) nav.hidden = false;
   })
   .catch(err => console.error('Falha ao carregar header.html:', err));
