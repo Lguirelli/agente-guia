@@ -14,24 +14,19 @@
       color:#fff;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans";
     }
-    /* evita scroll quando menu aberto no mobile */
     .no-scroll{ overflow:hidden; }
 
     /* ===== Camada do Dark Veil ===== */
-    #dark-veil{
-      position:fixed; inset:0; z-index:0; pointer-events:none;
-    }
+    #dark-veil{ position:fixed; inset:0; z-index:0; pointer-events:none; }
 
     /* ===== Header ===== */
     .site-header{
       position:relative; z-index:2;
-      background:transparent;
-      border:none; box-shadow:none; /* remove qualquer “linha” divisória */
+      background:transparent; border:none; box-shadow:none; /* remove linha */
     }
     .container.nav{
       display:flex; align-items:center; justify-content:space-between;
-      padding:16px 24px;
-      max-width:1200px; margin:0 auto;
+      padding:16px 24px; max-width:1200px; margin:0 auto;
     }
     .brand{
       display:flex; align-items:center; gap:8px;
@@ -39,44 +34,50 @@
     }
 
     /* ===== Menu / Toggle ===== */
-    .menu-wrap{ position:relative; margin-left:auto; } /* empurra tudo à direita */
+    .menu-wrap{ position:relative; margin-left:auto; }
     .menu-toggle{
       display:inline-flex; align-items:center; justify-content:center;
       flex-direction:column; gap:4px;
       width:40px; height:40px; background:transparent; border:0; cursor:pointer;
+      z-index:3; /* acima do dropdown */
     }
     .bar{ display:block; height:2px; width:20px; background:#fff; }
 
-    /* ===== Dropdown ===== */
-    .menu{
-      position:absolute; top:calc(100% + 12px); right:0;  /* alinhado à direita do botão */
+    /* ===== Menu ===== */
+    #site-menu{
+      /* mobile: dropdown */
+      position:absolute; top:calc(100% + 12px); right:0;
       display:flex; flex-direction:column; gap:8px;
       padding:12px; min-width:220px;
-      background:rgba(45,51,67,.5);           /* 50% de opacidade */
+      background:rgba(45,51,67,.5); /* 50% opacidade */
       -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
       border:1px solid rgba(255,255,255,.08);
       border-radius:12px;
+      z-index:2;
     }
-    .menu a{
+    #site-menu a{
       color:#fff; text-decoration:none; opacity:.9; padding:8px 10px; border-radius:8px;
     }
-    .menu a:hover{ opacity:1; background:rgba(255,255,255,.06); }
+    #site-menu a:hover{ opacity:1; background:rgba(255,255,255,.06); }
 
-    /* oculto por padrão via atributo [hidden]; classe .open só remove o hidden no JS */
-    .menu:not(.open){ display:none; }
+    /* Estado fechado no mobile controlado por [hidden] */
+    #site-menu[hidden]{ display:none; }
 
     /* ===== Desktop ===== */
     @media (min-width: 860px){
-      /* no desktop, mostramos menu como linha à direita, alinhado ao botão */
-      .menu{
-        position:static;
-        display:flex !important; flex-direction:row; gap:16px;
-        padding:0; min-width:unset; background:transparent;
-        border:0; border-radius:0; backdrop-filter:none; -webkit-backdrop-filter:none;
+      .menu-toggle{ display:none; }           /* esconde hambúrguer no desktop */
+      #site-menu{
+        position:static;                      /* vira menu inline */
+        display:flex !important;
+        flex-direction:row; align-items:center; gap:16px;
+        padding:0; min-width:unset;
+        background:transparent; border:0; border-radius:0;
+        -webkit-backdrop-filter:none; backdrop-filter:none;
       }
-      .menu a{ padding:6px 8px; background:transparent; }
-      .menu a:hover{ background:rgba(255,255,255,.08); }
-      .menu-toggle{ display:none; } /* esconde o hambúrguer */
+      #site-menu a{ padding:6px 8px; background:transparent; }
+      #site-menu a:hover{ background:rgba(255,255,255,.08); }
+      /* Garante visível no desktop mesmo que tenha ficado com [hidden] */
+      #site-menu[hidden]{ display:flex !important; }
     }
   </style>
 </head>
@@ -88,13 +89,11 @@
   <!-- ===== HEADER ===== -->
   <header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
     <div class="container nav">
-      <!-- Marca -->
       <a href="index.html" class="brand" aria-label="Voltar para o site da Guia (Agência)">
         <img src="icone.svg" alt="" class="dot" width="12" height="12" aria-hidden="true" />
         <span>Guia</span>
       </a>
 
-      <!-- Botão + Menu -->
       <div class="menu-wrap">
         <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
           <span class="bar bar-top"></span>
@@ -119,23 +118,42 @@
 
     const btn  = header.querySelector('.menu-toggle');
     const menu = header.querySelector('#site-menu');
-
     if (!btn || !menu) return;
 
+    const MQ = 860;
+
     function setOpen(open) {
-      btn.classList.toggle('is-open', open);
       menu.classList.toggle('open', open);
-      menu.hidden = !open;
       btn.setAttribute('aria-expanded', String(open));
-      document.documentElement.classList.toggle('no-scroll', open);
-      document.body.classList.toggle('no-scroll', open);
+      if (window.innerWidth < MQ) {
+        menu.hidden = !open;
+        document.documentElement.classList.toggle('no-scroll', open);
+        document.body.classList.toggle('no-scroll', open);
+      }
     }
 
-    setOpen(false);
+    function applyLayout() {
+      const isDesktop = window.innerWidth >= MQ;
+      if (isDesktop) {
+        // Desktop: menu sempre visível inline; botão oculto por CSS
+        menu.hidden = false;
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+      } else {
+        // Mobile: respeita estado aberto/fechado
+        menu.hidden = !menu.classList.contains('open');
+      }
+    }
 
+    // Estado inicial
+    setOpen(false);
+    applyLayout();
+
+    // Interações
     btn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
 
     document.addEventListener('click', (e) => {
+      if (window.innerWidth >= MQ) return; // desktop ignora
       if (!menu.classList.contains('open')) return;
       if (!menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
     });
@@ -144,13 +162,7 @@
       if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
     });
 
-    const MQ = 860;
-    let prevW = window.innerWidth;
-    window.addEventListener('resize', () => {
-      const w = window.innerWidth;
-      if ((prevW <= MQ && w > MQ) || (prevW > MQ && w <= MQ)) setOpen(false);
-      prevW = w;
-    });
+    window.addEventListener('resize', applyLayout);
   })();
   </script>
 
