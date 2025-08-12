@@ -1,13 +1,54 @@
 <footer class="footer">
-  <div class="container" style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap">
+  <div class="container footer-content">
     <small class="muted">© <span id="footer-year"></span> Guia — Todos os direitos reservados</small>
-    <div style="display:flex; gap:12px">
+    <div class="footer-links">
       <a class="tag" href="https://www.instagram.com" target="_blank" aria-label="Instagram">Instagram</a>
       <a class="tag" href="https://wa.me/5511999999999" target="_blank" aria-label="WhatsApp">WhatsApp</a>
       <a class="tag" href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">LinkedIn</a>
     </div>
   </div>
 </footer>
+
 <script>
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
+
+<style>
+  /* Layout desktop */
+  .footer-content {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+
+  .footer-links {
+    display:flex;
+    gap:12px;
+  }
+
+  /* Links do footer com efeito hover */
+  .footer-links a {
+    color: var(--text);
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary);
+  }
+
+  /* Mobile: centralizar e quebrar em 2 linhas */
+  @media (max-width: 640px) {
+    .footer-content {
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:8px;
+    }
+    .footer-links {
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+  }
+</style>
