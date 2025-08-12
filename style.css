@@ -34,6 +34,11 @@
   /* Fonts */
   --font-heading:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-body:'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* Novas variáveis para links clicáveis */
+  --link: var(--primary);
+  --link-hover: var(--accent);
+  --link-active: var(--accent-strong);
 }
 
 /* ===== Reset básico ===== */
@@ -208,25 +213,89 @@ html.no-scroll, body.no-scroll{ overflow:hidden }
 @media (prefers-reduced-motion: reduce){
   .menu-toggle .bar{ transition:none }
 }
-<head>
-  ...
-  <link rel="stylesheet" href="style.css"> <!-- seu CSS principal -->
-  <style>
-    /* Parallax JS */
-    .hero-media-wrap{
-      position:relative;
-      height:560px;
-      overflow:visible;
-    }
-    #roboHero{
-      display:block;
-      width:100%;
-      height:auto;
-      will-change:transform;
-      transition:transform 0.06s linear;
-    }
-    @media (max-width: 900px){
-      .hero-media-wrap{ height:420px; }
-    }
-  </style>
-</head>
+
+/* =================================================================== */
+/* ========== Clickable Text • Color Swap (links e itens do menu) ===== */
+/* =================================================================== */
+
+/* Estilo base para textos clicáveis */
+a, .text-link, .menu a {
+  color: var(--link);
+  transition: color .18s ease, background-size .22s ease, text-shadow .22s ease;
+}
+
+/* Hover: troca para a cor de destaque (menta) */
+a:hover, .text-link:hover, .menu a:hover {
+  color: var(--link-hover);
+}
+
+/* Press/click: flash rápido para accent-strong (efeito de clique) */
+a:active, .text-link:active, .menu a:active {
+  color: var(--link-active);
+  text-shadow: 0 0 0px transparent;
+  animation: link-press 200ms ease;
+}
+
+/* Foco acessível (teclado) */
+a:focus-visible, .text-link:focus-visible, .menu a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary) 60%, #ffffff 40%);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Estado "ativo/selecionado" (ex.: página atual) com gradiente no texto */
+a[aria-current="page"],
+a[aria-selected="true"],
+a[data-active="true"],
+.menu a[aria-current="page"],
+.menu a[aria-selected="true"],
+.menu a[data-active="true"],
+.text-link.is-active {
+  /* texto em gradiente roxo→menta */
+  background-image: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* mostra o gradiente */
+  text-shadow: none;
+}
+
+/* Sub-linha animada opcional para .text-link (use <a class="text-link">) */
+.text-link {
+  position: relative;
+  font-weight: 700;
+}
+.text-link::after{
+  content:"";
+  position:absolute; left:0; bottom:-2px;
+  width:0%; height:2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width .22s ease;
+}
+.text-link:hover::after, .text-link:focus-visible::after, .text-link.is-active::after{
+  width:100%;
+}
+
+/* Keyframe do “flash” de clique */
+@keyframes link-press{
+  0%   { color: var(--link-active); }
+  100% { color: var(--link-hover); }
+}
+
+/* =================================================================== */
+/* ===== Parallax (apenas estilos; JS fica no arquivo de scripts) ===== */
+/* =================================================================== */
+.hero-media-wrap{
+  position:relative;
+  height:560px;
+  overflow:visible;
+}
+#roboHero{
+  display:block;
+  width:100%;
+  height:auto;
+  will-change:transform;
+  transition:transform 0.06s linear;
+}
+@media (max-width: 900px){
+  .hero-media-wrap{ height:420px; }
+}
