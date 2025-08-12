@@ -63,8 +63,10 @@ header{
 .nav{
   display:flex; align-items:center; justify-content:space-between;
   gap:20px; min-height:var(--header-h);
-  position: relative; /* para centralizar a marca */
+  position: relative; /* para centralizar a marca e ancorar elementos */
 }
+
+/* Marca centralizada */
 .brand{
   display:inline-flex; align-items:center; gap:10px; font-weight:700;
   position: absolute;
@@ -76,14 +78,21 @@ header{
   filter: drop-shadow(0 0 6px rgba(58,169,255,.6));
 }
 
-/* menu desktop padrão */
-.menu{display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+/* Agrupador do botão + dropdown (ancora a caixinha) */
+.menu-wrap{
+  margin-left:auto;
+  position:relative;
+  display:inline-flex; align-items:center;
+}
+
+/* Estilo base de links do menu (mantém seu visual) */
+.menu{gap:18px; align-items:center; flex-wrap:wrap}
 .menu a{padding:8px 10px; border-radius:10px; color:var(--muted)}
 .menu a:hover{color:var(--text); background:rgba(255,255,255,.04)}
 
-/* botão hamburguer */
+/* Botão hamburguer (sempre visível) */
 .menu-toggle{
-  display:inline-flex; /* agora sempre visível */
+  display:inline-flex;
   width:44px; height:44px;
   border:1px solid var(--border);
   background:transparent;
@@ -91,7 +100,7 @@ header{
   align-items:center; justify-content:center;
   flex-direction:column;
   gap:5px;
-  margin-left: auto; /* empurra para a direita */
+  margin-left: auto; /* garante ficar à direita */
 }
 .menu-toggle .bar{
   display:block;
@@ -113,7 +122,7 @@ header{
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ===== Botões ===== */
+/* ===== Botões (genéricos) ===== */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
   height:40px; padding:0 16px; border-radius:12px; font-weight:600;
@@ -147,29 +156,34 @@ header{
   border-top:1px solid var(--border);
 }
 
-/* ===== Menu dropdown (mobile e desktop) ===== */
-nav.menu{
-  position: fixed;
-  left: 0; right: 0; top: var(--header-h);
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 16px;
-  background: rgba(19,21,26,.96);
-  border-top: 1px solid var(--border);
-  transform: translateY(-8px);
-  opacity: 0; pointer-events: none;
-  transition: transform .18s ease, opacity .18s ease;
-  align-items: flex-end; /* coluna alinhada à direita */
+/* ===== Dropdown flutuante alinhado ao botão (mobile e desktop) ===== */
+.site-header .menu-wrap .menu{
+  position:absolute;            /* flutuante sob o botão */
+  top:calc(100% + 8px);
+  right:0;                      /* alinhado à direita do botão */
+  width:min(360px, calc(100vw - 24px));
+  padding:12px;
+  background:rgba(19,21,26,.96);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  display:flex; flex-direction:column; gap:8px;
+  align-items:stretch;
+  text-align:right;
+  transform:translateY(-8px);
+  opacity:0; pointer-events:none;
+  transition:transform .18s ease, opacity .18s ease;
+  z-index:60;
 }
-nav.menu a{
-  text-align: right;
-  padding: 10px 12px;
-  border-radius: 10px;
+.site-header .menu-wrap .menu a{
+  padding:10px 12px;
+  border-radius:10px;
 }
-nav.menu.open{
-  transform: translateY(0);
-  opacity: 1; pointer-events: auto;
+.site-header .menu-wrap .menu.open{
+  transform:translateY(0);
+  opacity:1; pointer-events:auto;
 }
-nav.menu[hidden]{ display: none; }
+.site-header .menu-wrap .menu[hidden]{ display:none; }
 
 /* ===== Responsivo ===== */
 @media (max-width: 860px){
