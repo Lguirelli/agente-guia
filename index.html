@@ -21,27 +21,26 @@
   <script src="header.js" defer></script>
 
   <main id="conteudo">
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="container" style="display:grid; gap:24px; grid-template-columns:1.15fr 0.85fr; align-items:center">
-        <div>
-          <span style="text-transform:uppercase; font-weight:700; color:#7fd1ff; letter-spacing:.08em">Versão 1.0</span>
-          <h1 class="h1">AGENTE GUIA 1.0 — ATENDIMENTO AUTOMATIZADO NO WHATSAPP</h1>
-          <p class="lead">Captação, qualificação e encaminhamento de leads diretamente pelo WhatsApp. Tom humanizado, respostas rápidas e transferência para humano quando precisar.</p>
-          <div style="display:flex; gap:12px; flex-wrap:wrap">
-            <a class="btn primary" href="#como-funciona">Saiba mais</a>
-            <a class="btn secondary" href="#planos">Ver planos</a>
-          </div>
-        </div>
-
-        <!-- Imagem com opacidade máxima e sem caixa -->
-        <div style="background:transparent; border:none; box-shadow:none" aria-label="Mockup do Agente Guia 1.0 em ação">
-          <img src="./robo_hero.png" alt="Robo Agente Guia — imagem de capa"
-               loading="eager" width="800" height="560"
-               style="width:100%; height:auto; opacity:1;" />
-        </div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container" style="display:grid; gap:24px; grid-template-columns:1.15fr 0.85fr; align-items:center">
+    <div>
+      <span class="tag" style="text-transform:uppercase; font-weight:700; color:#7fd1ff; letter-spacing:.08em">Versão 1.0</span>
+      <h1 class="h1">AGENTE GUIA 1.0 — ATENDIMENTO AUTOMATIZADO NO WHATSAPP</h1>
+      <p class="lead">Captação, qualificação e encaminhamento de leads diretamente pelo WhatsApp. Tom humanizado, respostas rápidas e transferência para humano quando precisar.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn primary" href="#como-funciona">Saiba mais</a>
+        <a class="btn secondary" href="#planos">Ver planos</a>
       </div>
-    </section>
+    </div>
+
+    <!-- Parallax por JS -->
+    <div class="hero-media-wrap">
+      <img id="roboHero" src="./robo_hero.png" alt="Robo Agente Guia — imagem de capa" width="800" height="560" loading="eager" />
+    </div>
+  </div>
+</section>
+
 
 <!-- SOBRE A AGÊNCIA (RESUMO + CTA) -->
 <section class="section" id="sobre-agencia">
