@@ -1,219 +1,53 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guia — Agência</title>
+<style>
+  /* ===== Guia • Design tokens (nova paleta) ===== */
+  :root{
+    --bg:#0b0c10;                 /* fundo escuro do site */
+    --surface:transparent;
+    --card:#32394d;
+    --border:#3d455c;
 
-  <!-- ===== Fonts (Google) ===== -->
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    --primary:#7269e3;
+    --primary-strong:#625bd6;
+    --primary-contrast:#ffffff;
 
-  <style>
-    /* ===== Guia • Design tokens (nova paleta) ===== */
-    :root{
-      --bg:transparent;
-      --surface:transparent;
-      --card:#32394d;
-      --border:#3d455c;
-      --primary:#7269e3;
-      --primary-strong:#625bd6;
-      --primary-contrast:#ffffff;
-      --accent:#98dea3;
-      --accent-strong:#77cf86;
-      --neutral:#a783a6;
-      --text:#ffffff;
-      --muted:rgba(255,255,255,.72);
-      --success:#98dea3;
-      --warning:#f59e0b;
-      --danger:#ef4444;
-      --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --header-h:64px;
-      --font-heading:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --font-body:'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+    --accent:#98dea3;
+    --accent-strong:#77cf86;
+    --neutral:#a783a6;
 
-    /* ===== Reset básico ===== */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:transparent;
-      color:var(--text);
-      font:400 16px/1.6 var(--font-body);
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-    }
-    a{color:inherit; text-decoration:none}
-    img{max-width:100%; display:block}
+    --text:#ffffff;
+    --muted:rgba(255,255,255,.72);
+    --success:#98dea3;
+    --warning:#f59e0b;
+    --danger:#ef4444;
 
-    /* ===== Layout util ===== */
-    .container{
-      width:100%;
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 20px;
-    }
+    --radius:16px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --header-h:64px;
 
-    /* ===== Header / Navbar ===== */
-    header.site-header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(140%) blur(8px);
-      background:transparent;
-      border-bottom:1px solid var(--border);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:20px; min-height:var(--header-h);
-      position: relative;
-    }
+    --font-heading:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --font-body:'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
 
-    /* Marca centralizada */
-    .brand{
-      display:inline-flex; align-items:center; gap:10px; font-weight:800;
-      position: absolute; left: 50%; transform: translateX(-50%);
-      letter-spacing:.4px;
-    }
-    .brand .dot{
-      width:12px; height:12px; display:block; object-fit:contain;
-      filter: drop-shadow(0 0 6px rgba(114,105,227,.8));
-    }
+  /* ===== Reset básico ===== */
+  *{box-sizing:border-box}
+  html,body{height:100%; background:var(--bg);}  /* aplica o fundo */
+  body{
+    margin:0;
+    color:var(--text);
+    font:400 16px/1.6 var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit; text-decoration:none}
+  img{max-width:100%; display:block}
+  [hidden]{display:none !important}
 
-    /* Agrupador do botão + dropdown */
-    .menu-wrap{
-      margin-left:auto;
-      position:relative;
-      display:inline-flex; align-items:center;
-    }
+  /* ===== Layout util ===== */
+  .container{
+    width:100%;
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 20px;
+  }
 
-    /* Botão hamburguer */
-    .menu-toggle{
-      display:inline-flex;
-      width:44px; height:44px;
-      border:1px solid var(--border);
-      background:transparent;
-      border-radius:12px;
-      align-items:center; justify-content:center;
-      flex-direction:column; gap:5px;
-      margin-left:auto;
-    }
-    .menu-toggle .bar{
-      display:block; width:20px; height:2px;
-      background:var(--text);
-      border-radius:2px;
-      transition:transform 180ms ease, opacity 180ms ease, width 180ms ease, background-color 180ms ease;
-      transform-origin:center;
-    }
-    .menu-toggle.is-open .bar-top{transform: translateY(7px) rotate(45deg);}
-    .menu-toggle.is-open .bar-middle{opacity:0; width:0;}
-    .menu-toggle.is-open .bar-bottom{transform: translateY(-7px) rotate(-45deg);}
-
-    /* Links do menu */
-    .menu{
-      position:absolute;
-      top:calc(100% + 8px);
-      right:0;
-      width:min(480px, calc(100vw - 24px));
-      padding:16px 18px;
-      background:transparent;
-      border:1px solid var(--border);
-      border-radius:14px;
-      box-shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      align-items:start;
-      text-align:left;
-      transform:translateY(-8px);
-      opacity:0; pointer-events:none;
-      transition:transform .18s ease, opacity .18s ease;
-      z-index:60;
-    }
-    .menu a{
-      padding:10px 12px;
-      border-radius:10px;
-      color:var(--text);
-      white-space:nowrap;
-      transition: color 0.3s ease, background-color 0.3s ease;
-    }
-    .menu a:hover{
-      background:rgba(114,105,227,.16);
-      color:var(--primary);
-    }
-    .menu.open{
-      transform:translateY(0);
-      opacity:1; pointer-events:auto;
-    }
-
-    /* ===== Responsivo ===== */
-    @media (max-width: 860px){
-      .nav{align-items:center; padding:10px 0}
-      .brand{padding-left:0}
-      .site-header .menu-wrap .menu{
-        left:12px; right:12px; width:auto;
-        grid-template-columns: 1fr;
-        text-align:right;
-      }
-    }
-
-    html.no-scroll, body.no-scroll{overflow:hidden}
-  </style>
-</head>
-<body>
-
-<header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
-  <div class="container nav">
-    <a href="index.html" class="brand">
-      <img src="icone.svg" alt="" class="dot" aria-hidden="true" />
-      <span>Guia</span>
-    </a>
-
-    <div class="menu-wrap">
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
-        <span class="bar bar-top"></span>
-        <span class="bar bar-middle"></span>
-        <span class="bar bar-bottom"></span>
-      </button>
-
-      <nav id="site-menu" class="menu" hidden>
-        <a href="pagina_empresa.html">Sobre a agência</a>
-        <a href="relatorio_agente_ia.html">Relatório sobre uso de agentes de IA</a>
-        <a href="index.html#contato">Falar com a agência</a>
-      </nav>
-    </div>
-  </div>
-</header>
-
-<script>
-(function () {
-  const btn = document.querySelector('.menu-toggle');
-  const menu = document.querySelector('#site-menu');
-  if (!btn || !menu) return;
-
-  btn.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    btn.classList.toggle('is-open', open);
-    btn.setAttribute('aria-expanded', open);
-    if (window.innerWidth < 860) {
-      menu.hidden = !open;
-      document.documentElement.classList.toggle('no-scroll', open);
-      document.body.classList.toggle('no-scroll', open);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 860) {
-      menu.hidden = false;
-      menu.classList.remove('open');
-      btn.classList.remove('is-open');
-      document.documentElement.classList.remove('no-scroll');
-      document.body.classList.remove('no-scroll');
-    } else {
-      menu.hidden = !menu.classList.contains('open');
-    }
-  });
-})();
-</script>
-
-</body>
-</html>
+  /* =====*
