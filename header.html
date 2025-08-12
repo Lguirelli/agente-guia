@@ -1,98 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guia — Agência</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  /* ===== Guia • Design tokens (nova paleta) ===== */
   :root{
-    --bg:#0b0c10;
-    --surface:transparent;
     --card:#32394d;
     --border:#3d455c;
-
+    --text:#ffffff;
     --primary:#7269e3;
     --primary-strong:#625bd6;
-    --primary-contrast:#ffffff;
-
-    --accent:#98dea3;
-    --accent-strong:#77cf86;
-    --neutral:#a783a6;
-
-    --text:#ffffff;
-    --muted:rgba(255,255,255,.72);
-    --success:#98dea3;
-    --warning:#f59e0b;
-    --danger:#ef4444;
-
-    --radius:16px;
-    --shadow:0 10px 30px rgba(0,0,0,.35);
-    --header-h:64px;
-
-    --font-heading:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    --font-body:'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --radius:14px;
+    --shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
   }
 
-  /* ===== Reset básico ===== */
   *{box-sizing:border-box}
-  html,body{height:100%; background:var(--bg);}
+  html,body{height:100%}
   body{
     margin:0;
+    background:transparent;
     color:var(--text);
-    font:400 16px/1.6 var(--font-body);
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
+    font:400 16px/1.6 'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   }
-  a{color:inherit; text-decoration:none}
-  img{max-width:100%; display:block}
   [hidden]{display:none !important}
+  a{color:inherit; text-decoration:none}
 
-  /* ===== Layout util ===== */
-  .container{
-    width:100%;
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 20px;
-  }
+  .container{max-width:1120px; margin:0 auto; padding:0 20px}
 
-  /* ===== Header ===== */
+  /* ===== HEADER ===== */
   .site-header{
     position:sticky; top:0; z-index:50;
-    background:rgba(11,12,16,.6);
+    background:transparent;
+    border-bottom:0 solid var(--border);
     backdrop-filter:saturate(140%) blur(8px);
-    border-bottom:1px solid var(--border);
   }
 
-  /* Grid: [vazio] | [brand] | [menu] */
+  /* Grid: [vazio] | [brand] | [menu]  -> brand sempre no centro */
   .nav{
     display:grid;
     grid-template-columns: 1fr auto 1fr;
     align-items:center;
-    min-height:var(--header-h);
+    min-height:64px;
     gap:16px;
     position:relative;
   }
 
-  /* Marca (SVG + texto) sempre no centro */
+  /* Marca centralizada (coluna 2 do grid) */
   .brand{
-    grid-column:2; justify-self:center;
+    grid-column:2;
+    justify-self:center;
     display:inline-flex; align-items:center; gap:10px;
-    font-family:var(--font-heading);
-    letter-spacing:.4px; line-height:1;
-    z-index:2; /* acima do dropdown */
+    font-family:'Anton', system-ui; letter-spacing:.4px;
+    line-height:1;
   }
   .brand .dot{
     width:12px; height:12px; display:inline-block;
     filter: drop-shadow(0 0 6px rgba(114,105,227,.8));
   }
+  .brand span{ font-size:16px; }
 
-  /* Menu à direita */
+  /* Menu à direita (coluna 3 do grid) */
   .menu-wrap{
-    grid-column:3; justify-self:end;
-    position:relative; display:inline-flex; align-items:center;
-    z-index:3; /* acima do conteúdo */
+    grid-column:3;
+    justify-self:end;
+    position:relative;
+    display:inline-flex; align-items:center;
   }
 
-  /* Botão (sempre visível) */
+  /* Botão SEMPRE visível */
   .menu-toggle{
     display:inline-flex; width:44px; height:44px;
-    border:0; background:transparent; border-radius:12px;
-    align-items:center; justify-content:center;
+    border:0; background:transparent;
+    border-radius:12px; align-items:center; justify-content:center;
     flex-direction:column; gap:5px; cursor:pointer;
   }
   .menu-toggle .bar{
@@ -104,47 +87,106 @@
   .menu-toggle.is-open .bar-middle{opacity:0; width:0}
   .menu-toggle.is-open .bar-bottom{transform: translateY(-7px) rotate(-45deg)}
 
-  /* Dropdown ancorado ao botão (direita) — igual no desktop e mobile */
+  /* Dropdown: abre no clique, alinhado à direita do botão */
   #site-menu{
-    position:absolute;
-    top:calc(100% + 8px);
-    right:0; left:auto;
-    inset-inline-end:0; inset-inline-start:auto;
-
-    width:clamp(240px, 42vw, 360px);             /* mesma lógica em todas telas */
-    padding:16px 18px;
-    background:rgba(114,105,227,.5);             /* primária 50% */
+    position:absolute; top:calc(100% + 8px); right:0;
+    width:min(480px, calc(100vw - 24px));
+    padding:14px;
+    background:rgba(114,105,227,.5);   /* primária 50% */
     -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
-    border:1px solid var(--border);
-    border-radius:14px;
+    border:0;
+    border-radius:var(--radius);
     box-shadow:var(--shadow);
 
-    display:grid; grid-template-columns:1fr; gap:12px;
-    text-align:left;
-    transform-origin: top right;
+    display:grid; grid-template-columns:1fr; gap:10px;
     transform:translateY(-8px);
     opacity:0; pointer-events:none;
     transition:transform .18s ease, opacity .18s ease;
     z-index:60;
   }
   #site-menu.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
-
-  /* Itens do menu (hit-area melhor no touch) */
   #site-menu a{
-    display:block;
-    padding:10px 12px;
-    border-radius:10px;
+    padding:10px 12px; border-radius:10px; white-space:nowrap;
     color:var(--text);
-    white-space:nowrap;
-    transition: background-color .2s ease, color .2s ease;
   }
-  #site-menu a:hover{ background:rgba(255,255,255,.12); color:#fff; }
+  #site-menu a:hover{
+    background:rgba(255,255,255,.12);
+    color:#fff;
+  }
 
-  /* ===== Responsivo ===== */
   @media (max-width:860px){
-    /* Mantém idêntico ao desktop: preso à direita e com largura limitada */
-    #site-menu{ right:0; left:auto; width:clamp(240px, 80vw, 360px); }
+    #site-menu{ left:12px; right:12px; width:auto }
   }
 
-  html.no-scroll, body.no-scroll{ overflow:hidden }
+  html.no-scroll, body.no-scroll{overflow:hidden}
 </style>
+</head>
+<body>
+
+<header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
+  <div class="container nav">
+    <!-- SVG inline + texto SEMPRE no centro da barra -->
+    <a href="index.html" class="brand" aria-label="Página inicial da Guia">
+      <svg class="dot" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" xmlns="icone.svg">
+        <circle cx="6" cy="6" r="6" fill="#7269e3"/>
+      </svg>
+      <span>Guia</span>
+    </a>
+
+    <!-- Menu alinhado à direita -->
+    <div class="menu-wrap">
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
+        <span class="bar bar-top"></span>
+        <span class="bar bar-middle"></span>
+        <span class="bar bar-bottom"></span>
+      </button>
+
+      <nav id="site-menu" class="menu" aria-label="Navegação principal" hidden>
+        <a href="pagina_empresa.html">Sobre a agência</a>
+        <a href="relatorio_agente_ia.html">Relatório sobre uso de agentes de IA</a>
+        <a href="index.html#contato">Falar com a agência</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+(function(){
+  const btn  = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('site-menu');
+  if(!btn || !menu) return;
+
+  function setOpen(open){
+    menu.classList.toggle('open', open);
+    btn.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    menu.hidden = !open;
+    document.documentElement.classList.toggle('no-scroll', open && window.innerWidth < 860);
+    document.body.classList.toggle('no-scroll', open && window.innerWidth < 860);
+  }
+
+  setOpen(false);
+
+  btn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+
+  document.addEventListener('click', (e)=>{
+    if(!menu.classList.contains('open')) return;
+    const within = e.target.closest('.menu-wrap');
+    if(!within) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
+  });
+
+  window.addEventListener('resize', ()=>{
+    if(window.innerWidth >= 860){
+      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
