@@ -1,26 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@400;500;700&display=swap');
-
 /* ===== Guia • Design tokens ===== */
 :root{
-  /* Paleta proposta */
-  --purple:#7269e3;   /* principal */
-  --dark:#272c39;     /* fundo alternativo */
-  --mauve:#a783a6;    /* texto secundário / detalhes */
-  --mint:#98dea3;     /* acento */
-
-  /* Base escura */
   --bg:#0b0c10;
   --surface:#13151a;
   --card:#1a1d24;
   --border:#252a33;
 
-  /* Mapeamento do tema para a paleta nova */
-  --primary: var(--purple);
-  --primary-strong:#5d52d6;           /* roxo um pouco mais escuro p/ hover */
+  --primary:#3AA9FF;
+  --primary-strong:#1188ee;
   --primary-contrast:#ffffff;
-
-  --accent: var(--mint);               /* acento secundário */
-  --accent-strong:#6fcf96;             /* hover do acento */
 
   --text:#e8eef9;
   --muted:#9aa6b2;
@@ -41,16 +28,11 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font:400 16px/1.6 'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font:400 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
-a{
-  color: var(--primary);
-  text-decoration:none;
-  transition: color .3s ease, background-color .3s ease, opacity .2s ease;
-}
-a:hover{ color: var(--primary-strong); }
+a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
 
 /* ===== Layout util ===== */
@@ -60,7 +42,9 @@ img{max-width:100%; display:block}
   margin:0 auto;
   padding:0 20px;
 }
-.section{ padding:clamp(56px, 7vw, 72px) 0; }
+.section{
+  padding:clamp(56px, 7vw, 72px) 0;
+}
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -73,139 +57,88 @@ img{max-width:100%; display:block}
 header{
   position:sticky; top:0; z-index:50;
   backdrop-filter:saturate(140%) blur(8px);
-  background:
-    linear-gradient(180deg, rgba(19,21,26,.92), rgba(19,21,26,.64));
+  background:linear-gradient(180deg, rgba(19,21,26,.9), rgba(19,21,26,.6));
   border-bottom:1px solid var(--border);
 }
 .nav{
   display:flex; align-items:center; justify-content:space-between;
   gap:20px; min-height:var(--header-h);
+  position: relative; /* para centralizar a marca */
 }
-.brand{display:inline-flex; align-items:center; gap:10px; font-weight:700}
+.brand{
+  display:inline-flex; align-items:center; gap:10px; font-weight:700;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .brand .dot{
   width:12px; height:12px; display:block; object-fit:contain;
-  filter: drop-shadow(0 0 6px rgba(114,105,227,.55));
+  filter: drop-shadow(0 0 6px rgba(58,169,255,.6));
 }
 
 /* menu desktop padrão */
-.menu{ display:flex; gap:18px; align-items:center; flex-wrap:wrap }
-.menu a{
-  padding:8px 10px;
-  border-radius:10px;
-  color:var(--muted);
-  transition: color .3s ease, background-color .3s ease;
-}
-.menu a:hover{
-  color:var(--primary);
-  background:rgba(255,255,255,.04)
-}
+.menu{display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+.menu a{padding:8px 10px; border-radius:10px; color:var(--muted)}
+.menu a:hover{color:var(--text); background:rgba(255,255,255,.04)}
 
-/* botão hamburguer (escondido no desktop) */
+/* botão hamburguer */
 .menu-toggle{
-  display:none;
+  display:inline-flex; /* agora sempre visível */
   width:44px; height:44px;
   border:1px solid var(--border);
   background:transparent;
   border-radius:12px;
   align-items:center; justify-content:center;
-  flex-direction:column; gap:5px;
+  flex-direction:column;
+  gap:5px;
+  margin-left: auto; /* empurra para a direita */
 }
 .menu-toggle .bar{
-  display:block; width:20px; height:2px; background:var(--text);
-  margin:0; border-radius:2px;
+  display:block;
+  width:20px; height:2px;
+  background:var(--text);
+  margin:0;
+  border-radius:2px;
   transition:transform 180ms ease, opacity 180ms ease, width 180ms ease;
   transform-origin:center;
 }
-.menu-toggle.is-open .bar-top{ transform: translateY(7px) rotate(45deg); }
-.menu-toggle.is-open .bar-middle{ opacity:0; width:0; }
-.menu-toggle.is-open .bar-bottom{ transform: translateY(-7px) rotate(-45deg); }
+.menu-toggle.is-open .bar-top{
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.is-open .bar-middle{
+  opacity: 0;
+  width: 0;
+}
+.menu-toggle.is-open .bar-bottom{
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ===== Botões ===== */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
-  gap:8px;
-  height:40px; padding:0 16px;
-  border-radius:12px; font-weight:600;
+  height:40px; padding:0 16px; border-radius:12px; font-weight:600;
   border:1px solid transparent; transition:all .2s ease;
 }
-
-/* primário: roxo */
 .btn.primary{
   background:var(--primary); color:var(--primary-contrast);
-  box-shadow:0 6px 18px rgba(114,105,227,.35);
+  box-shadow:0 6px 18px rgba(58,169,255,.35);
 }
-.btn.primary:hover{ background:var(--primary-strong); transform:translateY(-1px) }
-.btn.primary:active{ transform:translateY(0) }
-
-/* secundário: contornado */
-.btn.secondary{
-  background:transparent; color:var(--text); border-color:var(--border)
-}
-.btn.secondary:hover{ background:rgba(255,255,255,.05) }
-
-/* acento: mint */
-.btn.accent{
-  background:var(--accent); color:#0d1b12;
-  box-shadow:0 6px 18px rgba(152,222,163,.28);
-}
-.btn.accent:hover{ background:var(--accent-strong); transform:translateY(-1px) }
-
-/* sutil / ghost que usa roxo */
-.btn.ghost{
-  background:rgba(114,105,227,.12);
-  color:var(--primary);
-  border:1px solid rgba(114,105,227,.35);
-}
-.btn.ghost:hover{ background:rgba(114,105,227,.18) }
-
-/* ===== Badges (exemplo com a nova paleta) ===== */
-.badge{
-  display:inline-flex; align-items:center; gap:6px;
-  padding:4px 10px; border-radius:999px; font-size:13px; line-height:1;
-  background:rgba(114,105,227,.14); color:var(--primary);
-  border:1px solid rgba(114,105,227,.35);
-}
-.badge.mint{
-  background:rgba(152,222,163,.14); color:var(--accent);
-  border:1px solid rgba(152,222,163,.35);
-}
+.btn.primary:hover{background:var(--primary-strong); transform:translateY(-1px)}
+.btn.secondary{background:transparent; color:var(--text); border-color:var(--border)}
+.btn.secondary:hover{background:rgba(255,255,255,.05)}
 
 /* ===== Tipografia ===== */
 .headline{
   margin:0 0 12px;
   font-weight:800;
-  font-family:'Anton', sans-serif;
   text-transform:uppercase;
   letter-spacing:.6px;
   font-size:clamp(28px, 4vw, 44px);
-  color:var(--text);
 }
 .subhead{
-  margin:0 0 26px; color:var(--mauve);
+  margin:0 0 26px; color:var(--muted);
   font-size:clamp(15px, 2.2vw, 18px);
 }
-h1,h2,h3,h4{ font-family:'Anton', sans-serif; color:var(--text); }
-p,li,small,span,input,button{ font-family:'Urbanist', sans-serif; }
-
-/* ===== Cards, inputs e barras usando novos tons ===== */
-.card.gradient{
-  background:
-    radial-gradient(1200px 400px at 100% -20%, rgba(114,105,227,.08), transparent 60%),
-    radial-gradient(1200px 400px at -20% 120%, rgba(152,222,163,.06), transparent 60%),
-    var(--card);
-}
-
-.input{
-  height:44px; padding:0 14px; border-radius:12px; width:100%;
-  background:var(--surface); color:var(--text);
-  border:1px solid var(--border);
-  outline:0; transition:border-color .2s ease, box-shadow .2s ease;
-}
-.input:focus{
-  border-color: rgba(114,105,227,.6);
-  box-shadow: 0 0 0 3px rgba(114,105,227,.25);
-}
-.input.success{ border-color: rgba(152,222,163,.7); }
 
 /* ===== Footer ===== */
 .footer{
@@ -213,37 +146,39 @@ p,li,small,span,input,button{ font-family:'Urbanist', sans-serif; }
   background:var(--surface); color:var(--muted);
   border-top:1px solid var(--border);
 }
-.footer a{ color: var(--muted); transition: color .3s ease; }
-.footer a:hover{ color: var(--primary); }
+
+/* ===== Menu dropdown (mobile e desktop) ===== */
+nav.menu{
+  position: fixed;
+  left: 0; right: 0; top: var(--header-h);
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 16px;
+  background: rgba(19,21,26,.96);
+  border-top: 1px solid var(--border);
+  transform: translateY(-8px);
+  opacity: 0; pointer-events: none;
+  transition: transform .18s ease, opacity .18s ease;
+  align-items: flex-end; /* coluna alinhada à direita */
+}
+nav.menu a{
+  text-align: right;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+nav.menu.open{
+  transform: translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+nav.menu[hidden]{ display: none; }
 
 /* ===== Responsivo ===== */
 @media (max-width: 860px){
   .nav{align-items:center; padding:10px 0}
-  .brand{ padding-left:12px; }
-  .menu-toggle{display:inline-flex}
-  .menu{
-    position:fixed; left:0; right:0; top:var(--header-h);
-    display:flex; flex-direction:column; gap:8px;
-    padding:16px;
-    background:rgba(19,21,26,.96);
-    border-top:1px solid var(--border);
-    transform:translateY(-8px);
-    opacity:0; pointer-events:none;
-    transition:transform .18s ease, opacity .18s ease;
-    align-items:flex-end;
-  }
-  .menu a{
-    padding:10px 12px; border-radius:10px; text-align:right;
-  }
-  .menu.open{ transform:translateY(0); opacity:1; pointer-events:auto }
-  .menu .btn{ width:100%; height:44px }
-  .btn{ height:38px; padding:0 14px }
+  .brand{padding-left:0} /* já centralizada */
 }
-
-/* bloqueio de scroll quando menu aberto */
 html.no-scroll, body.no-scroll{overflow:hidden}
 
-/* reduz transições para quem prefere menos animação */
+/* ===== Animação reduzida ===== */
 @media (prefers-reduced-motion: reduce){
   .menu-toggle .bar{transition:none}
 }
