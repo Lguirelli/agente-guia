@@ -140,10 +140,10 @@ img{ max-width:100%; display:block }
   min-inline-size: 220px;                   /* não ficar estreita demais */
 
   padding:16px 12px;                        /* respiro interno */
-  background:rgba(114,105,227,.5);
+  background:rgba(114,105,227,.8);
   -webkit-backdrop-filter:blur(8px);
   backdrop-filter:blur(8px);
-  border:1px solid var(--border);
+  border:0px solid var(--border);
   border-radius:14px;
   box-shadow:var(--shadow);
 
