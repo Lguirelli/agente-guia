@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulação WhatsApp — Agente Guia</title>
+  <style>
+    :root{
+      --header-bg:#075E54;
+      --header-fg:#E6FFFA;
+      --bubble-me:#DCF8C6;
+      --bubble-them:#FFFFFF;
+      --ticks:#34B7F1;
+    }
+    html,body{height:100%}
+    body{
+      margin:0; background:transparent; color:#111;
+      font:14px/1.35 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    }
+    .wrap{height:100%; display:flex; flex-direction:column; border-radius:28px; overflow:hidden; background:transparent}
+    .header{
+      display:flex; align-items:center; gap:12px; padding:10px 14px;
+      background:var(--header-bg); color:var(--header-fg)
+    }
+    .avatar{width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.2); display:grid; place-items:center; font-weight:700}
+    .title{display:flex; flex-direction:column}
+    .title .name{font-weight:700; font-size:13px}
+    .title .status{font-size:11px; opacity:.9}
+    .icons{margin-left:auto; display:flex; gap:10px; opacity:.9}
+    .icons span{width:18px; height:18px; display:inline-block; background:#fff2; border-radius:4px}
+
+    .chat{flex:1; overflow:auto; padding:10px; background:transparent}
+    .day{display:flex; justify-content:center; margin:8px 0}
+    .day span{font-size:10px; padding:4px 10px; border-radius:999px; background:rgba(255,255,255,.1); color:rgba(255,255,255,.8)}
+    .row{display:flex; margin:6px 0}
+    .me{justify-content:flex-end}
+    .bubble{
+      max-width:80%; padding:8px 10px; border-radius:16px; box-shadow:0 2px 6px rgba(0,0,0,.12);
+      position:relative; color:#111; background:#fff
+    }
+    .me .bubble{background:var(--bubble-me)}
+    .them .bubble{background:var(--bubble-them)}
+    .tail{position:absolute; top:6px; width:10px; height:10px; transform:rotate(45deg)}
+    .me .tail{right:-4px; background:var(--bubble-me)}
+    .them .tail{left:-4px; background:var(--bubble-them)}
+    .meta{display:flex; gap:6px; align-items:center; justify-content:flex-end; margin-top:4px}
+    .time{font-size:10px; opacity:.6}
+    .ticks{display:inline-flex; gap:2px}
+    .tick{width:12px; height:8px; display:inline-block}
+    .typing{
+      display:inline-flex; gap:4px; align-items:center
+    }
+    .dot{
+      width:6px; height:6px; border-radius:50%; background:#0007; animation:bounce 1s infinite ease-in-out
+    }
+    .dot:nth-child(2){animation-delay:.15s}
+    .dot:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{
+      0%,100%{transform:translateY(0); opacity:.3}
+      50%{transform:translateY(-3px); opacity:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app">
+    <div class="header">
+      <div class="avatar">G</div>
+      <div class="title">
+        <span class="name">Agente Guia</span>
+        <span class="status">online agora</span>
+      </div>
+      <div class="icons"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="chat" id="chat">
+      <div class="day"><span>Hoje</span></div>
+      <!-- mensagens entram por JS -->
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const script = [
+      { from: "them", text: "Oi! Vi seu trabalho com o Agente Guia 👀", typingMs: 1200 },
+      { from: "them", text: "Você consegue automatizar o atendimento do meu WhatsApp?", typingMs: 1500 },
+      { from: "me", text: "Consigo sim. Montamos um fluxo com IA + integrações. Quer ver um exemplo?", typingMs: 900 },
+      { from: "them", text: "Quero muito! Como funciona o disparo inicial?", typingMs: 1100 },
+      { from: "me", text: "Abertura com menu, coleta de dados e qualificação. Tudo com tom humano.", typingMs: 1200 },
+      { from: "me", text: "Te mando uma demo interativa ainda hoje.", typingMs: 900 },
+      { from: "them", text: "Perfeito. Qual investimento inicial?", typingMs: 1000 },
+      { from: "me", text: "Planos a partir de R$ 497/mês + setup único. Fechamos?", typingMs: 1100 },
+      { from: "them", text: "Fechamos! Me envia o contrato.", typingMs: 800 },
+    ];
+
+    const chat = document.getElementById('chat');
+    let idx = 0, playing = false, start = Date.now();
+
+    const io = new IntersectionObserver(entries=>{
+      if(entries.some(e=>e.isIntersecting)){
+        if(!playing){ playing = true; next(); }
+      }
+    }, {threshold: .5});
+    io.observe(document.getElementById('app'));
+
+    function scrollDown(){ chat.scrollTop = chat.scrollHeight; }
+
+    function timeLabel(){
+      const mins = Math.min(59, Math.floor((Date.now()-start)/60000));
+      const d = new Date(start + mins*60000);
+      return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    }
+
+    function showTyping(){
+      const row = document.createElement('div');
+      row.className = 'row them';
+      row.id = 'typing';
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.innerHTML = '<div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="font-size:10px;opacity:.6;margin-left:6px">digitando…</span></div>';
+      const tail = document.createElement('span'); tail.className = 'tail';
+      bubble.appendChild(tail);
+      row.appendChild(bubble);
+      chat.appendChild(row);
+      scrollDown();
+    }
+
+    function hideTyping(){
+      const t = document.getElementById('typing');
+      if(t) t.remove();
+    }
+
+    function addMessage({from, text}){
+      const row = document.createElement('div');
+      row.className = 'row ' + (from==='me' ? 'me' : 'them');
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.textContent = text;
+      const tail = document.createElement('span'); tail.className = 'tail';
+      bubble.appendChild(tail);
+
+      const meta = document.createElement('div'); meta.className = 'meta';
+      const time = document.createElement('span'); time.className = 'time'; time.textContent = timeLabel();
+      meta.appendChild(time);
+
+      if(from==='me'){
+        const ticks = document.createElement('span'); ticks.className = 'ticks';
+        ticks.innerHTML = '<svg class="tick" viewBox="0 0 16 12" aria-hidden><path d="M5.5 8.5L2.5 5.5L1 7l4.5 4 6-8-1.5-1-4.5 6.5z" fill="#9aa2a6"/></svg>'+
+                          '<svg class="tick" viewBox="0 0 16 12" aria-hidden><path d="M5.5 8.5L2.5 5.5L1 7l4.5 4 6-8-1.5-1-4.5 6.5z" fill="#9aa2a6"/></svg>';
+        meta.appendChild(ticks);
+        setTimeout(()=>[...ticks.querySelectorAll('path')].forEach(p=>p.setAttribute('fill', getComputedStyle(document.documentElement).getPropertyValue('--ticks').trim() || '#34B7F1')), 1200);
+      }
+
+      bubble.appendChild(meta);
+      row.appendChild(bubble);
+      chat.appendChild(row);
+      scrollDown();
+    }
+
+    function next(){
+      if(idx >= script.length) return;
+      const item = script[idx++];
+      showTyping();
+      setTimeout(()=>{
+        hideTyping();
+        addMessage(item);
+        if(idx < script.length) next();
+      }, Math.max(400, item.typingMs||1000));
+    }
+  })();
+  </script>
+</body>
+</html>
