@@ -1,192 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Guia — Agência</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia — Agência</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Perf: conexões para fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<style>
-  :root{
-    --card:#32394d;
-    --border:#3d455c;
-    --text:#ffffff;
-    --primary:#7269e3;
-    --primary-strong:#625bd6;
-    --radius:14px;
-    --shadow:0 14px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
-  }
+  <!-- Fontes (Anton p/ títulos, Urbanist p/ corpo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    background:transparent;
-    color:var(--text);
-    font:400 16px/1.6 'Urbanist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  }
-  [hidden]{display:none !important}
-  a{color:inherit; text-decoration:none}
+  <!-- CSS do header + menu dropdown (arquivo com as correções do mobile) -->
+  <link rel="stylesheet" href="css/header-menu.css">
 
-  .container{max-width:1120px; margin:0 auto; padding:0 20px}
-
-  /* ===== HEADER ===== */
-  .site-header{
-    position:sticky; top:0; z-index:50;
-    background:transparent;
-    border-bottom:0 solid var(--border);
-    backdrop-filter:saturate(140%) blur(8px);
-  }
-
-  /* Grid: [vazio] | [brand] | [menu]  -> brand sempre no centro */
-  .nav{
-    display:grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items:center;
-    min-height:64px;
-    gap:16px;
-    position:relative;
-  }
-
-  /* Marca centralizada (coluna 2 do grid) */
-  .brand{
-    grid-column:2;
-    justify-self:center;
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:'Anton', system-ui; letter-spacing:.4px;
-    line-height:1;
-  }
-  .brand .dot{
-    width:12px; height:12px; display:inline-block;
-    filter: drop-shadow(0 0 6px rgba(114,105,227,.8));
-  }
-  .brand span{ font-size:16px; }
-
-  /* Menu à direita (coluna 3 do grid) */
-  .menu-wrap{
-    grid-column:3;
-    justify-self:end;
-    position:relative;
-    display:inline-flex; align-items:center;
-  }
-
-  /* Botão SEMPRE visível */
-  .menu-toggle{
-    display:inline-flex; width:44px; height:44px;
-    border:0; background:transparent;
-    border-radius:12px; align-items:center; justify-content:center;
-    flex-direction:column; gap:5px; cursor:pointer;
-  }
-  .menu-toggle .bar{
-    width:20px; height:2px; background:var(--text); border-radius:2px;
-    transition:transform .18s ease, opacity .18s ease, width .18s ease;
-    transform-origin:center;
-  }
-  .menu-toggle.is-open .bar-top{transform: translateY(7px) rotate(45deg)}
-  .menu-toggle.is-open .bar-middle{opacity:0; width:0}
-  .menu-toggle.is-open .bar-bottom{transform: translateY(-7px) rotate(-45deg)}
-
-  /* Dropdown: abre no clique, alinhado à direita do botão */
-  #site-menu{
-    position:absolute; top:calc(100% + 8px); right:0;
-    width:min(480px, calc(100vw - 24px));
-    padding:14px;
-    background:rgba(114,105,227,.5);   /* primária 50% */
-    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
-    border:0;
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-
-    display:grid; grid-template-columns:1fr; gap:10px;
-    transform:translateY(-8px);
-    opacity:0; pointer-events:none;
-    transition:transform .18s ease, opacity .18s ease;
-    z-index:60;
-  }
-  #site-menu.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
-  #site-menu a{
-    padding:10px 12px; border-radius:10px; white-space:nowrap;
-    color:var(--text);
-  }
-  #site-menu a:hover{
-    background:rgba(255,255,255,.12);
-    color:#fff;
-  }
-
-  @media (max-width:860px){
-    #site-menu{ left:12px; right:12px; width:auto }
-  }
-
-  html.no-scroll, body.no-scroll{overflow:hidden}
-</style>
+  <meta name="theme-color" content="#0b0c10">
 </head>
 <body>
 
-<header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
-  <div class="container nav">
-    <!-- SVG inline + texto SEMPRE no centro da barra -->
-    <a href="index.html" class="brand" aria-label="Página inicial da Guia">
-      <svg class="dot" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" xmlns="icone.svg">
-        <circle cx="6" cy="6" r="6" fill="#7269e3"/>
-      </svg>
-      <span>Guia</span>
-    </a>
+  <!-- ===== HEADER (com ícone como imagem) ===== -->
+  <header class="site-header" aria-label="Cabeçalho da Guia (Agência)">
+    <div class="container nav">
+      <!-- Marca centralizada -->
+      <a href="index.html" class="brand" aria-label="Página inicial da Guia">
+        <img
+          class="dot"
+          src="icone.svg"
+          width="12"
+          height="12"
+          alt=""
+          decoding="async"
+          loading="eager"
+        />
+        <span>Guia</span>
+      </a>
 
-    <!-- Menu alinhado à direita -->
-    <div class="menu-wrap">
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
-        <span class="bar bar-top"></span>
-        <span class="bar bar-middle"></span>
-        <span class="bar bar-bottom"></span>
-      </button>
+      <!-- Menu alinhado à direita -->
+      <div class="menu-wrap">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-menu">
+          <span class="bar bar-top"></span>
+          <span class="bar bar-middle"></span>
+          <span class="bar bar-bottom"></span>
+        </button>
 
-      <nav id="site-menu" class="menu" aria-label="Navegação principal" hidden>
-        <a href="pagina_empresa.html">Sobre a agência</a>
-        <a href="relatorio_agente_ia.html">Relatório sobre uso de agentes de IA</a>
-        <a href="index.html#contato">Falar com a agência</a>
-      </nav>
+        <nav id="site-menu" class="menu" aria-label="Navegação principal" hidden>
+          <a href="pagina_empresa.html">Sobre a agência</a>
+          <a href="relatorio_agente_ia.html">Relatório sobre uso de agentes de IA</a>
+          <a href="index.html#contato">Falar com a agência</a>
+        </nav>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<script>
-(function(){
-  const btn  = document.querySelector('.menu-toggle');
-  const menu = document.getElementById('site-menu');
-  if(!btn || !menu) return;
+  <!-- ===== Script do toggle do menu ===== -->
+  <script>
+  (function(){
+    const btn  = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('site-menu');
+    if(!btn || !menu) return;
 
-  function setOpen(open){
-    menu.classList.toggle('open', open);
-    btn.classList.toggle('is-open', open);
-    btn.setAttribute('aria-expanded', String(open));
-    menu.hidden = !open;
-    document.documentElement.classList.toggle('no-scroll', open && window.innerWidth < 860);
-    document.body.classList.toggle('no-scroll', open && window.innerWidth < 860);
-  }
+    function setOpen(open){
+      menu.classList.toggle('open', open);
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
 
-  setOpen(false);
-
-  btn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
-
-  document.addEventListener('click', (e)=>{
-    if(!menu.classList.contains('open')) return;
-    const within = e.target.closest('.menu-wrap');
-    if(!within) setOpen(false);
-  });
-
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
-  });
-
-  window.addEventListener('resize', ()=>{
-    if(window.innerWidth >= 860){
-      document.documentElement.classList.remove('no-scroll');
-      document.body.classList.remove('no-scroll');
+      // bloqueia o scroll no mobile quando o menu abre
+      const lock = open && window.innerWidth < 860;
+      document.documentElement.classList.toggle('no-scroll', lock);
+      document.body.classList.toggle('no-scroll', lock);
     }
-  });
-})();
-</script>
+
+    setOpen(false);
+
+    btn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+
+    // clique fora do menu fecha
+    document.addEventListener('click', (e)=>{
+      if(!menu.classList.contains('open')) return;
+      const within = e.target.closest('.menu-wrap');
+      if(!within) setOpen(false);
+    });
+
+    // ESC fecha
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && menu.classList.contains('open')) setOpen(false);
+    });
+
+    // ao voltar para desktop, remove travas de scroll
+    window.addEventListener('resize', ()=>{
+      if(window.innerWidth >= 860){
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+  })();
+  </script>
 
 </body>
 </html>
