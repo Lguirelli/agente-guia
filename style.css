@@ -218,13 +218,13 @@ img{
 
 /* ===== Tipografia ===== */
 .headline{
-  margin:0 0 12px;
+  margin:0 0 16px;
   font-family:var(--font-heading);
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:.6px;
   font-size:clamp(28px, 4vw, 44px);
-  color:var(--text);
+  color:var(--mint); /* verde da paleta */
 }
 .subhead{
   margin:0 0 26px;
@@ -232,6 +232,17 @@ img{
   font-family:var(--font-body);
   font-weight:400;
   font-size:clamp(15px, 2.2vw, 18px);
+}
+
+/* ===== Cards/Seções ===== */
+.section{
+  padding:56px 0;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
 }
 
 /* ===== Botões ===== */
