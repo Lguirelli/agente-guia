@@ -7,8 +7,132 @@
   <title>Agente Guia | Relatório Completo IA</title>
   <meta name="description" content="Relatório educativo sobre agentes de IA para atendimento ao cliente no Brasil e no mundo, incluindo métricas, casos de uso, ROI e LGPD." />
   <link rel="stylesheet" href="style.css">
+
+  <!-- Estilos locais (escopo desta página) -->
+  <style>
+    :root{
+      /* fallback caso a página seja usada isolada */
+      --mint:#98DEA3;
+      --mint-strong:#77cf86;
+      --border:#3d455c;
+      --card:rgba(255,255,255,.02);
+      --text:#fff;
+      --muted:rgba(255,255,255,.75);
+    }
+
+    body.page-report { scroll-behavior: smooth; }
+
+    /* Barra de progresso de leitura */
+    .reading-progress {
+      position: fixed; top: 0; left: 0; height: 4px; width: 0%;
+      background: linear-gradient(90deg, var(--mint), var(--mint-strong));
+      z-index: 100;
+      transition: width .1s linear;
+    }
+
+    /* Largura de leitura confortável */
+    .reading-width {
+      max-width: 860px;
+      margin-inline: auto;
+    }
+
+    /* Cartões de conteúdo */
+    .card-page {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    /* Título principal centrado e com cor da paleta */
+    .page-title {
+      color: var(--mint);
+      text-align: center;
+      margin: 0 0 10px;
+      letter-spacing: .6px;
+    }
+
+    .page-subhead {
+      text-align: center;
+      color: var(--muted);
+      margin: 0 auto 28px;
+      max-width: 720px;
+    }
+
+    /* Títulos de seção com guia visual */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 14px;
+    }
+    .section-title::before{
+      content: "";
+      inline-size: 8px;
+      block-size: 24px;
+      border-radius: 6px;
+      background: var(--mint);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--mint) 25%, transparent);
+    }
+
+    /* Texto base */
+    .body, .list, .subhead {
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    /* Listas mais legíveis (UL) */
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .list li{
+      position: relative;
+      padding-left: 28px;
+      margin: 10px 0;
+    }
+    .list li::before{
+      content: "";
+      position: absolute; left: 0.5px; top: 0.6em;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--mint) 25%, transparent);
+    }
+
+    /* Listas ordenadas (OL) com contadores destacados */
+    ol.list{
+      counter-reset: step;
+    }
+    ol.list li{
+      padding-left: 38px;
+    }
+    ol.list li::before{
+      counter-increment: step;
+      content: counter(step);
+      position: absolute; left: 0; top: 0.2em;
+      width: 26px; height: 26px; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--mint);
+      color: #0B0C10; font-weight: 800;
+    }
+
+    /* Separação entre seções */
+    .section + .section .card-page{
+      margin-top: 12px;
+    }
+
+    /* Responsivo */
+    @media (max-width: 860px){
+      .card-page{ padding: 22px }
+      .page-subhead{ padding-inline: 6px }
+    }
+  </style>
 </head>
-<body>
+<body class="page-report">
+
+  <!-- Barra de progresso de leitura -->
+  <div class="reading-progress" id="readingProgress"></div>
 
   <!-- HEADER PADRÃO -->
   <div id="site-header"></div>
@@ -17,149 +141,173 @@
   <main>
     <!-- Título -->
     <section class="section">
-      <div class="container">
-        <h1 class="headline">Relatório Completo: Agentes de IA no Atendimento ao Cliente</h1>
-        <p class="subhead">Estudo detalhado sobre mercado, métricas, casos de uso e governança.</p>
+      <div class="container reading-width">
+        <div class="card-page">
+          <h1 class="headline page-title">Relatório Completo: Agentes de IA no Atendimento ao Cliente</h1>
+          <p class="subhead page-subhead">Estudo detalhado sobre mercado, métricas, casos de uso e governança.</p>
+        </div>
       </div>
     </section>
 
     <!-- Resumo Executivo -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">Resumo Executivo</h2>
-        <ul class="list">
-          <li>Mercado em rápida expansão. Mercado global de IA para atendimento alcançou US$ 13,0 bilhões em 2024 e pode chegar a US$ 83,9 bilhões em 2033.</li>
-          <li>Brasil em alta. Gastos com IA somaram US$ 3,2 bilhões em 2023 e devem crescer acima de 30 por cento ao ano.</li>
-          <li>WhatsApp dominante. 70 por cento das empresas no Brasil usam o WhatsApp Business para vendas e suporte.</li>
-          <li>Métricas de impacto. Redução de até 87 por cento no FRT e aumento de até 25 pontos no CSAT após IA.</li>
-          <li>ROI rápido. Payback típico entre 3 e 6 meses e economia de até 40 por cento no custo por atendimento.</li>
-          <li>Casos diversos. Ganhos comprovados em varejo, serviços, saúde, educação, financeiro e turismo.</li>
-          <li>Riscos e LGPD. Privacidade, vieses e segurança exigem governança e compliance.</li>
-          <li>Execução ágil. MVP funcional em 30 dias com ferramentas do mercado.</li>
-        </ul>
+    <section class="section" id="resumo">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">Resumo Executivo</h2>
+          <ul class="list">
+            <li>Mercado em rápida expansão. Mercado global de IA para atendimento alcançou US$ 13,0 bilhões em 2024 e pode chegar a US$ 83,9 bilhões em 2033.</li>
+            <li>Brasil em alta. Gastos com IA somaram US$ 3,2 bilhões em 2023 e devem crescer acima de 30 por cento ao ano.</li>
+            <li>WhatsApp dominante. 70 por cento das empresas no Brasil usam o WhatsApp Business para vendas e suporte.</li>
+            <li>Métricas de impacto. Redução de até 87 por cento no FRT e aumento de até 25 pontos no CSAT após IA.</li>
+            <li>ROI rápido. Payback típico entre 3 e 6 meses e economia de até 40 por cento no custo por atendimento.</li>
+            <li>Casos diversos. Ganhos comprovados em varejo, serviços, saúde, educação, financeiro e turismo.</li>
+            <li>Riscos e LGPD. Privacidade, vieses e segurança exigem governança e compliance.</li>
+            <li>Execução ágil. MVP funcional em 30 dias com ferramentas do mercado.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- 1. O que é -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">1. O que é um agente de IA de atendimento</h2>
-        <p class="body">Agente de IA de atendimento é um sistema que entende linguagem natural, responde automaticamente e pode executar ações como consultas, agendamentos e pagamentos. Diferente de bots de regras, aprende com interações e integra dados de múltiplas fontes.</p>
+    <section class="section" id="o-que-e">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">1. O que é um agente de IA de atendimento</h2>
+          <p class="body">Agente de IA de atendimento é um sistema que entende linguagem natural, responde automaticamente e pode executar ações como consultas, agendamentos e pagamentos. Diferente de bots de regras, aprende com interações e integra dados de múltiplas fontes.</p>
+        </div>
       </div>
     </section>
 
     <!-- 2. Por que agora -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">2. Por que agora</h2>
-        <p class="body">O avanço da IA generativa, a maturidade de APIs e o custo acessível de modelos tornaram viável sua aplicação em escala. Clientes exigem respostas rápidas e presença multicanal.</p>
+    <section class="section" id="por-que-agora">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">2. Por que agora</h2>
+          <p class="body">O avanço da IA generativa, a maturidade de APIs e o custo acessível de modelos tornaram viável sua aplicação em escala. Clientes exigem respostas rápidas e presença multicanal.</p>
+        </div>
       </div>
     </section>
 
     <!-- 3. Casos de uso por setor -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">3. Casos de uso por setor</h2>
-        <ul class="list">
-          <li><b>Varejo:</b> atendimento 24/7, rastreio de pedidos, promoções personalizadas.</li>
-          <li><b>Serviços:</b> agendamentos automáticos, suporte técnico.</li>
-          <li><b>Saúde:</b> triagem de pacientes, lembretes de consultas.</li>
-          <li><b>Educação:</b> FAQ automatizado, suporte a matrícula.</li>
-          <li><b>Financeiro:</b> consulta de saldo, desbloqueio de cartão.</li>
-          <li><b>Turismo:</b> cotações, reservas e suporte durante viagem.</li>
-        </ul>
+    <section class="section" id="casos-setor">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">3. Casos de uso por setor</h2>
+          <ul class="list">
+            <li><b>Varejo:</b> atendimento 24/7, rastreio de pedidos, promoções personalizadas.</li>
+            <li><b>Serviços:</b> agendamentos automáticos, suporte técnico.</li>
+            <li><b>Saúde:</b> triagem de pacientes, lembretes de consultas.</li>
+            <li><b>Educação:</b> FAQ automatizado, suporte a matrícula.</li>
+            <li><b>Financeiro:</b> consulta de saldo, desbloqueio de cartão.</li>
+            <li><b>Turismo:</b> cotações, reservas e suporte durante viagem.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- 4. Benefícios com números -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">4. Benefícios com números</h2>
-        <ul class="list">
-          <li>Redução de FRT: até 87 por cento.</li>
-          <li>Aumento de FCR: de 70 por cento para 90 por cento.</li>
-          <li>Desvio para autosserviço: até 30 por cento.</li>
-          <li>Aumento de CSAT: +25 pontos.</li>
-          <li>Redução de custo por atendimento: até 40 por cento.</li>
-        </ul>
+    <section class="section" id="beneficios">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">4. Benefícios com números</h2>
+          <ul class="list">
+            <li>Redução de FRT: até 87 por cento.</li>
+            <li>Aumento de FCR: de 70 por cento para 90 por cento.</li>
+            <li>Desvio para autosserviço: até 30 por cento.</li>
+            <li>Aumento de CSAT: +25 pontos.</li>
+            <li>Redução de custo por atendimento: até 40 por cento.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- 5. Limitações e riscos -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">5. Limitações e riscos</h2>
-        <ul class="list">
-          <li>Alucinações. Respostas erradas ou inventadas.</li>
-          <li>Privacidade. Uso e proteção de dados.</li>
-          <li>Viés. Respostas tendenciosas.</li>
-          <li>Segurança. Risco de vazamento de dados.</li>
-          <li>Compliance. Necessidade de aderir à LGPD.</li>
-        </ul>
+    <section class="section" id="riscos">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">5. Limitações e riscos</h2>
+          <ul class="list">
+            <li>Alucinações. Respostas erradas ou inventadas.</li>
+            <li>Privacidade. Uso e proteção de dados.</li>
+            <li>Viés. Respostas tendenciosas.</li>
+            <li>Segurança. Risco de vazamento de dados.</li>
+            <li>Compliance. Necessidade de aderir à LGPD.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- 6. Como começar em 30 dias -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">6. Como começar em 30 dias</h2>
-        <ol class="list">
-          <li>Definir objetivos e KPIs.</li>
-          <li>Escolher fornecedor.</li>
-          <li>Integrar canais prioritários.</li>
-          <li>Treinar o modelo com dados da empresa.</li>
-          <li>Testar e ajustar fluxos.</li>
-          <li>Lançar piloto.</li>
-        </ol>
+    <section class="section" id="como-comecar">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">6. Como começar em 30 dias</h2>
+          <ol class="list">
+            <li>Definir objetivos e KPIs.</li>
+            <li>Escolher fornecedor.</li>
+            <li>Integrar canais prioritários.</li>
+            <li>Treinar o modelo com dados da empresa.</li>
+            <li>Testar e ajustar fluxos.</li>
+            <li>Lançar piloto.</li>
+          </ol>
+        </div>
       </div>
     </section>
 
     <!-- 7. Estudos de caso curtos -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">7. Estudos de caso curtos</h2>
-        <ul class="list">
-          <li>Loja online reduziu FRT de 12h para 45s e economizou R$ 400 mil por ano.</li>
-          <li>Clínica médica automatizou 60 por cento dos agendamentos e aumentou CSAT em 22 pontos.</li>
-          <li>Corretora de imóveis reduziu tempo médio de resposta de 3h para 2min.</li>
-        </ul>
+    <section class="section" id="cases">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">7. Estudos de caso curtos</h2>
+          <ul class="list">
+            <li>Loja online reduziu FRT de 12h para 45s e economizou R$ 400 mil por ano.</li>
+            <li>Clínica médica automatizou 60 por cento dos agendamentos e aumentou CSAT em 22 pontos.</li>
+            <li>Corretora de imóveis reduziu tempo médio de resposta de 3h para 2min.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- 8. Perguntas frequentes -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">8. Perguntas frequentes</h2>
-        <ul class="list">
-          <li><b>O que um agente de IA faz no dia a dia?</b> Responde, executa ações e aprende.</li>
-          <li><b>Diferença entre bot de regras e agente de IA?</b> IA entende contexto e aprende.</li>
-          <li><b>Como lidar com erros?</b> Monitorar e corrigir fluxos.</li>
-          <li><b>Como manter privacidade?</b> Cumprir LGPD e minimizar coleta.</li>
-          <li><b>Como medir sucesso?</b> KPIs no mês 1 focam tempo e satisfação. No mês 3, ROI.</li>
-        </ul>
+    <section class="section" id="faq">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">8. Perguntas frequentes</h2>
+          <ul class="list">
+            <li><b>O que um agente de IA faz no dia a dia?</b> Responde, executa ações e aprende.</li>
+            <li><b>Diferença entre bot de regras e agente de IA?</b> IA entende contexto e aprende.</li>
+            <li><b>Como lidar com erros?</b> Monitorar e corrigir fluxos.</li>
+            <li><b>Como manter privacidade?</b> Cumprir LGPD e minimizar coleta.</li>
+            <li><b>Como medir sucesso?</b> KPIs no mês 1 focam tempo e satisfação. No mês 3, ROI.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- 9. Checklist de compra -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">9. Checklist de compra</h2>
-        <ul class="list">
-          <li>Funciona nos canais desejados?</li>
-          <li>Integra com sistemas internos?</li>
-          <li>Cumpre LGPD?</li>
-          <li>Permite treinamento contínuo?</li>
-          <li>Suporta auditoria e logs?</li>
-          <li>Tem casos comprovados no Brasil?</li>
-        </ul>
+    <section class="section" id="checklist">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">9. Checklist de compra</h2>
+          <ul class="list">
+            <li>Funciona nos canais desejados?</li>
+            <li>Integra com sistemas internos?</li>
+            <li>Cumpre LGPD?</li>
+            <li>Permite treinamento contínuo?</li>
+            <li>Suporta auditoria e logs?</li>
+            <li>Tem casos comprovados no Brasil?</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- Conclusão -->
-    <section class="section">
-      <div class="container">
-        <h2 class="headline">Conclusão</h2>
-        <p class="body">Agentes de IA para atendimento já são realidade e oferecem ganhos claros em velocidade, satisfação e custo. A adoção estratégica e com governança pode colocar empresas na liderança de seus setores.</p>
+    <section class="section" id="conclusao">
+      <div class="container reading-width">
+        <div class="card-page">
+          <h2 class="headline section-title">Conclusão</h2>
+          <p class="body">Agentes de IA para atendimento já são realidade e oferecem ganhos claros em velocidade, satisfação e custo. A adoção estratégica e com governança pode colocar empresas na liderança de seus setores.</p>
+        </div>
       </div>
     </section>
 
@@ -168,5 +316,21 @@
   <!-- FOOTER -->
   <div id="site-footer"></div>
   <script src="footer.js" defer></script>
+
+  <!-- Script da barra de progresso de leitura -->
+  <script>
+    (function(){
+      const bar = document.getElementById('readingProgress');
+      const onScroll = () => {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop || document.body.scrollTop;
+        const height = (h.scrollHeight - h.clientHeight);
+        const pct = height ? (scrolled / height) * 100 : 0;
+        bar.style.width = pct + '%';
+      };
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
 </body>
 </html>
