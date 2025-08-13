@@ -71,13 +71,13 @@ img{ max-width:100%; display:block }
   position:sticky; top:0; z-index:50;
   background:rgba(11,12,16,.6);          /* leve transparência no header */
   backdrop-filter:saturate(140%) blur(8px);
-  border-bottom:0px solid var(--border);
+  border-bottom:1px solid var(--border);
 }
 
 /* Grid garante brand no centro e menu à direita */
 .nav{
   display:grid;
-  grid-template-columns: 1fr auto 1fr;   /* [vazio] | [brand] | [menu] */
+  grid-template-columns: 1fr auto 1fr;
   align-items:center;
   min-height:var(--header-h);
   gap:16px;
@@ -93,7 +93,8 @@ img{ max-width:100%; display:block }
   letter-spacing:.4px; line-height:1;
 }
 .brand .dot{
-  width:12px; height:12px; display:inline-block;
+  width:20px; height:20px; /* Ícone maior */
+  display:inline-block;
   filter: drop-shadow(0 0 6px rgba(114,105,227,.8));
 }
 
@@ -134,7 +135,7 @@ img{ max-width:100%; display:block }
   inset-inline-start:auto;
 
   width:min(480px, calc(100vw - 24px));
-  padding:16px 12px; /* reduzido para diminuir espaço lateral */
+  padding:16px 10px; /* menos espaço lateral */
   background:rgba(114,105,227,.5);
   -webkit-backdrop-filter:blur(8px);
   backdrop-filter:blur(8px);
@@ -143,4 +144,67 @@ img{ max-width:100%; display:block }
   box-shadow:var(--shadow);
 
   display:grid;
-  gr
+  grid-template-columns:1fr;
+  gap:12px;
+
+  text-align:right; /* texto alinhado à direita */
+
+  transform-origin: top right;
+  transform:translateY(-8px);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .18s ease, opacity .18s ease;
+  z-index:60;
+
+  max-height:calc(100vh - var(--header-h) - 24px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+#site-menu.open{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+  will-change:transform,opacity;
+}
+#site-menu a{
+  display:block;
+  padding:10px 6px; /* menos espaço à esquerda */
+  border-radius:10px;
+  white-space:nowrap;
+  color:var(--text);
+  text-align:right; /* mantém alinhamento à direita */
+  transition: background-color .2s ease, color .2s ease;
+}
+#site-menu a:hover{ background:rgba(255,255,255,.12); color:#fff }
+#site-menu a:active{ background:rgba(255,255,255,.16) }
+
+/* ===== Responsivo ===== */
+@media (max-width: 860px){
+  .menu-wrap{ position:relative }
+
+  #site-menu{
+    right:0; left:auto;
+    width:min(92vw, 360px);
+    max-width:calc(100vw - 24px);
+    padding:
+      calc(16px + env(safe-area-inset-top, 0))
+      10px
+      calc(16px + env(safe-area-inset-bottom, 0))
+      10px;
+    transform-origin: top right;
+    text-align:right;
+  }
+
+  #site-menu a{
+    padding:14px 6px; /* menos espaço à esquerda */
+    font-size:16px;
+    line-height:1.2;
+    text-align:right;
+  }
+
+  #site-menu.open{ z-index:999 }
+}
+
+/* ===== Bloqueio de scroll do fundo quando menu abre ===== */
+html.no-scroll, body.no-scroll{ overflow:hidden }
