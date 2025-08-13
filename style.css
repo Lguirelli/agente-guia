@@ -71,7 +71,7 @@ img{ max-width:100%; display:block }
   position:sticky; top:0; z-index:50;
   background:rgba(11,12,16,.6);          /* leve transparência no header */
   backdrop-filter:saturate(140%) blur(8px);
-  border-bottom:1px solid var(--border);
+  border-bottom:0px solid var(--border);
 }
 
 /* Grid garante brand no centro e menu à direita */
@@ -128,87 +128,19 @@ img{ max-width:100%; display:block }
 #site-menu{
   position:absolute;
   top:calc(100% + 8px);
-  right:0;                /* alinha à direita do botão */
-  left:auto;              /* impede esticar para a esquerda */
-  inset-inline-end:0;     /* suporte lógico (RTL) */
+  right:0;
+  left:auto;
+  inset-inline-end:0;
   inset-inline-start:auto;
 
   width:min(480px, calc(100vw - 24px));
-  padding:16px 18px;
-  background:rgba(114,105,227,.5);        /* primária 50% */
-  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  padding:16px 12px; /* reduzido para diminuir espaço lateral */
+  background:rgba(114,105,227,.5);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
   border:1px solid var(--border);
   border-radius:14px;
   box-shadow:var(--shadow);
 
   display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
-
-  /* alinhar textos à direita dentro do box */
-  text-align:right;
-
-  /* anima a partir da âncora */
-  transform-origin: top right;
-  transform:translateY(-8px);
-  opacity:0; pointer-events:none;
-  transition:transform .18s ease, opacity .18s ease;
-  z-index:60;
-
-  /* segurança para listas longas */
-  max-height:calc(100vh - var(--header-h) - 24px);
-  overflow:auto;
-  overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-}
-#site-menu.open{
-  transform:translateY(0);
-  opacity:1;
-  pointer-events:auto;
-  will-change:transform,opacity;
-}
-#site-menu a{
-  display:block;                   /* amplia área de toque */
-  padding:10px 12px;
-  border-radius:10px;
-  white-space:nowrap;
-  color:var(--text);
-  text-align:right;                /* redundante, assegura alinhamento */
-  transition: background-color .2s ease, color .2s ease;
-}
-#site-menu a:hover{ background:rgba(255,255,255,.12); color:#fff }
-#site-menu a:active{ background:rgba(255,255,255,.16) }
-
-/* ===== Responsivo ===== */
-@media (max-width: 860px){
-  /* Mantém o alinhamento à direita no mobile, evitando ocupar a tela inteira,
-     mas adaptando para não cortar conteúdo e respeitar área segura */
-  .menu-wrap{ position:relative }
-
-  #site-menu{
-    right:0; left:auto;
-    width:min(92vw, 360px);
-    max-width:calc(100vw - 24px);
-    padding:
-      calc(16px + env(safe-area-inset-top, 0))
-      18px
-      calc(16px + env(safe-area-inset-bottom, 0))
-      18px;
-    transform-origin: top right;
-    text-align:right; /* mantém alinhamento no mobile */
-  }
-
-  /* Itens do menu mais confortáveis para toque */
-  #site-menu a{
-    padding:14px 16px;
-    font-size:16px;
-    line-height:1.2;
-    text-align:right;
-  }
-
-  /* Garante sobreposição acima de outros elementos */
-  #site-menu.open{ z-index:999 }
-}
-
-/* ===== Bloqueio de scroll do fundo quando menu abre ===== */
-html.no-scroll, body.no-scroll{ overflow:hidden }
+  gr
