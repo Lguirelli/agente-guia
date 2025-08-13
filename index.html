@@ -20,9 +20,23 @@
     body { font-family: "Urbanist", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
     h1, h2, h3, .h1, .headline { font-family: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; letter-spacing:.02em; }
 
-    /* Utilitários de alinhamento/cor (sem tipografia inline) */
+    /* Utilitários */
     .text-center { text-align:center; }
     .accent { color:#7fd1ff; }
+
+    /* ===== Hover global para textos/links clicáveis ===== */
+    a, .text-link {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, .text-link:hover { color: var(--primary); }
+    a:active, .text-link:active { color: var(--primary-strong); }
+    a:focus-visible, .text-link:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
 
     /* Barra de prova social e depoimentos */
     .social-proof-bar {
@@ -128,7 +142,7 @@
       </div>
     </section>
 
-    <!-- COMO FUNCIONA (mantido com CSS local) -->
+    <!-- COMO FUNCIONA -->
     <section class="section how-it-works" id="como-funciona" aria-labelledby="titulo-como">
       <style>
         :root{
@@ -218,7 +232,7 @@
         </div>
 
         <p class="caption" style="margin-top:12px">Números baseados em implementações reais dos últimos 12 meses. Resultados podem variar.</p>
-        <div class="text-center" style="margin-top:8px"><a class="btn primary" href="#planos">Quero estes resultados</a></div>
+        <div class="text-center" style="margin-top:8px"><a class="btn primary" href="relatorio_agentes_ia.html">Siaba mais</a></div>
       </div>
     </section>
 
@@ -269,7 +283,7 @@
             <a class="btn primary" href="#contato" style="margin-top:8px">Falar com consultor</a>
           </div>
         </div>
-        <p class="caption text-center" style="margin-top:8px; font-size:12px;">Valores sujeitos a impostos. Provedor WhatsApp não incluso.</p>
+        <p class="caption text-center" style="margin-top:8px; font-size:12px;">Valores sujeitos a impostos. Provedor WhatsApp não inclusο.</p>
       </div>
     </section>
 
