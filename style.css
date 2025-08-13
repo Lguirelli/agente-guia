@@ -134,8 +134,12 @@ img{ max-width:100%; display:block }
   inset-inline-end:0;
   inset-inline-start:auto;
 
-  width:min(480px, calc(100vw - 24px));
-  padding:16px 4px; /* mínimo espaço lateral */
+  /* >>> AJUSTE PRINCIPAL: caixa do tamanho do conteúdo */
+  inline-size: fit-content;                 /* encolhe para caber o conteúdo */
+  max-inline-size: min(360px, calc(100vw - 24px)); /* limite máximo no desktop */
+  min-inline-size: 220px;                   /* não ficar estreita demais */
+
+  padding:16px 12px;                        /* respiro interno */
   background:rgba(114,105,227,.5);
   -webkit-backdrop-filter:blur(8px);
   backdrop-filter:blur(8px);
@@ -169,11 +173,17 @@ img{ max-width:100%; display:block }
 }
 #site-menu a{
   display:block;
-  padding:10px 2px; /* mínimo espaço à esquerda */
+  padding:10px 6px;
   border-radius:10px;
-  white-space:nowrap;
+
+  /* >>> AJUSTE: permitir quebra de linha para não alargar a caixa */
+  white-space:normal;       /* antes era nowrap */
+  word-break:keep-all;
+  overflow-wrap:break-word;
+
   color:var(--text);
-  text-align:right; /* mantém alinhamento à direita */
+  text-align:right;
+  line-height:1.25;
   transition: background-color .2s ease, color .2s ease;
 }
 #site-menu a:hover{ background:rgba(255,255,255,.12); color:#fff }
@@ -185,21 +195,25 @@ img{ max-width:100%; display:block }
 
   #site-menu{
     right:0; left:auto;
-    width:min(92vw, 360px);
-    max-width:calc(100vw - 24px);
+
+    /* >>> Mobile: limite um pouco menor e padding seguro */
+    max-inline-size: min(320px, calc(100vw - 24px));
+    min-inline-size: 200px;
+
     padding:
       calc(16px + env(safe-area-inset-top, 0))
-      4px
+      12px
       calc(16px + env(safe-area-inset-bottom, 0))
-      4px;
+      12px;
+
     transform-origin: top right;
     text-align:right;
   }
 
   #site-menu a{
-    padding:14px 2px; /* mínimo espaço à esquerda no mobile */
+    padding:14px 6px;
     font-size:16px;
-    line-height:1.2;
+    line-height:1.25;
     text-align:right;
   }
 
