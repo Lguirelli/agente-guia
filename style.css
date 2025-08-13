@@ -135,7 +135,7 @@ img{ max-width:100%; display:block }
   inset-inline-start:auto;
 
   width:min(480px, calc(100vw - 24px));
-  padding:16px 10px; /* menos espaço lateral */
+  padding:16px 4px; /* mínimo espaço lateral */
   background:rgba(114,105,227,.5);
   -webkit-backdrop-filter:blur(8px);
   backdrop-filter:blur(8px);
@@ -169,7 +169,7 @@ img{ max-width:100%; display:block }
 }
 #site-menu a{
   display:block;
-  padding:10px 6px; /* menos espaço à esquerda */
+  padding:10px 2px; /* mínimo espaço à esquerda */
   border-radius:10px;
   white-space:nowrap;
   color:var(--text);
@@ -189,15 +189,15 @@ img{ max-width:100%; display:block }
     max-width:calc(100vw - 24px);
     padding:
       calc(16px + env(safe-area-inset-top, 0))
-      10px
+      4px
       calc(16px + env(safe-area-inset-bottom, 0))
-      10px;
+      4px;
     transform-origin: top right;
     text-align:right;
   }
 
   #site-menu a{
-    padding:14px 6px; /* menos espaço à esquerda */
+    padding:14px 2px; /* mínimo espaço à esquerda no mobile */
     font-size:16px;
     line-height:1.2;
     text-align:right;
