@@ -20,10 +20,11 @@
     body { font-family: "Urbanist", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
     h1, h2, h3, .h1, .headline { font-family: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; letter-spacing:.02em; }
 
-    /* Utilitários só de layout/alinhamento (sem redefinir tipografia) */
+    /* Utilitários de alinhamento/cor (sem tipografia inline) */
     .text-center { text-align:center; }
+    .accent { color:#7fd1ff; }
 
-    /* Barra de prova social e depoimentos (sem tipografia inline) */
+    /* Barra de prova social e depoimentos */
     .social-proof-bar {
       background: rgba(127, 209, 255, 0.06);
       border: 1px solid rgba(127, 209, 255, 0.2);
@@ -183,4 +184,215 @@
 
           <article class="card bl">
             <h3 class="headline">2) CONFIGURAÇÃO TÉCNICA</h3>
-            <p class="subhead">Cuidamos de API,
+            <p class="subhead">Cuidamos de API, webhooks e integrações sem você se preocupar.</p>
+          </article>
+
+          <article class="card br">
+            <h3 class="headline">4) OTIMIZAÇÃO CONTÍNUA</h3>
+            <p class="subhead">Monitoramos métricas e ajustamos para maximizar conversões mensalmente.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTADOS -->
+    <section class="section" id="resultados" aria-labelledby="titulo-resultados">
+      <div class="container">
+        <h2 class="headline text-center" id="titulo-resultados">RESULTADOS QUE VOCÊ SENTE NO CAIXA</h2>
+        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:12px;">
+          <article class="card" style="padding:24px">
+            <p class="subhead" style="margin:0 0 8px">Redução no tempo de primeira resposta</p>
+            <p class="headline" style="font-size:28px; margin:0;">até 87%</p>
+            <div class="value-prop">Resposta em menos de 5 segundos</div>
+          </article>
+          <article class="card" style="padding:24px">
+            <p class="subhead" style="margin:0 0 8px">Economia no custo por atendimento</p>
+            <p class="headline" style="font-size:28px; margin:0;">até 40%</p>
+            <div class="value-prop">Reduz equipe de atendimento</div>
+          </article>
+          <article class="card" style="padding:24px">
+            <p class="subhead" style="margin:0 0 8px">Aumento no índice de satisfação (CSAT)</p>
+            <p class="headline" style="font-size:28px; margin:0;">+18%</p>
+            <div class="value-prop">Atendimento 24/7 sem falhas</div>
+          </article>
+        </div>
+
+        <p class="caption" style="margin-top:12px">Números baseados em implementações reais dos últimos 12 meses. Resultados podem variar.</p>
+        <div class="text-center" style="margin-top:8px"><a class="btn primary" href="#planos">Quero estes resultados</a></div>
+      </div>
+    </section>
+
+    <!-- RECURSOS (v1.0) -->
+    <section class="section" id="recursos" aria-labelledby="titulo-recursos">
+      <div class="container">
+        <h2 class="headline text-center" id="titulo-recursos">RECURSOS QUE AUMENTAM SUAS VENDAS</h2>
+        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:12px;">
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px"><span class="accent">🎯 QUALIFICAÇÃO INTELIGENTE</span></h3>
+            <p class="subhead">Identifica clientes com maior potencial e prioriza atendimento humano.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px"><span class="accent">⚡ RESPOSTAS INSTANTÂNEAS</span></h3>
+            <p class="subhead">Catálogo, preços e políticas em menos de 2 segundos.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:20px"><span class="accent">🤝 HANDOVER INTELIGENTE</span></h3>
+            <p class="subhead">Transfere para humano na hora certa, com contexto completo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section class="section" id="planos" aria-labelledby="titulo-planos">
+      <div class="container">
+        <h2 class="headline text-center" id="titulo-planos">ESCOLHA SEU PLANO DE CRESCIMENTO</h2>
+        <p class="subhead text-center">Comece pequeno, escale conforme cresce.</p>
+
+        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:16px;">
+          <div class="card" style="padding:22px">
+            <h3 class="headline" style="font-size:20px">ESSENCIAL</h3>
+            <p class="subhead">Até 1.000 conversas/mês</p>
+            <p class="subhead" style="font-weight:700">R$ 790/mês</p>
+            <a class="btn primary" href="#contato" style="margin-top:8px">Começar agora</a>
+          </div>
+          <div class="card" style="padding:22px; border:2px solid #7fd1ff">
+            <h3 class="headline" style="font-size:20px">PRO</h3>
+            <p class="subhead">Até 5.000 conversas/mês</p>
+            <p class="subhead" style="font-weight:700">R$ 1.490/mês</p>
+            <a class="btn primary" href="#contato" style="margin-top:8px">Escolher PRO</a>
+          </div>
+          <div class="card" style="padding:22px">
+            <h3 class="headline" style="font-size:20px">EMPRESARIAL</h3>
+            <p class="subhead">Volume alto • SLAs dedicados</p>
+            <p class="subhead" style="font-weight:700"><span class="accent">Sob consulta</span></p>
+            <a class="btn primary" href="#contato" style="margin-top:8px">Falar com consultor</a>
+          </div>
+        </div>
+        <p class="caption text-center" style="margin-top:8px; font-size:12px;">Valores sujeitos a impostos. Provedor WhatsApp não incluso.</p>
+      </div>
+    </section>
+
+    <!-- SEGURANÇA / LGPD -->
+    <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
+      <div class="container">
+        <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
+        <p class="subhead text-center">Seus dados e de seus clientes protegidos de ponta a ponta.</p>
+        <div class="card" style="padding:0; overflow:hidden">
+          <table class="table" aria-label="Práticas de segurança e privacidade" style="width:100%">
+            <thead><tr><th>Área</th><th>Nossa Proteção</th></tr></thead>
+            <tbody>
+              <tr><td><strong>LGPD/GDPR</strong></td><td>Opt-in/opt-out automático e registros.</td></tr>
+              <tr><td><strong>Dados</strong></td><td>Criptografia em trânsito e em repouso; retenção configurável.</td></tr>
+              <tr><td><strong>Infraestrutura</strong></td><td>AWS/Azure com certificações de segurança.</td></tr>
+              <tr><td><strong>Acesso</strong></td><td>MFA e logs de auditoria.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="titulo-faq">
+      <div class="container">
+        <h2 class="headline text-center" id="titulo-faq">DÚVIDAS FREQUENTES</h2>
+        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:16px;">
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:18px"><span class="accent">🚀 Em quanto tempo vejo resultados?</span></h3>
+            <p class="subhead">Muitos clientes veem impacto já na primeira semana. Implementação v1.0 em até 48h.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:18px"><span class="accent">📱 Funciona no meu número atual?</span></h3>
+            <p class="subhead">Sim, via WhatsApp Business API oficial, sem perder histórico.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:18px"><span class="accent">🤖 Preciso entender de tecnologia?</span></h3>
+            <p class="subhead">Não. Cuidamos de setup, fluxos, integrações e manutenção.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:18px"><span class="accent">💰 E se não funcionar pra mim?</span></h3>
+            <p class="subhead">Garantia incondicional de 30 dias. Se não aumentar suas conversões, devolvemos 100%.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:18px"><span class="accent">📊 Como acompanho os resultados?</span></h3>
+            <p class="subhead">Dashboard com métricas de conversão, tempo de resposta, satisfação e ROI.</p>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 class="headline" style="font-size:18px"><span class="accent">🔄 Posso mudar ou cancelar depois?</span></h3>
+            <p class="subhead">Sem fidelidade. Você pode fazer upgrade, downgrade ou cancelar a qualquer momento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" id="cta" aria-labelledby="titulo-cta">
+      <div class="container text-center">
+        <h2 class="headline" id="titulo-cta">PARE DE PERDER VENDAS. COMECE HOJE!</h2>
+        <p class="subhead">Fale com a Guia e veja como fica no seu WhatsApp.</p>
+        <div class="actions" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <a class="btn primary" href="#contato">Quero uma apresentação</a>
+          <a class="btn secondary" href="#planos">Ver planos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section" id="contato" aria-labelledby="titulo-contato">
+      <div class="container" style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <div>
+          <h2 class="headline" id="titulo-contato">FALE COM A GUIA</h2>
+          <p class="subhead">Tire dúvidas e peça uma demo rápida pelo WhatsApp.</p>
+          <ul class="subhead" style="margin-top:8px">
+            <li>E-mail: contato@guia.ag</li>
+            <li>WhatsApp: (11) 99999-9999</li>
+          </ul>
+        </div>
+        <form class="card" aria-label="Formulário de contato" onsubmit="event.preventDefault(); alert('Enviado!');" style="padding:20px">
+          <label>Nome<br><input class="input" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0F0F0F; color:var(--text)" required></label>
+          <div style="height:10px"></div>
+          <label>Empresa<br><input class="input" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0F0F0F; color:var(--text)" required></label>
+          <div style="height:10px"></div>
+          <label>WhatsApp<br><input class="input" type="tel" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0F0F0F; color:var(--text)" required></label>
+          <div style="height:14px"></div>
+          <button class="btn primary" type="submit">Quero testar o Agente Guia 1.0</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer compartilhado -->
+  <div id="site-footer"></div>
+  <script src="footer.js" defer></script>
+
+  <!-- Script: Parallax do herói (corrigido) -->
+  <script>
+  (function(){
+    const img = document.getElementById('roboHero');
+    if(!img) return;
+    let ticking = false;
+
+    function update(){
+      const rect = img.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const center = rect.top + rect.height / 2;
+      const progress = (center - vh / 2) / vh;
+      const move = -progress * 40; // pixels
+      img.style.transform = `translateY(${move}px)`;
+      ticking = false;
+    }
+
+    function onScroll(){
+      if(!ticking){
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update);
+  })();
+  </script>
+</body>
+</html>
