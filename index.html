@@ -462,11 +462,56 @@
 
 <!-- SEGURANÇA / LGPD -->
 <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
+  <style>
+    /* Painel de fundo + centralização */
+    #seguranca .sec-box{
+      margin-top:12px;
+      background: rgba(255,255,255,.04);   /* caixa de fundo */
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:8px 12px;
+      overflow:hidden;
+    }
+    #seguranca .table{
+      width:100%;
+      margin:0 auto;                       /* centraliza a tabela no card */
+      border-collapse:separate;
+      border-spacing:0;
+      text-align:center;                   /* textos centralizados por padrão */
+    }
+
+    /* Cabeçalhos em roxo */
+    #seguranca .table thead th{
+      color:var(--purple);                 /* puxa o roxo do seu design token */
+      font-family:var(--font-heading);
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.2px;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    /* Células do corpo */
+    #seguranca .table tbody td{
+      padding:16px;
+      vertical-align:middle;
+    }
+    #seguranca .table tbody td:first-child{
+      font-weight:700;                     /* LGPD/GDPR, Dados, etc. */
+    }
+
+    @media (max-width:640px){
+      #seguranca .table tbody td{ padding:12px 10px; }
+    }
+  </style>
+
   <div class="container">
     <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
     <p class="subhead text-center">Seus dados e de seus clientes protegidos de ponta a ponta.</p>
-    <div class="card" style="padding:0; overflow:hidden">
-      <table class="table" aria-label="Práticas de segurança e privacidade" style="width:100%">
+
+    <div class="card sec-box">
+      <table class="table" aria-label="Práticas de segurança e privacidade">
         <thead>
           <tr>
             <th>Área</th>
@@ -483,6 +528,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- FAQ -->
 <section class="section" id="faq" aria-labelledby="titulo-faq">
