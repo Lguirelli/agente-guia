@@ -1,266 +1,189 @@
 /* =========================================================
-   Guia • CSS global
-   Header fixo + estado inativo (100% transparente e não clicável)
-   Paleta escura • Títulos Anton • Corpo Urbanist
+   Guia • Header + Menu (desktop e mobile)
+   - Header fixo, sempre transparente
+   - Fica 100% transparente e NÃO clicável ao rolar (classe .header-inativo)
+   - Correções mobile + travas de scroll já suportadas
    ========================================================= */
 
-/* ===== Fonts (Google) ===== */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Urbanist:wght@300;400;500;600;700&display=swap');
-
-/* ===== Design tokens ===== */
+/* ===== Design tokens mínimos ===== */
 :root{
-  /* Cores base */
-  --bg:#0b0c10;                 /* fundo escuro principal */
-  --surface:transparent;         /* superfícies sem fill */
-  --card:#1a1d24;                /* cartões/espaços elevados */
-  --border:#3d455c;              /* linhas e divisórias */
+  --bg:#0b0c10;
+  --text:#ffffff;
+  --muted:#b6bdca;
+  --border:#3d455c;
+  --primary:#7269e3;
+  --primary-strong:#625bd6;
+  --radius:14px;
 
-  /* Marca */
-  --primary:#7269e3;             /* roxo da marca */
-  --primary-strong:#625bd6;      /* roxo mais forte */
-  --accent:#98dea3;              /* verde de destaque */
-
-  /* Tipografia e cores de texto */
-  --title-font:'Anton', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --body-font:'Urbanist', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --text:#ffffff;                /* texto padrão claro */
-  --muted:#b6bdca;               /* texto secundário */
-
-  /* Dimensões */
-  --container:1200px;
-  --radius:16px;
-
-  /* Espaçamentos (desktop) */
-  --space-1:4px;
-  --space-2:8px;
-  --space-3:12px;
-  --space-4:16px;
-  --space-5:20px;
-  --space-6:24px;
-  --space-7:32px;
-  --space-8:40px;
-  --space-9:56px;
-  --space-10:72px;
-
-  /* Transições */
-  --ease:cubic-bezier(.22,.61,.36,1);
   --time-fast:160ms;
   --time-med:260ms;
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
 
-/* ===== Reset base e acessibilidade ===== */
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
-html{ scroll-behavior:smooth; }
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--body-font);
-  font-size:16px;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-img,svg,video,canvas{ display:block; max-width:100%; height:auto; }
-a{ color:inherit; text-decoration:none; }
-button{ font-family:inherit; }
+/* ===== Utilidades ===== */
+.no-scroll{ overflow:hidden; }
+[hidden]{ display:none !important; }
 
-/* ===== Tipografia ===== */
-h1,h2,h3,h4{
-  font-family:var(--title-font);
-  color:#fff;
-  line-height:1.1;
-  letter-spacing:.2px;
-  margin:0 0 var(--space-5);
-}
-h1{ font-size: clamp(2rem, 4vw, 3.25rem); }
-h2{ font-size: clamp(1.5rem, 3vw, 2.25rem); }
-h3{ font-size: clamp(1.25rem, 2.4vw, 1.5rem); }
-p{ margin:0 0 var(--space-5); color:var(--text); }
-.muted{ color:var(--muted); }
-
-/* ===== Layout utilitário ===== */
-.container{
-  width:100%;
-  max-width:var(--container);
-  margin-inline:auto;
-  padding-inline: clamp(var(--space-4), 4vw, var(--space-7));
-}
-.section{
-  background:transparent;              /* sessões com fundo transparente */
-  padding-block: var(--space-10);
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:var(--space-7);
-}
-
-/* ===== Header fixo e menu ===== */
-header.site-header{
+/* ===== Header fixo e transparente ===== */
+.site-header{
   position:fixed;
-  inset:0 0 auto 0;
+  top:0; left:0; right:0;
   height:72px;
+  z-index:1000;
+
   display:flex;
   align-items:center;
-  z-index:1000;
+
   /* Sempre transparente visualmente */
   background:transparent;
-  /* Transições de opacidade para permitir estado "inativo" suave */
+
+  /* Suavidade p/ entrada/saída e estado inativo */
   transition: opacity var(--time-med) var(--ease), transform var(--time-med) var(--ease);
   will-change: opacity, transform;
 }
 
-/* Quando o header estiver 100% transparente e não clicável */
-header.site-header.header-inativo{
-  opacity:0;                 /* 100% transparente */
-  pointer-events:none;       /* não recebe cliques/hover/foco */
+/* Quando o header estiver 100% transparente, ele também deixa de ser clicável */
+.site-header.header-inativo{
+  opacity:0;              /* invisível */
+  pointer-events:none;    /* não recebe cliques/hover/foco */
 }
 
-/* Conteúdo do header */
-.site-header .wrap{
+/* ===== Barra interna ===== */
+.container.nav{
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:var(--space-6);
-  width:100%;
-  height:100%;
-  padding-inline: clamp(var(--space-4), 4vw, var(--space-7));
+  gap:16px;
+  padding-inline: clamp(16px, 4vw, 32px);
 }
+
+/* Marca (centro visual do header) */
 .brand{
   display:inline-flex;
   align-items:center;
-  gap:var(--space-3);
-  font-family:var(--title-font);
-  font-size:1.25rem;
-  letter-spacing:.3px;
-}
-.brand .logo{
-  width:36px; height:36px;
-}
-
-/* Navegação (desktop) */
-.nav{
-  display:flex;
-  align-items:center;
-  gap: clamp(var(--space-5), 3vw, var(--space-8));
-}
-.nav a{
-  font-weight:600;
-  color:#fff;
-  opacity:.9;
-  transition: opacity var(--time-fast) var(--ease), transform var(--time-fast) var(--ease);
-}
-.nav a:hover{ opacity:1; transform:translateY(-1px); }
-
-/* Botões do header */
-.btn{
-  display:inline-flex;
-  align-items:center;
   justify-content:center;
-  gap:8px;
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:transparent;
-  color:#fff;
-  font-weight:600;
-  transition: transform var(--time-fast) var(--ease), border-color var(--time-fast) var(--ease);
+  gap:10px;
+  min-width:120px;
 }
-.btn:hover{ transform:translateY(-1px); border-color:var(--primary); }
-.btn-primary{
-  border-color:transparent;
-  background:var(--primary);
-  color:#fff;
+.brand img{
+  display:block;
+  height:32px;
+  width:auto;
 }
-.btn-primary:hover{ background:var(--primary-strong); }
 
-/* ===== Dropdown (desktop) ===== */
-.dropdown{
-  position:relative;
-}
-.dropdown-toggle{ cursor:pointer; }
-.dropdown-menu{
-  position:absolute;
-  top:calc(100% + 10px);
-  left:0;
-  min-width:240px;
-  padding:8px;
-  border-radius:12px;
-  background:rgba(26,29,36,.96);
-  border:1px solid var(--border);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  opacity:0;
-  transform:translateY(-6px);
-  pointer-events:none;
-  transition: opacity var(--time-med) var(--ease), transform var(--time-med) var(--ease);
-}
-.dropdown:hover .dropdown-menu{
-  opacity:1;
-  transform:translateY(0);
-  pointer-events:auto;
-}
-.dropdown-menu a{
+/* ===== Menu ===== */
+.menu-wrap{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:10px 12px;
-  border-radius:10px;
-  color:#fff;
-}
-.dropdown-menu a:hover{
-  background:rgba(114,105,227,.12);
+  margin-left:auto;
 }
 
-/* ===== Mobile nav ===== */
-.hamburger{
-  display:none;
-  width:40px; height:40px;
+/* Toggle (hamburger) */
+.menu-toggle{
+  position:relative;
+  width:44px; height:44px;
+  display:grid;
   place-items:center;
-  border-radius:10px;
   border:1px solid var(--border);
+  border-radius:12px;
   background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  transition: border-color var(--time-fast) var(--ease), transform var(--time-fast) var(--ease);
 }
-.mobile-nav{
+.menu-toggle:hover{ border-color:var(--primary); transform:translateY(-1px); }
+
+.menu-toggle .bar{
+  position:relative;
+  display:block;
+  width:20px; height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transition: transform var(--time-med) var(--ease), opacity var(--time-med) var(--ease);
+}
+.menu-toggle .bar + .bar{ margin-top:4px; }
+
+/* estado aberto (anima em X) */
+.menu-toggle.is-open .bar-top{ transform: translateY(6px) rotate(45deg); }
+.menu-toggle.is-open .bar-middle{ opacity:0; }
+.menu-toggle.is-open .bar-bottom{ transform: translateY(-6px) rotate(-45deg); }
+
+/* ===== Navegação (painel) ===== */
+.menu{
   position:fixed;
-  inset:72px 0 auto 0;
+  top:72px; right:0; left:0;         /* painel full-width abaixo do header */
   background:rgba(11,12,16,.96);
+  -webkit-backdrop-filter:saturate(1.2) blur(6px);
+  backdrop-filter:saturate(1.2) blur(6px);
   border-top:1px solid var(--border);
-  transform:translateY(-12px);
+
+  /* animação de entrada/saída */
+  transform: translateY(-10px);
   opacity:0;
   pointer-events:none;
   transition: opacity var(--time-med) var(--ease), transform var(--time-med) var(--ease);
 }
-.mobile-nav .inner{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  padding:16px clamp(var(--space-4), 4vw, var(--space-7)) 20px;
-}
-.mobile-nav a{
-  padding:12px 10px;
-  border-radius:10px;
-  font-weight:600;
-  color:#fff;
-}
-.mobile-nav a:hover{ background:rgba(114,105,227,.12); }
 
-/* Estado aberto (você controla com JS adicionando .is-open no body, por exemplo) */
-body.nav-open .mobile-nav{
-  transform:translateY(0);
+.menu.open{
+  transform: translateY(0);
   opacity:1;
   pointer-events:auto;
 }
 
-/* ===== Hero / Seções ===== */
-.hero{
-  padding-top: calc(72px + var(--space-9)); /* compensa o header fixo */
-  padding-bottom: var(--space-10);
+.menu a{
+  display:block;
+  padding:14px 18px;
+  color:var(--text);
+  font-weight:600;
+  text-decoration:none;
+  border-radius:10px;
+  transition: background var(--time-fast) var(--ease);
 }
-.section.compact{
-  padding-block: var(--space-8);
+.menu a:hover{
+  background:rgba(114,105,227,.12);
 }
 
-/* ===== Tabelas / Planos (ex*
+/* Layout interno do painel */
+.menu.open{
+  /* espaçamento interno responsivo */
+  padding:12px clamp(16px, 4vw, 32px) 16px;
+}
+
+/* ===== Desktop: alterna para “inline” se desejar (opcional) =====
+   Se quiser menu inline no desktop, descomente o bloco abaixo.
+   Mantive como painel para consistência com seu HTML atual. */
+/*
+@media (min-width: 1024px){
+  .menu{
+    position:static;
+    background:transparent;
+    border:0;
+    transform:none;
+    opacity:1;
+    pointer-events:auto;
+    display:flex;
+    gap: clamp(16px, 3vw, 32px);
+    padding:0;
+  }
+  .menu a:hover{ background:rgba(255,255,255,.06); }
+}
+*/
+
+/* ===== Acessibilidade de foco ===== */
+.menu-toggle:focus-visible,
+.menu a:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+  border-radius:12px;
+}
+
+/* ===== Compensação do header no conteúdo (opcional)
+   Aplique a classe .has-fixed-header no <body> se quiser.
+*/
+.has-fixed-header main,
+.has-fixed-header .page{
+  padding-top:72px;
+}
