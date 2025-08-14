@@ -436,7 +436,7 @@
       </div>
     </section>
 
- <!-- SEGURANÇA / LGPD (compacta e centralizada) -->
+<!-- SEGURANÇA / LGPD (centralização visual simétrica) -->
 <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
   <style>
   /* Padding lateral menor só nesta seção */
@@ -444,31 +444,29 @@
     padding-inline:12px;
   }
 
-  /* Caixa da tabela (mantém tamanho atual) */
+  /* Caixa da tabela */
   #seguranca .sec-box{
-    margin:12px auto 0;                 /* centraliza a caixa */
+    margin:12px auto 0;
     background:rgba(255,255,255,.045);
     border:1px solid rgba(255,255,255,.12);
     border-radius:16px;
     box-shadow:var(--shadow);
-    padding:8px;                        /* respiro mínimo */
+    padding:8px;
     width:100%;
-    max-width:1080px;                   /* limite no desktop */
+    max-width:1080px;
   }
 
-  /* Tabela cheia dentro da caixa, com textos centralizados */
+  /* Tabela centralizada visualmente */
   #seguranca .table{
     border-collapse:collapse;
-    table-layout:fixed;                 /* colunas estáveis */
-    width:100%;
-    margin:0;
+    width:auto;                          /* largura baseada no conteúdo */
+    margin:0 auto;                       /* centraliza a tabela na caixa */
   }
   #seguranca .table th,
   #seguranca .table td{
-    text-align:center;                  /* centraliza conteúdo */
-    padding:10px 8px;
+    text-align:center;
+    padding:10px 20px;                   /* espaçamento igual em ambas as colunas */
     vertical-align:middle;
-    word-wrap:break-word;
   }
 
   /* Cabeçalho */
@@ -478,38 +476,23 @@
     font-weight:800;
     text-transform:uppercase;
     letter-spacing:.2px;
-    padding:8px 8px;
     border-bottom:1px solid rgba(255,255,255,.08);
     white-space:nowrap;
   }
 
-  /* Primeira coluna mais forte (rótulos) */
+  /* Primeira coluna em negrito */
   #seguranca .table td:first-child{
     font-weight:700;
     white-space:nowrap;
   }
 
-  /* Proporção das colunas (desktop) */
-  #seguranca .table th:first-child,
-  #seguranca .table td:first-child{ width:32%; }     /* Área */
-  #seguranca .table th:last-child,
-  #seguranca .table td:last-child{ width:68%; }      /* Nossa Proteção */
-
-  /* ---------------------------------------------------------
-     Responsivo
-     --------------------------------------------------------- */
+  /* Mobile */
   @media (max-width: 640px){
     #seguranca .container{ padding-inline:10px; }
     #seguranca .sec-box{ padding:8px; max-width:100%; }
-
+    #seguranca .table{ width:100%; }      /* no mobile ocupa a largura toda */
     #seguranca .table th,
-    #seguranca .table td{ padding:8px 6px; }
-
-    /* Mantém leitura boa no mobile */
-    #seguranca .table th:first-child,
-    #seguranca .table td:first-child{ width:32%; }
-    #seguranca .table th:last-child,
-    #seguranca .table td:last-child{ width:68%; }
+    #seguranca .table td{ padding:8px 10px; }
   }
   </style>
 
