@@ -436,73 +436,64 @@
       </div>
     </section>
 
-    <!-- SEGURANÇA / LGPD -->
-   <!-- ===== Centralizar textos em SEGURANÇA e FAQ mantendo a divisão ===== -->
-<style>
-  /* Segurança: centraliza tudo e mantém a tabela alinhada ao centro */
-  #seguranca .card{ text-align:center; }
-  #seguranca .table{
-    width:100%;
-    margin:0 auto;                 /* centraliza a tabela no card */
-    border-collapse:separate;
-    border-spacing:0;
-  }
-  #seguranca .table th,
-  #seguranca .table td{
-    text-align:center;             /* <<< textos centralizados nas células */
-    padding:12px 14px;
-    vertical-align:middle;
-  }
-
-  /* FAQ: centraliza conteúdo dos cards sem alterar o grid */
-  #faq .card{ text-align:center; }
-  #faq .card .headline{ margin-bottom:8px; }
-  #faq .card .subhead{ margin:0; }
-</style>
-
-<!-- SEGURANÇA / LGPD -->
+  <!-- SEGURANÇA / LGPD (compacta e centralizada) -->
 <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
   <style>
-    /* Painel de fundo + centralização */
+    /* Caixa/box da tabela */
     #seguranca .sec-box{
       margin-top:12px;
-      background: rgba(255,255,255,.04);   /* caixa de fundo */
-      border:1px solid var(--border);
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.12);
       border-radius:16px;
-      box-shadow:var(--shadow);
-      padding:8px 12px;
-      overflow:hidden;
-    }
-    #seguranca .table{
-      width:100%;
-      margin:0 auto;                       /* centraliza a tabela no card */
-      border-collapse:separate;
-      border-spacing:0;
-      text-align:center;                   /* textos centralizados por padrão */
+      box-shadow: var(--shadow);
+      padding:10px 12px;              /* mínimo de respiro */
+      display:grid;
+      place-items:center;              /* centraliza o conteúdo */
     }
 
-    /* Cabeçalhos em roxo */
+    /* Tabela centralizada e enxuta */
+    #seguranca .table{
+      border-collapse:collapse;        /* sem espaços internos */
+      table-layout:auto;
+      width:auto;                      /* encolhe ao conteúdo */
+      max-width:100%;
+      margin:0 auto;                   /* centralizada */
+      text-align:center;
+    }
+
+    /* Cabeçalho roxo e compacto */
     #seguranca .table thead th{
-      color:var(--purple);                 /* puxa o roxo do seu design token */
+      color:var(--purple);
       font-family:var(--font-heading);
       font-weight:800;
       text-transform:uppercase;
       letter-spacing:.2px;
-      padding:14px 16px;
+      padding:10px 12px;               /* compacto */
       border-bottom:1px solid rgba(255,255,255,.08);
+      white-space:nowrap;
     }
 
-    /* Células do corpo */
-    #seguranca .table tbody td{
-      padding:16px;
+    /* Células */
+    #seguranca .table td{
+      padding:12px 16px;               /* compacto e legível */
       vertical-align:middle;
     }
-    #seguranca .table tbody td:first-child{
-      font-weight:700;                     /* LGPD/GDPR, Dados, etc. */
+    #seguranca .table td:first-child{
+      font-weight:700;                  /* Área (LGPD, Dados...) */
+      white-space:nowrap;
     }
 
+    /* Linha divisória suave entre corpo e cabeçalho já está acima */
+    /* Opcional: linhas entre as linhas do corpo
+    #seguranca .table tbody tr:not(:last-child) td{
+      border-bottom:1px dashed rgba(255,255,255,.06);
+    } */
+
+    /* Responsivo */
     @media (max-width:640px){
-      #seguranca .table tbody td{ padding:12px 10px; }
+      #seguranca .sec-box{ padding:8px 10px; }
+      #seguranca .table thead th,
+      #seguranca .table td{ padding:10px 10px; }
     }
   </style>
 
@@ -510,7 +501,7 @@
     <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
     <p class="subhead text-center">Seus dados e de seus clientes protegidos de ponta a ponta.</p>
 
-    <div class="card sec-box">
+    <div class="sec-box">
       <table class="table" aria-label="Práticas de segurança e privacidade">
         <thead>
           <tr>
@@ -519,16 +510,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>LGPD/GDPR</strong></td><td>Opt-in/opt-out automático e registros.</td></tr>
-          <tr><td><strong>Dados</strong></td><td>Criptografia em trânsito e em repouso; retenção configurável.</td></tr>
-          <tr><td><strong>Infraestrutura</strong></td><td>AWS/Azure com certificações de segurança.</td></tr>
-          <tr><td><strong>Acesso</strong></td><td>MFA e logs de auditoria.</td></tr>
+          <tr><td>LGPD/GDPR</td><td>Opt-in/opt-out automático e registros.</td></tr>
+          <tr><td>Dados</td><td>Criptografia em trânsito e em repouso; retenção configurável.</td></tr>
+          <tr><td>Infraestrutura</td><td>AWS/Azure com certificações de segurança.</td></tr>
+          <tr><td>Acesso</td><td>MFA e logs de auditoria.</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
-
 
 <!-- FAQ -->
 <section class="section" id="faq" aria-labelledby="titulo-faq">
