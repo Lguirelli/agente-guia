@@ -152,6 +152,7 @@
 <section class="section how-it-works" id="como-funciona" aria-labelledby="titulo-como">
   <style>
    /* ===== Seção ===== */
+/* ===== Seção ===== */
 .how-it-works{
   background:var(--bg);
   padding:40px 16px 56px;
@@ -164,7 +165,7 @@
 }
 .how-it-works .title{ 
   text-align:center; 
-  margin-bottom:12px; /* antes 16px */
+  margin-bottom:10px; /* antes 12px */
 }
 .how-it-works .title h2{
   font-family:var(--font-heading); 
@@ -178,7 +179,7 @@
   font-family:var(--font-heading); 
   font-weight:800;
   font-size:clamp(20px, 2.8vw, 32px);
-  margin:.25rem 0 0; 
+  margin:.15rem 0 0; /* antes .25rem */
   text-transform:uppercase; 
   color:var(--primary);
 }
@@ -188,9 +189,9 @@
   display:grid;
   grid-template-columns:1fr minmax(260px, 400px) 1fr;
   grid-template-areas:"tl phone tr" "bl phone br";
-  gap:12px 24px; /* antes 18px 36px */
+  gap:10px 20px; /* antes 12px 24px */
   align-items:center;
-  margin-top:8px; /* antes 12px */
+  margin-top:6px; /* antes 8px */
 }
 
 /* ===== Cards ===== */
@@ -199,7 +200,7 @@
   border:0; 
   border-radius:16px;
   box-shadow:var(--shadow); 
-  padding:12px; /* antes 16px */
+  padding:10px; /* antes 12px */
   max-width:300px; /* antes 320px */
   text-align:center;
   display:flex; 
@@ -210,17 +211,18 @@
   font-family:var(--font-heading); 
   font-weight:800;
   text-transform:uppercase; 
-  font-size:18px;
-  margin:0 0 6px; 
+  font-size:17px; /* antes 18px */
+  margin:0 0 4px; /* antes 6px */
   color:var(--text);
   letter-spacing:.2px;
+  line-height:1.15; /* mais compacto */
 }
 .how-it-works .card .subhead{
   margin:0; 
   color:var(--muted);
   font-family:var(--font-body); 
-  font-size:15px;
-  line-height:1.45;
+  font-size:14px; /* antes 15px */
+  line-height:1.35; /* antes 1.45 */
 }
 .how-it-works .tl{ grid-area:tl; justify-self:center; }
 .how-it-works .tr{ grid-area:tr; justify-self:center; }
@@ -234,7 +236,7 @@
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:4px 0; /* reduz espaço vertical ao redor do mockup */
+  padding:2px 0; /* antes 4px */
 }
 .phone-scale-wrapper{
   transform: scale(0.75);
@@ -282,7 +284,7 @@
   .how-it-works .grid{
     grid-template-columns:1fr;
     grid-template-areas:"title" "phone" "tl" "tr" "bl" "br";
-    gap:12px; /* antes 16px */
+    gap:10px; /* antes 12px */
   }
   .how-it-works .card{ max-width:580px; }
 }
