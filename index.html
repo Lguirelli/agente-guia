@@ -438,64 +438,65 @@
 
   <!-- SEGURANÇA / LGPD (compacta e centralizada) -->
 <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
-  <style>
-    /* Caixa/box da tabela */
-    #seguranca .sec-box{
-      margin-top:12px;
-      background:rgba(255,255,255,.045);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;
-      box-shadow: var(--shadow);
-      padding:10px 12px;              /* mínimo de respiro */
-      display:grid;
-      place-items:center;              /* centraliza o conteúdo */
-    }
+<style>
+  /* === Caixa/box da tabela (sem “ar” nas laterais) === */
+  #seguranca .container{ padding-inline:12px; }          /* menos padding do container */
+  #seguranca .sec-box{
+    margin-top:12px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:8px 10px;                                     /* respiro mínimo lateral */
+    display:block;                                        /* evita centralização extra */
+    width:100%;                                           /* ocupa toda a largura útil */
+  }
 
-    /* Tabela centralizada e enxuta */
-    #seguranca .table{
-      border-collapse:collapse;        /* sem espaços internos */
-      table-layout:auto;
-      width:auto;                      /* encolhe ao conteúdo */
-      max-width:100%;
-      margin:0 auto;                   /* centralizada */
-      text-align:center;
-    }
+  /* === Tabela centralizada e ENCHENDO a caixa === */
+  #seguranca .table{
+    border-collapse:collapse;
+    table-layout:fixed;                                   /* colunas estáveis */
+    width:100%;                                           /* estica até as bordas */
+    margin:0;                                             /* sem margem extra */
+    text-align:center;
+  }
 
-    /* Cabeçalho roxo e compacto */
-    #seguranca .table thead th{
-      color:var(--purple);
-      font-family:var(--font-heading);
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.2px;
-      padding:10px 12px;               /* compacto */
-      border-bottom:1px solid rgba(255,255,255,.08);
-      white-space:nowrap;
-    }
+  /* Cabeçalho roxo e compacto */
+  #seguranca .table thead th{
+    color:var(--purple);
+    font-family:var(--font-heading);
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.2px;
+    padding:10px 8px;                                     /* compacto */
+    border-bottom:1px solid rgba(255,255,255,.08);
+    white-space:nowrap;
+  }
 
-    /* Células */
-    #seguranca .table td{
-      padding:12px 16px;               /* compacto e legível */
-      vertical-align:middle;
-    }
-    #seguranca .table td:first-child{
-      font-weight:700;                  /* Área (LGPD, Dados...) */
-      white-space:nowrap;
-    }
+  /* Células enxutas */
+  #seguranca .table td{
+    padding:10px 8px;                                     /* reduz lateral */
+    vertical-align:middle;
+  }
+  #seguranca .table td:first-child{
+    font-weight:700;
+    white-space:nowrap;
+  }
 
-    /* Linha divisória suave entre corpo e cabeçalho já está acima */
-    /* Opcional: linhas entre as linhas do corpo
-    #seguranca .table tbody tr:not(:last-child) td{
-      border-bottom:1px dashed rgba(255,255,255,.06);
-    } */
+  /* Proporção das colunas (menos “vazio” à esquerda) */
+  #seguranca .table th:first-child,
+  #seguranca .table td:first-child{ width:28%; }
+  #seguranca .table th:last-child,
+  #seguranca .table td:last-child{ width:72%; }
 
-    /* Responsivo */
-    @media (max-width:640px){
-      #seguranca .sec-box{ padding:8px 10px; }
-      #seguranca .table thead th,
-      #seguranca .table td{ padding:10px 10px; }
-    }
-  </style>
+  /* Responsivo */
+  @media (max-width:640px){
+    #seguranca .container{ padding-inline:10px; }
+    #seguranca .sec-box{ padding:8px 8px; }
+    #seguranca .table thead th,
+    #seguranca .table td{ padding:8px 6px; }
+  }
+</style>
 
   <div class="container">
     <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
