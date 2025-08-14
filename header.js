@@ -1,4 +1,4 @@
-// injeta o header e ativa o dropdown (mobile e desktop)
+// injeta o header e ativa o dropdown (mobile e desktop) + fade out no scroll
 fetch('header.html')
   .then(r => r.text())
   .then(html => {
@@ -7,6 +7,7 @@ fetch('header.html')
 
     mount.innerHTML = html;
 
+    const header = mount.querySelector('.site-header') || mount; // fallback
     const btn = mount.querySelector('.menu-toggle');
     const nav = mount.querySelector('#site-menu');
     if (!btn || !nav) { console.error('menu-toggle ou #site-menu não encontrados dentro do header.'); return; }
@@ -32,6 +33,10 @@ fetch('header.html')
       nav.hidden = mqMobile.matches ? !isOpen : false;
 
       lockScroll(isOpen);
+
+      // Se o menu abrir, garantir header totalmente visível (usabilidade)
+      if (isOpen) setHeaderOpacity(1);
+      else scheduleFadeUpdate(); // recalcula com base no scroll atual
     }
 
     const toggleMenu = () => applyState(!btn.classList.contains('is-open'));
@@ -48,13 +53,53 @@ fetch('header.html')
 
     // reavaliar quando trocar de viewport
     mqMobile.addEventListener('change', () => {
-      // no desktop, garantir que o [hidden] fique falso
-      if (!mqMobile.matches) nav.hidden = false;
+      if (!mqMobile.matches) nav.hidden = false; // no desktop, garantir que o [hidden] fique falso
       lockScroll(btn.classList.contains('is-open'));
+      scheduleFadeUpdate();
     });
 
-    // estado inicial: fechado (removendo hidden no desktop)
+    // ===== Fade out no scroll =====
+    const FADE_START = 0;    // px a partir do topo onde começa a reduzir
+    const FADE_END   = 240;  // px onde o header fica totalmente transparente
+
+    let ticking = false;
+
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+
+    function setHeaderOpacity(op) {
+      if (!header) return;
+      header.style.opacity = String(clamp(op, 0, 1));
+    }
+
+    function computeOpacity(scrollY) {
+      // Se menu aberto no mobile: header sempre visível
+      if (btn.classList.contains('is-open') && mqMobile.matches) return 1;
+
+      const t = clamp((scrollY - FADE_START) / (FADE_END - FADE_START), 0, 1);
+      return 1 - t; // 1 → 0 conforme rola
+    }
+
+    function updateFade() {
+      const y = window.scrollY || window.pageYOffset || 0;
+      const op = computeOpacity(y);
+      setHeaderOpacity(op);
+      ticking = false;
+    }
+
+    function scheduleFadeUpdate() {
+      if (!ticking) {
+        requestAnimationFrame(updateFade);
+        ticking = true;
+      }
+    }
+
+    // listeners de scroll/resize
+    window.addEventListener('scroll', scheduleFadeUpdate, { passive: true });
+    window.addEventListener('resize', scheduleFadeUpdate);
+
+    // estado inicial: fechado (removendo hidden no desktop) + aplica fade inicial
     applyState(false);
     if (!mqMobile.matches) nav.hidden = false;
+    scheduleFadeUpdate();
   })
   .catch(err => console.error('Falha ao carregar header.html:', err));
