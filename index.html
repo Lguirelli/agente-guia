@@ -148,18 +148,18 @@
       </div>
     </section>
 
-    <!-- COMO FUNCIONA (corrigido para usar Poppins/Inter e paleta nova) -->
-    <section class="section how-it-works" id="como-funciona" aria-labelledby="titulo-como">
+ <!-- COMO FUNCIONA (original + celular 50% menor + iframe full) -->
+<section class="section how-it-works" id="como-funciona" aria-labelledby="titulo-como">
   <style>
     /* ===== Seção ===== */
     .how-it-works{
       background:var(--bg);
-      padding:40px 16px 56px;           /* ↓ padding geral */
+      padding:40px 16px 56px;
       color:var(--text);
       font-family:var(--font-body), sans-serif;
     }
     .how-it-works .container{ max-width:1120px; margin:0 auto; }
-    .how-it-works .title{ text-align:center; margin-bottom:16px; } /* ↓ */
+    .how-it-works .title{ text-align:center; margin-bottom:16px; }
     .how-it-works .title h2{
       font-family:var(--font-heading); font-weight:800;
       font-size:clamp(26px, 3.6vw, 44px);
@@ -172,50 +172,60 @@
       margin:.25rem 0 0; text-transform:uppercase; color:var(--primary);
     }
 
-    /* ===== Grid (menor gap) ===== */
+    /* ===== Grid ===== */
     .how-it-works .grid{
       display:grid;
       grid-template-columns:1fr minmax(260px, 400px) 1fr;
       grid-template-areas:"tl phone tr" "bl phone br";
-      gap:18px 36px;                    /* ↓ espaços entre colunas/linhas */
+      gap:18px 36px;
       align-items:center;
-      margin-top:12px;                  /* ↓ */
+      margin-top:12px;
     }
 
-    /* ===== Cards (mais compactos) ===== */
+    /* ===== Cards ===== */
     .how-it-works .card{
       background:transparent; border:0; border-radius:16px;
-      box-shadow:var(--shadow); padding:16px;       /* ↓ */
+      box-shadow:var(--shadow); padding:16px;
       max-width:320px; text-align:center;
       display:flex; flex-direction:column; align-items:center;
     }
     .how-it-works .card .headline{
       font-family:var(--font-heading); font-weight:800;
-      text-transform:uppercase; font-size:18px;     /* ↓ */
-      margin:0 0 6px; color:var(--text);            /* ↓ */
+      text-transform:uppercase; font-size:18px;
+      margin:0 0 6px; color:var(--text);
       letter-spacing:.2px;
     }
     .how-it-works .card .subhead{
       margin:0; color:var(--muted);
-      font-family:var(--font-body); font-size:15px; /* ↓ */
-      line-height:1.45;                              /* ↓ */
+      font-family:var(--font-body); font-size:15px;
+      line-height:1.45;
     }
     .how-it-works .tl{ grid-area:tl; justify-self:center; }
     .how-it-works .tr{ grid-area:tr; justify-self:center; }
     .how-it-works .bl{ grid-area:bl; justify-self:center; }
     .how-it-works .br{ grid-area:br; justify-self:center; }
 
-    /* ===== Telefone + Box da tela ===== */
-    .how-it-works .phone{ grid-area:phone; justify-self:center; }
+    /* ===== Telefone reduzido com scale ===== */
+    .how-it-works .phone{ 
+      grid-area:phone; 
+      justify-self:center; 
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .phone-scale-wrapper{
+      transform: scale(0.5);
+      transform-origin: center;
+    }
     .how-it-works .phone-frame{
-      position:relative; width:clamp(240px, 34vw, 400px);
+      position:relative;
+      width:clamp(240px, 34vw, 400px);
       filter:drop-shadow(0 10px 24px rgba(0,0,0,.55));
     }
     .how-it-works .phone-frame img{
       display:block; width:100%; height:auto;
       pointer-events:none; user-select:none;
     }
-    /* Área clicável/visível da “tela” — ajuste fino via variáveis */
     .how-it-works .phone-screen{
       --inset-top:   7.5%;
       --inset-right: 6%;
@@ -225,11 +235,16 @@
       position:absolute;
       top:var(--inset-top); right:var(--inset-right);
       bottom:var(--inset-bottom); left:var(--inset-left);
-      border-radius:26px; overflow:hidden; background:#000;   /* tela preta por trás */
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);        /* leve borda interna */
+      border-radius:26px; overflow:hidden; background:#000;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
     }
     .how-it-works .phone-screen iframe{
-      width:100%; height:100%; border:0; display:block;
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
     }
 
     /* ===== Responsivo ===== */
@@ -237,10 +252,9 @@
       .how-it-works .grid{
         grid-template-columns:1fr;
         grid-template-areas:"title" "phone" "tl" "tr" "bl" "br";
-        gap:16px;                                        /* ↓ */
+        gap:16px;
       }
       .how-it-works .card{ max-width:600px; }
-      .how-it-works .phone-frame{ width:min(86vw, 400px); }
     }
   </style>
 
@@ -252,47 +266,45 @@
 
     <div class="grid">
       <article class="card tl">
-        <h3 class="headline">1) ANÁLISE ESTRATÉGICA</h3>
+        <h3 class="headline" style="color:var(--purple)">ANÁLISE ESTRATÉGICA</h3>
         <p class="subhead">Mapeamos seu funil e identificamos oportunidades de automação que geram mais conversões.</p>
       </article>
 
-      <!-- ===== Celular com BOX da tela puxando a simulação do repositório ===== -->
+      <!-- ===== Celular ===== -->
       <figure class="phone">
-        <div class="phone-frame">
-          <!-- imagem do mockup do iPhone -->
-          <img src="iphone_placeholder.png"
-               alt="Mockup do iPhone exibindo o Agente Guia" />
-
-          <!-- área da tela: embute a simulação via iframe (substitua o src) -->
-          <div class="phone-screen" aria-label="Simulação WhatsApp">
-            <iframe
-              src="whats_app_chat_sim.html"
-              title="Simulação de conversa WhatsApp — Agente Guia"
-              loading="lazy"
-              referrerpolicy="no-referrer">
-            </iframe>
+        <div class="phone-scale-wrapper">
+          <div class="phone-frame">
+            <img src="iphone_placeholder.png"
+                 alt="Mockup do iPhone exibindo o Agente Guia" />
+            <div class="phone-screen" aria-label="Simulação WhatsApp">
+              <iframe
+                src="whats_app_chat_sim.html"
+                title="Simulação de conversa WhatsApp — Agente Guia"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              </iframe>
+            </div>
           </div>
         </div>
       </figure>
 
       <article class="card tr">
-        <h3 class="headline">3) IA TREINADA</h3>
-        <p class="subhead">Fluxos com o tom da sua marca que qualificam e nutrem leads automaticamente.</p>
+        <h3 class="headline" style="color:var(--purple)">OTIMIZAÇÃO CONTÍNUA</h3>
+        <p class="subhead">Ajustes semanais baseados em dados para aumentar conversões e ticket médio.</p>
       </article>
 
       <article class="card bl">
-        <h3 class="headline">2) CONFIGURAÇÃO TÉCNICA</h3>
+        <h3 class="headline" style="color:var(--purple)">CONFIGURAÇÃO TÉCNICA</h3>
         <p class="subhead">Cuidamos de API, webhooks e integrações sem você se preocupar.</p>
       </article>
 
       <article class="card br">
-        <h3 class="headline">4) OTIMIZAÇÃO CONTÍNUA</h3>
-        <p class="subhead">Monitoramos métricas e ajustamos para maximizar conversões mensalmente.</p>
+        <h3 class="headline" style="color:var(--purple)">IA TREINADA</h3>
+        <p class="subhead">Fluxos com o tom da sua marca que qualificam e nutrem leads automaticamente.</p>
       </article>
     </div>
   </div>
 </section>
-
 
     <!-- RESULTADOS -->
     <section class="section" id="resultados" aria-labelledby="titulo-resultados">
