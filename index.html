@@ -148,146 +148,173 @@
       </div>
     </section>
 
- <!-- COMO FUNCIONA (original + celular 50% menor + iframe full) -->
+<!-- COMO FUNCIONA -->
 <section class="section how-it-works" id="como-funciona" aria-labelledby="titulo-como">
   <style>
-
-/* ===== Seção ===== */
-.how-it-works{
-  background:var(--bg);
-  padding:40px 16px 56px;
-  color:var(--text);
-  font-family:var(--font-body), sans-serif;
-}
-.how-it-works .container{ 
-  max-width:1120px; 
-  margin:0 auto; 
-}
-.how-it-works .title{ 
-  text-align:center; 
-  margin-bottom:10px; /* antes 12px */
-}
-.how-it-works .title h2{
-  font-family:var(--font-heading); 
-  font-weight:800;
-  font-size:clamp(26px, 3.6vw, 44px);
-  margin:0; 
-  text-transform:uppercase;
-  letter-spacing:.2px;
-}
-.how-it-works .title h3{
-  font-family:var(--font-heading); 
-  font-weight:800;
-  font-size:clamp(20px, 2.8vw, 32px);
-  margin:.15rem 0 0; /* antes .25rem */
-  text-transform:uppercase; 
-  color:var(--primary);
-}
-
-/* ===== Grid ===== */
-.how-it-works .grid{
-  display:grid;
-  grid-template-columns:1fr minmax(260px, 400px) 1fr;
-  grid-template-areas:"tl phone tr" "bl phone br";
-  gap:10px 20px; /* antes 12px 24px */
-  align-items:center;
-  margin-top:6px; /* antes 8px */
-}
-
-/* ===== Cards ===== */
-.how-it-works .card{
-  background:transparent; 
-  border:0; 
-  border-radius:16px;
-  box-shadow:var(--shadow); 
-  padding:10px; /* antes 12px */
-  max-width:300px; /* antes 320px */
-  text-align:center;
-  display:flex; 
-  flex-direction:column; 
-  align-items:center;
-}
-.how-it-works .card .headline{
-  font-family:var(--font-heading); 
-  font-weight:800;
-  text-transform:uppercase; 
-  font-size:17px; /* antes 18px */
-  margin:0 0 4px; /* antes 6px */
-  color:var(--text);
-  letter-spacing:.2px;
-  line-height:1.15; /* mais compacto */
-}
-.how-it-works .card .subhead{
-  margin:0; 
-  color:var(--muted);
-  font-family:var(--font-body); 
-  font-size:14px; /* antes 15px */
-  line-height:1.35; /* antes 1.45 */
-}
-.how-it-works .tl{ grid-area:tl; justify-self:center; }
-.how-it-works .tr{ grid-area:tr; justify-self:center; }
-.how-it-works .bl{ grid-area:bl; justify-self:center; }
-.how-it-works .br{ grid-area:br; justify-self:center; }
-
-/* ===== Telefone reduzido com scale ===== */
-.how-it-works .phone{ 
-  grid-area:phone; 
-  justify-self:center; 
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:2px 0; /* antes 4px */
-}
-.phone-scale-wrapper{
-  transform: scale(0.75);
-  transform-origin: center;
-}
-.how-it-works .phone-frame{
-  position:relative;
-  width:clamp(240px, 34vw, 400px);
-  filter:drop-shadow(0 10px 24px rgba(0,0,0,.55));
-}
-.how-it-works .phone-frame img{
-  display:block; 
-  width:100%; 
-  height:auto;
-  pointer-events:none; 
-  user-select:none;
-}
-.how-it-works .phone-screen{
-  --inset-top:   7.5%;
-  --inset-right: 6%;
-  --inset-bottom:7.6%;
-  --inset-left:  6%;
-
-  position:absolute;
-  top:var(--inset-top); 
-  right:var(--inset-right);
-  bottom:var(--inset-bottom); 
-  left:var(--inset-left);
-  border-radius:26px; 
-  overflow:hidden; 
-  background:#000;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
-}
-.how-it-works .phone-screen iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-  display:block;
-}
-
-/* ===== Responsivo ===== */
-@media (max-width:980px){
-  .how-it-works .grid{
-    grid-template-columns:1fr;
-    grid-template-areas:"title" "phone" "tl" "tr" "bl" "br";
-    gap:10px; /* antes 12px */
+  /* ===== Seção ===== */
+  .how-it-works{
+    background:var(--bg);
+    padding:40px 16px 56px;
+    color:var(--text);
+    font-family:var(--font-body), sans-serif;
   }
-  .how-it-works .card{ max-width:580px; }
-}
+  .how-it-works .container{ 
+    max-width:1120px; 
+    margin:0 auto; 
+  }
+  .how-it-works .title{ 
+    text-align:center; 
+    margin-bottom:10px; /* antes 12px */
+  }
+  .how-it-works .title h2{
+    font-family:var(--font-heading); 
+    font-weight:800;
+    font-size:clamp(26px, 3.6vw, 44px);
+    margin:0; 
+    text-transform:uppercase;
+    letter-spacing:.2px;
+  }
+  .how-it-works .title h3{
+    font-family:var(--font-heading); 
+    font-weight:800;
+    font-size:clamp(20px, 2.8vw, 32px);
+    margin:.15rem 0 0; /* antes .25rem */
+    text-transform:uppercase; 
+    color:var(--primary);
+  }
+
+  /* ===== Grid ===== */
+  .how-it-works .grid{
+    display:grid;
+    grid-template-columns:1fr minmax(260px, 400px) 1fr;
+    grid-template-areas:"tl phone tr" "bl phone br";
+    gap:10px 20px; /* base (mobile/<=980) */
+    align-items:center;
+    margin-top:6px; /* antes 8px */
+  }
+
+  /* ===== Cards ===== */
+  .how-it-works .card{
+    background:transparent; 
+    border:0; 
+    border-radius:16px;
+    box-shadow:var(--shadow); 
+    padding:10px; /* antes 12px */
+    max-width:300px; /* antes 320px */
+    text-align:center;
+    display:flex; 
+    flex-direction:column; 
+    align-items:center;
+    margin:0;
+  }
+  .how-it-works .card .headline{
+    font-family:var(--font-heading); 
+    font-weight:800;
+    text-transform:uppercase; 
+    font-size:17px; /* antes 18px */
+    margin:0 0 4px; /* antes 6px */
+    color:var(--text);
+    letter-spacing:.2px;
+    line-height:1.15; /* mais compacto */
+  }
+  .how-it-works .card .subhead{
+    margin:0; 
+    color:var(--muted);
+    font-family:var(--font-body); 
+    font-size:14px; /* antes 15px */
+    line-height:1.35; /* antes 1.45 */
+  }
+  .how-it-works .tl{ grid-area:tl; justify-self:center; }
+  .how-it-works .tr{ grid-area:tr; justify-self:center; }
+  .how-it-works .bl{ grid-area:bl; justify-self:center; }
+  .how-it-works .br{ grid-area:br; justify-self:center; }
+
+  /* ===== Telefone reduzido com scale ===== */
+  .how-it-works .phone{ 
+    grid-area:phone; 
+    justify-self:center; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:2px 0; /* antes 4px */
+  }
+  .phone-scale-wrapper{
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+  .how-it-works .phone-frame{
+    position:relative;
+    width:clamp(240px, 34vw, 400px);
+    filter:drop-shadow(0 10px 24px rgba(0,0,0,.55));
+  }
+  .how-it-works .phone-frame img{
+    display:block; 
+    width:100%; 
+    height:auto;
+    pointer-events:none; 
+    user-select:none;
+  }
+  .how-it-works .phone-screen{
+    --inset-top:   7.5%;
+    --inset-right: 6%;
+    --inset-bottom:7.6%;
+    --inset-left:  6%;
+
+    position:absolute;
+    top:var(--inset-top); 
+    right:var(--inset-right);
+    bottom:var(--inset-bottom); 
+    left:var(--inset-left);
+    border-radius:26px; 
+    overflow:hidden; 
+    background:#000;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  .how-it-works .phone-screen iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+
+  /* ========= Ajuste de proximidade dos textos (desktop) ========= */
+  @media (min-width:981px){
+    .how-it-works .grid{
+      gap:10px 40px;           /* mais espaço horizontal para “abraçar” o celular */
+      align-items:center;
+    }
+    .how-it-works .tl,
+    .how-it-works .tr,
+    .how-it-works .bl,
+    .how-it-works .br{
+      align-self:center;
+      justify-self:center;
+    }
+    /* Aproxima os blocos do meio: desce os de cima e sobe os de baixo */
+    .how-it-works .tl,
+    .how-it-works .tr{ transform:translateY(22%); }
+    .how-it-works .bl,
+    .how-it-works .br{ transform:translateY(-22%); }
+
+    /* Cards um pouco mais estreitos (como na referência) */
+    .how-it-works .card{ max-width:280px; } /* antes 300px */
+  }
+
+  /* ===== Responsivo ===== */
+  @media (max-width:980px){
+    .how-it-works .grid{
+      grid-template-columns:1fr;
+      grid-template-areas:
+        "title" "phone" "tl" "tr" "bl" "br";
+      gap:10px; /* antes 12px */
+    }
+    .how-it-works .card{ 
+      max-width:580px; 
+      transform:none; /* sem deslocamento no mobile */
+    }
+  }
   </style>
 
   <div class="container">
@@ -303,11 +330,10 @@
       </article>
 
       <!-- ===== Celular ===== -->
-      <figure class="phone">
+      <figure class="phone" aria-hidden="false">
         <div class="phone-scale-wrapper">
           <div class="phone-frame">
-            <img src="iphone_placeholder.png"
-                 alt="Mockup do iPhone exibindo o Agente Guia" />
+            <img src="iphone_placeholder.png" alt="Mockup do iPhone exibindo o Agente Guia">
             <div class="phone-screen" aria-label="Simulação WhatsApp">
               <iframe
                 src="whats_app_chat_sim.html"
