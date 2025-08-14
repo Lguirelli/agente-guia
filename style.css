@@ -1,6 +1,6 @@
 /* =========================================================
    Guia • Header + Menu dropdown (desktop e mobile)
-   Paleta nova + fontes atualizadas
+   Paleta nova + fontes atualizadas • Header fixo com blur
    ========================================================= */
 
 /* ===== Fonts (Google) ===== */
@@ -85,22 +85,15 @@ img{ max-width:100%; height:auto; display:block; }
   padding:0 20px;
 }
 
-/* ===== Header (fixo) ===== */
+/* ===== Header (fixo com blur) ===== */
 .site-header{
   position: fixed; top:0; left:0; right:0; z-index:50;
-  background:rgba(11,12,16,0);
-  -webkit-backdrop-filter:saturate(140%) blur(8px);
-  backdrop-filter:saturate(140%) blur(8px);
-  border-bottom:0 solid var(--border);
-  isolation:isolate;
-  transition: opacity .2s ease; /* para fade-out */
-  pointer-events: auto; /* por padrão clicável */
-}
-
-/* Header invisível — sem clique */
-.site-header.is-hidden {
-  opacity: 0;
-  pointer-events: none;
+  background: rgba(11,12,16,.6); /* leve transparência para ver o blur */
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 0 solid var(--border);
+  isolation: isolate;
+  pointer-events: auto;
 }
 
 .nav{
@@ -271,76 +264,4 @@ img{ max-width:100%; height:auto; display:block; }
 }
 .hero-media-wrap::before{
   content: "";
-  position: absolute;
-  width: 130%;
-  height: 130%;
-  background: radial-gradient(circle, rgba(128, 172, 211, var(--eye-glow-alpha)) 0%, transparent 70%);
-  filter: blur(var(--eye-glow-blur));
-  z-index: 0;
-}
-.hero-media-wrap img{
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== Responsivo (menu) ===== */
-@media (max-width: 860px){
-  #site-menu{
-    max-inline-size:min(320px, calc(100vw - 24px));
-    min-inline-size:200px;
-    padding:calc(16px + env(safe-area-inset-top, 0)) 12px calc(16px + env(safe-area-inset-bottom, 0)) 12px;
-  }
-  #site-menu a{
-    padding:14px 6px;
-    font-size:16px;
-  }
-}
-html.no-scroll, body.no-scroll{ overflow:hidden }
-
-/* ===== Imagens específicas ===== */
-#roboHero,
-.how-it-works .phone img{
-  max-width:100%;
-  height:auto !important;
-  display:block;
-}
-
-/* =========================================================
-   Compact spacing — MOBILE ONLY (<= 768px)
-   ========================================================= */
-@media (max-width: 768px) {
-  .headline { margin: 0 0 8px; font-size: clamp(22px, 6vw, 32px); }
-  .subhead  { margin: 0 0 10px; }
-  .caption  { margin-top: 6px; }
-
-  .section  { padding: 20px 0; } /* reduzido no mobile */
-  .container{ padding-inline: 16px; }
-
-  .section .container > * + * { margin-top: 8px; }
-  .section [style*="display:grid"] { gap: 12px !important; }
-
-  .card { padding: 14px; }
-  .testimonial-card { padding: 14px; }
-  .social-proof-bar { padding: 10px; margin: 10px 0; }
-  .kpi { font-size: 20px; }
-
-  .hero .container { gap: 10px !important; }
-
-  .how-it-works { padding: 20px 16px 32px; }
-  .how-it-works .grid { margin-top: 6px; }
-  .how-it-works .card { padding: 12px 14px; }
-
-  #resultados [style*="display:grid"],
-  #recursos   [style*="display:grid"],
-  #planos     [style*="display:grid"],
-  #faq        [style*="display:grid"] { gap: 12px !important; }
-
-  #seguranca .table th,
-  #seguranca .table td { padding: 6px 8px; }
-
-  #cta .actions { gap: 8px !important; }
-  #cta .subhead { margin-bottom: 6px; }
-
-  #contato ul { margin-top: 4px; }
-  .btn { height: 38px; padding: 0 14px; }
-}
+  posit
