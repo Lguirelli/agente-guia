@@ -35,8 +35,11 @@ fetch('header.html')
       lockScroll(isOpen);
 
       // Se o menu abrir, garantir header totalmente visível (usabilidade)
-      if (isOpen) setHeaderOpacity(1);
-      else scheduleFadeUpdate(); // recalcula com base no scroll atual
+      if (isOpen) {
+        setHeaderOpacity(1);           // força opacidade 1
+      } else {
+        scheduleFadeUpdate();          // recalcula com base no scroll atual
+      }
     }
 
     const toggleMenu = () => applyState(!btn.classList.contains('is-open'));
@@ -61,6 +64,7 @@ fetch('header.html')
     // ===== Fade out no scroll =====
     const FADE_START = 0;    // px a partir do topo onde começa a reduzir
     const FADE_END   = 240;  // px onde o header fica totalmente transparente
+    const OP_THRESHOLD = 0.01; // tolerância para considerar "100% transparente"
 
     let ticking = false;
 
@@ -68,12 +72,20 @@ fetch('header.html')
 
     function setHeaderOpacity(op) {
       if (!header) return;
-      header.style.opacity = String(clamp(op, 0, 1));
+      const clamped = clamp(op, 0, 1);
+      header.style.opacity = String(clamped);
+
+      // Quando chegar a 0 (ou muito próximo), desativa cliques; caso contrário, reativa
+      const isHidden = clamped <= OP_THRESHOLD;
+
+      // Importante: ao abrir o menu, não deixamos o header "hidden"
+      const forceVisible = btn.classList.contains('is-open'); // em qualquer viewport
+      header.classList.toggle('is-hidden', !forceVisible && isHidden);
     }
 
     function computeOpacity(scrollY) {
-      // Se menu aberto no mobile: header sempre visível
-      if (btn.classList.contains('is-open') && mqMobile.matches) return 1;
+      // Se menu aberto (mobile ou desktop): header sempre visível
+      if (btn.classList.contains('is-open')) return 1;
 
       const t = clamp((scrollY - FADE_START) / (FADE_END - FADE_START), 0, 1);
       return 1 - t; // 1 → 0 conforme rola
