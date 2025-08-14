@@ -439,63 +439,69 @@
   <!-- SEGURANÇA / LGPD (compacta e centralizada) -->
 <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
 <style>
-  /* === Caixa/box da tabela (sem “ar” nas laterais) === */
-  #seguranca .container{ padding-inline:12px; }          /* menos padding do container */
-  #seguranca .sec-box{
-    margin-top:12px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    padding:8px 8px;                                     /* respiro mínimo lateral */
-    display:block;                                        /* evita centralização extra */
-    width:75%;                                           /* ocupa toda a largura útil */
-  }
+/* === Caixa/box da tabela (sem “ar” nas laterais) === */
+#seguranca .container{ padding-inline:12px; }     /* menos padding do container */
 
-  /* === Tabela centralizada e ENCHENDO a caixa === */
-  #seguranca .table{
-    border-collapse:collapse;
-    table-layout:fixed;                                   /* colunas estáveis */
-    width:100%;                                           /* estica até as bordas */
-    margin:0;                                             /* sem margem extra */
-    text-align:center;
-  }
+#seguranca .sec-box{
+  margin:12px auto 0;                              /* centraliza a caixa */
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:8px 8px;                                  /* respiro mínimo lateral */
+  display:block;
+  width:100%;                                       /* ocupa toda a largura útil */
+  max-width:1080px;                                 /* opcional: limite no desktop */
+}
 
-  /* Cabeçalho roxo e compacto */
-  #seguranca .table thead th{
-    color:var(--purple);
-    font-family:var(--font-heading);
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:.2px;
-    padding:8px 8px;                                     /* compacto */
-    border-bottom:1px solid rgba(255,255,255,.08);
-    white-space:nowrap;
-  }
+/* === Tabela centralizada e ENCHENDO a caixa === */
+#seguranca .table{
+  border-collapse:collapse;
+  table-layout:fixed;                                /* colunas estáveis */
+  width:100%;                                        /* estica até as bordas */
+  margin:0;
+  text-align:center;
+}
 
-  /* Células enxutas */
-  #seguranca .table td{
-    padding:10px 8px;                                     /* reduz lateral */
-    vertical-align:middle;
-  }
-  #seguranca .table td:first-child{
-    font-weight:700;
-    white-space:nowrap;
-  }
+/* Cabeçalho roxo e compacto */
+#seguranca .table thead th{
+  color:var(--purple);
+  font-family:var(--font-heading);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.2px;
+  padding:8px 8px;                                   /* compacto */
+  border-bottom:1px solid rgba(255,255,255,.08);
+  white-space:nowrap;
+}
 
-  /* Proporção das colunas (menos “vazio” à esquerda) */
+/* Células enxutas */
+#seguranca .table td{
+  padding:10px 8px;                                  /* reduz lateral */
+  vertical-align:middle;
+}
+#seguranca .table td:first-child{
+  font-weight:700;
+  white-space:nowrap;
+}
+
+/* Proporção das colunas (menos “vazio” à esquerda) */
+#seguranca .table th:first-child,
+#seguranca .table td:first-child{ width:28%; }
+#seguranca .table th:last-child,
+#seguranca .table td:last-child{ width:72%; }        /* corrigido: era 28% */
+
+/* Responsivo */
+@media (max-width:640px){
+  #seguranca .container{ padding-inline:10px; }
+  #seguranca .sec-box{ padding:8px; max-width:100%; }
+  #seguranca .table thead th, #seguranca .table td{ padding:8px 6px; }
   #seguranca .table th:first-child,
-  #seguranca .table td:first-child{ width:28%; }
+  #seguranca .table td:first-child{ width:32%; }     /* um pouco mais larga no mobile */
   #seguranca .table th:last-child,
-  #seguranca .table td:last-child{ width:28%; }
+  #seguranca .table td:last-child{ width:68%; }
+}
 
-  /* Responsivo */
-  @media (max-width:640px){
-    #seguranca .container{ padding-inline:10px; }
-    #seguranca .sec-box{ padding:8px 8px; }
-    #seguranca .table thead th,
-    #seguranca .table td{ padding:8px 6px; }
-  }
 </style>
 
   <div class="container">
