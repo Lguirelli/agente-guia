@@ -94,6 +94,13 @@ img{ max-width:100%; height:auto; display:block; }
   border-bottom:0 solid var(--border);
   isolation:isolate;
   transition: opacity .2s ease; /* para fade-out */
+  pointer-events: auto; /* por padrão clicável */
+}
+
+/* Header invisível — sem clique */
+.site-header.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav{
