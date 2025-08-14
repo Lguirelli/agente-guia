@@ -269,7 +269,7 @@ img{
   border-top:1px solid var(--border);
 }
 
-/* ===== Responsivo ===== */
+/* ===== Responsivo (menu) ===== */
 @media (max-width: 860px){
   #site-menu{
     max-inline-size:min(320px, calc(100vw - 24px));
@@ -290,4 +290,58 @@ html.no-scroll, body.no-scroll{ overflow:hidden }
   max-width:100%;
   height:auto !important;
   display:block;
+}
+
+/* =========================================================
+   Compact spacing — MOBILE ONLY (<= 768px)
+   Reduz espaços entre elementos da mesma seção para melhor
+   aproveitamento vertical sem perder legibilidade.
+   ========================================================= */
+@media (max-width: 768px) {
+  /* Tipografia e blocos */
+  .headline { margin: 0 0 8px; font-size: clamp(22px, 6vw, 32px); }
+  .subhead  { margin: 0 0 10px; }
+  .caption  { margin-top: 6px; }
+
+  /* Seções e container */
+  .section  { padding: 28px 0; }               /* antes: 56px */
+  .container{ padding-inline: 16px; }          /* antes: 20px */
+
+  /* Empilhamento interno mais justo */
+  .section .container > * + * { margin-top: 10px; }
+
+  /* Força gaps menores em grids definidos inline no HTML */
+  .section [style*="display:grid"] { gap: 14px !important; }
+
+  /* Cartões e elementos frequentes */
+  .card { padding: 14px; }                     /* afeta apenas cards sem padding inline */
+  .testimonial-card { padding: 14px; }
+  .social-proof-bar { padding: 10px; margin: 12px 0; }
+  .kpi { font-size: 20px; }
+
+  /* Hero */
+  .hero .container { gap: 12px !important; }
+
+  /* “Como funciona” */
+  .how-it-works { padding: 28px 16px 40px; }
+  .how-it-works .grid { margin-top: 8px; }
+  .how-it-works .card { padding: 12px 14px; }
+
+  /* Resultados / Recursos / Planos / FAQ: grids mais compactos */
+  #resultados [style*="display:grid"],
+  #recursos   [style*="display:grid"],
+  #planos     [style*="display:grid"],
+  #faq        [style*="display:grid"] { gap: 14px !important; }
+
+  /* Segurança / LGPD: células compactas */
+  #seguranca .table th,
+  #seguranca .table td { padding: 8px 10px; }
+
+  /* CTA final */
+  #cta .actions { gap: 10px !important; }
+  #cta .subhead { margin-bottom: 8px; }
+
+  /* Contato */
+  #contato ul { margin-top: 6px; }
+  .btn { height: 38px; padding: 0 14px; }
 }
