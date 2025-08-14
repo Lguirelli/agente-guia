@@ -437,56 +437,87 @@
     </section>
 
     <!-- SEGURANÇA / LGPD -->
-    <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
-      <div class="container">
-        <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
-        <p class="subhead text-center">Seus dados e de seus clientes protegidos de ponta a ponta.</p>
-        <div class="card" style="padding:0; overflow:hidden">
-          <table class="table" aria-label="Práticas de segurança e privacidade" style="width:100%">
-            <thead><tr><th>Área</th><th>Nossa Proteção</th></tr></thead>
-            <tbody>
-              <tr><td><strong>LGPD/GDPR</strong></td><td>Opt-in/opt-out automático e registros.</td></tr>
-              <tr><td><strong>Dados</strong></td><td>Criptografia em trânsito e em repouso; retenção configurável.</td></tr>
-              <tr><td><strong>Infraestrutura</strong></td><td>AWS/Azure com certificações de segurança.</td></tr>
-              <tr><td><strong>Acesso</strong></td><td>MFA e logs de auditoria.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+   <!-- ===== Centralizar textos em SEGURANÇA e FAQ mantendo a divisão ===== -->
+<style>
+  /* Segurança: centraliza tudo e mantém a tabela alinhada ao centro */
+  #seguranca .card{ text-align:center; }
+  #seguranca .table{
+    width:100%;
+    margin:0 auto;                 /* centraliza a tabela no card */
+    border-collapse:separate;
+    border-spacing:0;
+  }
+  #seguranca .table th,
+  #seguranca .table td{
+    text-align:center;             /* <<< textos centralizados nas células */
+    padding:12px 14px;
+    vertical-align:middle;
+  }
 
-    <!-- FAQ -->
-    <section class="section" id="faq" aria-labelledby="titulo-faq">
-      <div class="container">
-        <h2 class="headline text-center" id="titulo-faq">DÚVIDAS FREQUENTES</h2>
-        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:16px;">
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:18px"><span class="accent">🚀 Em quanto tempo vejo resultados?</span></h3>
-            <p class="subhead">Muitos clientes veem impacto já na primeira semana. Implementação v1.0 em até 48h.</p>
-          </div>
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:18px"><span class="accent">📱 Funciona no meu número atual?</span></h3>
-            <p class="subhead">Sim, via WhatsApp Business API oficial, sem perder histórico.</p>
-          </div>
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:18px"><span class="accent">🤖 Preciso entender de tecnologia?</span></h3>
-            <p class="subhead">Não. Cuidamos de setup, fluxos, integrações e manutenção.</p>
-          </div>
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:18px"><span class="accent">💰 E se não funcionar pra mim?</span></h3>
-            <p class="subhead">Garantia incondicional de 30 dias. Se não aumentar suas conversões, devolvemos 100%.</p>
-          </div>
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:18px"><span class="accent">📊 Como acompanho os resultados?</span></h3>
-            <p class="subhead">Dashboard com métricas de conversão, tempo de resposta, satisfação e ROI.</p>
-          </div>
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:18px"><span class="accent">🔄 Posso mudar ou cancelar depois?</span></h3>
-            <p class="subhead">Sem fidelidade. Você pode fazer upgrade, downgrade ou cancelar a qualquer momento.</p>
-          </div>
-        </div>
+  /* FAQ: centraliza conteúdo dos cards sem alterar o grid */
+  #faq .card{ text-align:center; }
+  #faq .card .headline{ margin-bottom:8px; }
+  #faq .card .subhead{ margin:0; }
+</style>
+
+<!-- SEGURANÇA / LGPD -->
+<section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
+  <div class="container">
+    <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
+    <p class="subhead text-center">Seus dados e de seus clientes protegidos de ponta a ponta.</p>
+    <div class="card" style="padding:0; overflow:hidden">
+      <table class="table" aria-label="Práticas de segurança e privacidade" style="width:100%">
+        <thead>
+          <tr>
+            <th>Área</th>
+            <th>Nossa Proteção</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>LGPD/GDPR</strong></td><td>Opt-in/opt-out automático e registros.</td></tr>
+          <tr><td><strong>Dados</strong></td><td>Criptografia em trânsito e em repouso; retenção configurável.</td></tr>
+          <tr><td><strong>Infraestrutura</strong></td><td>AWS/Azure com certificações de segurança.</td></tr>
+          <tr><td><strong>Acesso</strong></td><td>MFA e logs de auditoria.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" aria-labelledby="titulo-faq">
+  <div class="container">
+    <h2 class="headline text-center" id="titulo-faq">DÚVIDAS FREQUENTES</h2>
+
+    <!-- mantém a divisão em grid, só centraliza os textos dentro dos cards -->
+    <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:16px;">
+      <div class="card" style="padding:20px">
+        <h3 class="headline" style="font-size:18px"><span class="accent">🚀 Em quanto tempo vejo resultados?</span></h3>
+        <p class="subhead">Muitos clientes veem impacto já na primeira semana. Implementação v1.0 em até 48h.</p>
       </div>
-    </section>
+      <div class="card" style="padding:20px">
+        <h3 class="headline" style="font-size:18px"><span class="accent">📱 Funciona no meu número atual?</span></h3>
+        <p class="subhead">Sim, via WhatsApp Business API oficial, sem perder histórico.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <h3 class="headline" style="font-size:18px"><span class="accent">🤖 Preciso entender de tecnologia?</span></h3>
+        <p class="subhead">Não. Cuidamos de setup, fluxos, integrações e manutenção.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <h3 class="headline" style="font-size:18px"><span class="accent">💰 E se não funcionar pra mim?</span></h3>
+        <p class="subhead">Garantia incondicional de 30 dias. Se não aumentar suas conversões, devolvemos 100%.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <h3 class="headline" style="font-size:18px"><span class="accent">📊 Como acompanho os resultados?</span></h3>
+        <p class="subhead">Dashboard com métricas de conversão, tempo de resposta, satisfação e ROI.</p>
+      </div>
+      <div class="card" style="padding:20px">
+        <h3 class="headline" style="font-size:18px"><span class="accent">🔄 Posso mudar ou cancelar depois?</span></h3>
+        <p class="subhead">Sem fidelidade. Você pode fazer upgrade, downgrade ou cancelar a qualquer momento.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- CTA FINAL -->
     <section class="section" id="cta" aria-labelledby="titulo-cta">
