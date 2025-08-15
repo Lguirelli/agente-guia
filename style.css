@@ -25,7 +25,7 @@ body{
   margin:0; color:var(--text);
   font:400 16px/1.6 var(--font-body);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  padding-top:var(--header-h);
+  padding-top:calc(var(--header-h) - 10px); /* espaço reduzido abaixo do header */
 }
 a{color:inherit; text-decoration:none}
 img{max-width:100%; height:auto; display:block}
@@ -84,11 +84,20 @@ img{max-width:100%; height:auto; display:block}
   transition:opacity .18s ease, transform .18s ease, visibility 0s .18s;
   z-index:1002;
 }
-#site-menu a{display:block; white-space:nowrap; padding:10px 12px; border-radius:10px}
+#site-menu a{display:block; white-space:normal; word-break:break-word; text-align:center; padding:10px 12px; border-radius:10px}
 #site-menu a:hover{background:rgba(255,255,255,.12)}
 #site-menu.open,
 .menu-toggle[aria-expanded="true"] + #site-menu{
   visibility:visible; opacity:1; transform:translateY(0); pointer-events:auto; transition-delay:0s;
+}
+
+/* Também permite quebra de texto em links/botões do header */
+.menu-wrap a,
+.site-header .btn{
+  white-space:normal;
+  word-break:break-word;
+  text-align:center;
+  line-height:1.2;
 }
 
 /* =========================================================
@@ -104,6 +113,7 @@ img{max-width:100%; height:auto; display:block}
 /* =========================================================
    Hero (base)
    ========================================================= */
+.hero{ margin-top:0; padding-top:20px; } /* aproxima do header */
 .hero-media-wrap{position:relative; display:flex; justify-content:center; align-items:center}
 .hero-media-wrap::before{
   content:""; position:absolute; width:130%; height:130%;
@@ -113,7 +123,7 @@ img{max-width:100%; height:auto; display:block}
 .hero-media-wrap img{position:relative; z-index:1}
 
 /* Botões */
-.btn{display:inline-flex; align-items:center; justify-content:center; height:40px; padding:0 16px; border-radius:12px; font-weight:700; border:1px solid transparent; transition:all .2s ease; font-family:var(--font-body)}
+.btn{display:inline-flex; align-items:center; justify-content:center; height:40px; padding:0 16px; border-radius:12px; font-weight:700; border:1px solid transparent; transition:all .2s ease; font-family:var(--font-body); white-space:normal; word-break:break-word; text-align:center; line-height:1.2}
 .btn.primary{background:var(--purple); color:#fff; box-shadow:0 6px 18px rgba(114,105,227,.35)}
 .btn.primary:hover{background:var(--purple-strong); transform:translateY(-1px)}
 .btn.secondary{background:transparent; color:var(--text); border-color:var(--border)}
@@ -172,9 +182,7 @@ img{max-width:100%; height:auto; display:block}
   .menu-toggle{ display:inline-flex !important; visibility:visible !important; opacity:1 !important }
 
   /* Hero: layout em uma coluna, textos centralizados */
-  .hero .container{
-    display:block !important;
-  }
+  .hero .container{ display:block !important; }
   .hero .hero-copy{
     text-align:center;
     max-width:780px;
@@ -203,7 +211,9 @@ img{max-width:100%; height:auto; display:block}
   .hero .actions .btn{
     flex:1 1 0;
     min-width:140px;
-    white-space:nowrap;
+    white-space:normal;
+    word-break:break-word;
+    line-height:1.2;
   }
 
   /* Robô pequeno fixo no canto inferior direito */
@@ -214,11 +224,11 @@ img{max-width:100%; height:auto; display:block}
     right:14px; bottom:14px;
     width:auto; max-width:28vw; max-height:120px;
     height:auto; object-fit:contain;
-    z-index:900; pointer-events:none; /* não bloqueia cliques nos botões */
+    z-index:900; pointer-events:none;
     filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));
   }
 
-  /* Espaçamento extra para não colidir com o robô fixo */
+  /* Espaço extra para não colidir com o robô fixo */
   .hero{ padding-bottom:120px; }
 
   /* Espaçamento compacto geral */
