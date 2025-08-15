@@ -276,6 +276,44 @@ img{ max-width:100%; height:auto; display:block; }
   z-index: 1;
 }
 
+/* ===== KPIs — caixas responsivas e alinhamento perfeito ===== */
+.kpi-wrap{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap:16px;
+  align-items:stretch;              /* todas as caixas com a mesma altura */
+}
+.kpi-wrap > *{ min-width:0 }        /* evita overflow em quebras */
+
+.kpi-box{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background: rgba(255,255,255,.03);     /* leve contraste dentro do card */
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  padding:18px 12px;
+  min-height:110px;                      /* altura consistente */
+  box-shadow: var(--shadow);
+}
+
+.kpi-value{
+  font-family: var(--font-heading);
+  font-weight:800;
+  font-size: clamp(20px, 4.2vw, 28px);
+  line-height:1;
+  color: var(--mint);
+  letter-spacing:.3px;
+}
+
+.kpi-label{
+  margin-top:6px;
+  font-size:14px;
+  color: var(--muted);
+}
+
 /* ===== Responsivo (menu) ===== */
 @media (max-width: 860px){
   #site-menu{
@@ -306,16 +344,25 @@ html.no-scroll, body.no-scroll{ overflow:hidden }
   .subhead  { margin: 0 0 10px; }
   .caption  { margin-top: 6px; }
 
-  .section  { padding: 20px 0; } /* reduzido no mobile */
+  /* menos espaço entre sessões */
+  .section  { padding: 16px 0 !important; }
   .container{ padding-inline: 16px; }
 
-  .section .container > * + * { margin-top: 8px; }
+  .section .container > * + * { margin-top: 6px; }
   .section [style*="display:grid"] { gap: 12px !important; }
 
-  .card { padding: 14px; }
-  .testimonial-card { padding: 14px; }
+  .card, .testimonial-card { padding: 14px; }
   .social-proof-bar { padding: 10px; margin: 10px 0; }
-  .kpi { font-size: 20px; }
+
+  /* KPIs mais compactos no mobile */
+  .kpi-wrap{ gap:10px }
+  .kpi-box{
+    min-height:88px;
+    padding:12px 10px;
+    border-radius:12px;
+  }
+  .kpi-value{ font-size: clamp(18px, 6vw, 22px); }
+  .kpi-label{ font-size:12px; }
 
   .hero .container { gap: 10px !important; }
 
@@ -335,4 +382,5 @@ html.no-scroll, body.no-scroll{ overflow:hidden }
   #cta .subhead { margin-bottom: 6px; }
 
   #contato ul { margin-top: 4px; }
-  .btn
+}
+
