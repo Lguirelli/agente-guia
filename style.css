@@ -162,7 +162,7 @@ img{max-width:100%; height:auto; display:block}
 }
 
 /* =========================================================
-   MOBILE (≤768px) — apenas correções solicitadas
+   MOBILE (≤768px) — correções solicitadas
    ========================================================= */
 @media (max-width:768px){
 
@@ -171,50 +171,58 @@ img{max-width:100%; height:auto; display:block}
   .menu-wrap{ z-index:1001 }
   .menu-toggle{ display:inline-flex !important; visibility:visible !important; opacity:1 !important }
 
-  /* Hero: título ↔ robô na 1ª linha; descrição 100% abaixo; botões lado a lado */
+  /* Hero: layout em uma coluna, textos centralizados */
   .hero .container{
-    display:grid !important;
-    grid-template-columns:1fr auto !important; /* título | robô */
-    align-items:center;
-    gap:16px !important;
+    display:block !important;
+  }
+  .hero .hero-copy{
+    text-align:center;
+    max-width:780px;
+    margin:0 auto;
   }
 
-  /* transforma a coluna de texto em itens individuais do grid */
-  .hero .container > .hero-copy{ display: contents; }
-
-  .hero .tag{ grid-column:1; color:var(--mint) }
-
-  /* Título alinhado ao robô */
+  /* Headline menor e com menos espaçamento entre linhas */
   .hero .headline{
-    grid-column:1;
-    margin:0;
-    display:flex; align-items:center; width:100%;
+    font-size: clamp(20px, 5vw, 28px);
+    line-height: 1.2;
+    margin-bottom:12px;
   }
 
-  /* Robô */
-  .hero .hero-media-wrap{
-    grid-column:2;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .hero .hero-media-wrap img{
-    max-height:140px; width:auto; height:auto; object-fit:contain;
+  .hero .subhead{
+    text-align:center;
+    margin:0 auto 14px;
   }
 
-  /* Descrição full-width */
-  .hero .hero-description{
-    grid-column:1 / -1; width:100%; margin-top:12px; line-height:1.5;
-  }
-
-  /* Botões lado a lado */
+  /* Ações: lado a lado e responsivas */
   .hero .actions{
-    grid-column:1 / -1;
-    display:flex !important; flex-wrap:nowrap !important;
-    gap:10px !important; margin-top:12px !important; width:100%;
+    display:flex !important;
+    gap:10px !important;
+    justify-content:center;
+    margin-top:12px !important;
   }
-  .hero .actions .btn{ flex:1 1 0; white-space:nowrap }
+  .hero .actions .btn{
+    flex:1 1 0;
+    min-width:140px;
+    white-space:nowrap;
+  }
 
-  /* Espaçamento compacto */
-  .section{ padding:16px 0 !important }
+  /* Robô pequeno fixo no canto inferior direito */
+  .hero .hero-media-wrap{ height:0; overflow:visible; }
+  .hero .hero-media-wrap::before{ display:none; } /* remove glow p/ não ocupar */
+  .hero .hero-media-wrap img{
+    position:fixed !important;
+    right:14px; bottom:14px;
+    width:auto; max-width:28vw; max-height:120px;
+    height:auto; object-fit:contain;
+    z-index:900; pointer-events:none; /* não bloqueia cliques nos botões */
+    filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));
+  }
+
+  /* Espaçamento extra para não colidir com o robô fixo */
+  .hero{ padding-bottom:120px; }
+
+  /* Espaçamento compacto geral */
+  .section{ padding:22px 0 !important }
   .container{ padding-inline:16px }
 }
 
