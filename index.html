@@ -104,3 +104,145 @@
     .hero-description{
       grid-column:1 / -1; width:100%;
       margin-top:12px; line-height:1.5;
+    }
+    .actions{
+      grid-column:1 / -1;
+      display:flex !important; flex-wrap:nowrap; gap:10px; margin-top:12px; width:100%;
+    }
+    .actions .btn{ flex:1 1 0; white-space:nowrap }
+
+    /* Compactação de seção no mobile */
+    .section{ padding:16px 0 !important }
+    .container{ padding-inline:16px }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="container nav">
+      <div style="grid-column:1; justify-self:start"></div>
+      <a class="brand" href="#home" aria-label="Agente Guia">
+        <span class="dot" aria-hidden="true"></span>
+        AGENTE GUIA
+      </a>
+      <div class="menu-wrap">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu">
+          <span class="bar bar-top"></span>
+          <span class="bar bar-middle"></span>
+          <span class="bar bar-bottom"></span>
+        </button>
+        <div id="site-menu" role="menu" aria-hidden="true">
+          <a href="#resultados" role="menuitem">Resultados</a>
+          <a href="#planos" role="menuitem">Planos</a>
+          <a href="#faq" role="menuitem">FAQ</a>
+          <a href="#contato" role="menuitem">Contato</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero section" id="home">
+    <div class="container">
+      <!-- Coluna do texto -->
+      <div class="hero-copy">
+        <span class="tag" style="color: var(--mint);">Versão 1.0</span>
+        <h1 class="headline">AUMENTE SUAS VENDAS EM 40% COM ATENDIMENTO AUTOMATIZADO NO WHATSAPP</h1>
+      </div>
+
+      <!-- Coluna do robô (mantém compatível com parallax/JS) -->
+      <div class="hero-media hero-media-wrap">
+        <img id="roboHero" src="robo_hero.png" alt="Robô Agente Guia — imagem de capa" loading="eager" />
+      </div>
+
+      <!-- Descrição (full-width no mobile) -->
+      <p class="hero-description">
+        Pare de perder leads! Nossa IA responde em segundos, qualifica clientes e aumenta suas conversões 24/7.
+        <strong>Mais de 120 empresas</strong> já aumentaram suas vendas em até 40%.
+      </p>
+
+      <!-- Ações (lado a lado no mobile) -->
+      <div class="actions">
+        <a class="btn primary" href="#planos">Quero aumentar minhas vendas</a>
+        <a class="btn secondary" href="#resultados">Ver resultados reais</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS (placeholder) -->
+  <section class="section" id="resultados">
+    <div class="container">
+      <h2 class="headline" style="text-transform:none; font-size:28px;">Resultados</h2>
+      <p class="subhead">Casos reais de aumento de conversão usando o Agente Guia.</p>
+      <!-- Conteúdo aqui -->
+    </div>
+  </section>
+
+  <!-- PLANOS (placeholder) -->
+  <section class="section" id="planos">
+    <div class="container">
+      <h2 class="headline" style="text-transform:none; font-size:28px;">Planos</h2>
+      <p class="subhead">Escolha o plano ideal para seu negócio.</p>
+      <!-- Conteúdo aqui -->
+    </div>
+  </section>
+
+  <!-- FAQ (placeholder) -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="headline" style="text-transform:none; font-size:28px;">FAQ</h2>
+      <!-- Conteúdo aqui -->
+    </div>
+  </section>
+
+  <!-- CONTATO (placeholder) -->
+  <section class="section" id="contato">
+    <div class="container">
+      <h2 class="headline" style="text-transform:none; font-size:28px;">Contato</h2>
+      <!-- Conteúdo aqui -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <small class="muted">© <span id="footer-year"></span> Guia — Todos os direitos reservados</small>
+    </div>
+  </footer>
+
+  <script>
+    // Ano no footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Toggle do menu
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('site-menu');
+
+    toggle?.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+      // Evita rolagem de fundo quando menu estiver aberto em telas pequenas
+      document.documentElement.classList.toggle('no-scroll', open);
+      document.body.classList.toggle('no-scroll', open);
+    });
+
+    // Fecha menu ao clicar fora (mobile/desktop)
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+        if (menu.classList.contains('open')) {
+          menu.classList.remove('open');
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+          document.documentElement.classList.remove('no-scroll');
+          document.body.classList.remove('no-scroll');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
