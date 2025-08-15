@@ -78,18 +78,33 @@
   <script src="header.js" defer></script>
 
   <main id="conteudo">
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="container" style="display:grid; gap:24px; grid-template-columns:1.15fr 0.85fr; align-items:center">
-        <div>
-          <span class="tag">Versão 1.0</span>
-          <h1 class="h1">AUMENTE SUAS VENDAS EM 40% COM ATENDIMENTO AUTOMATIZADO NO WHATSAPP</h1>
-          <p class="lead">Pare de perder leads! Nossa IA responde em segundos, qualifica clientes e aumenta suas conversões 24/7. <b>Mais de 120 empresas</b> já aumentaram suas vendas em até 40%.</p>
-          <div style="display:flex; gap:12px; flex-wrap:wrap">
-            <a class="btn primary" href="#planos">Quero aumentar minhas vendas</a>
-            <a class="btn secondary" href="#resultados">Ver resultados reais</a>
-          </div>
-        </div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <!-- Coluna do texto (título alinhado ao robô no mobile) -->
+    <div class="hero-copy">
+      <span class="tag">Versão 1.0</span>
+      <h1 class="headline">AUMENTE SUAS VENDAS EM 40% COM ATENDIMENTO AUTOMATIZADO NO WHATSAPP</h1>
+
+      <!-- Este parágrafo ocupa toda a largura no mobile -->
+      <p class="hero-description">
+        Pare de perder leads! Nossa IA responde em segundos, qualifica clientes e aumenta suas conversões 24/7.
+        <strong>Mais de 120 empresas</strong> já aumentaram suas vendas em até 40%.
+      </p>
+
+      <!-- Botões lado a lado -->
+      <div class="actions">
+        <a class="btn primary" href="#planos">Quero aumentar minhas vendas</a>
+        <a class="btn secondary" href="#resultados">Ver resultados reais</a>
+      </div>
+    </div>
+
+    <!-- Coluna da imagem (mantém compatível com seu parallax JS) -->
+    <div class="hero-media hero-media-wrap">
+      <img id="roboHero" src="robo_hero.png" alt="Robô Agente Guia — imagem de capa" loading="eager" />
+    </div>
+  </div>
+</section>
 
         <!-- Parallax por JS -->
         <div class="hero-media-wrap">
