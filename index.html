@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Agente Guia 1.0: atendimento automatizado no WhatsApp. Respostas em segundos, qualificação de leads e aumento de conversões 24/7.">
   <title>Agente Guia 1.0 — Atendimento automatizado no WhatsApp</title>
   <meta name="theme-color" content="#0b0c10" />
 
@@ -15,35 +16,41 @@
   <!-- CSS global -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Ajustes locais (compatíveis com style.css novo) -->
   <style>
-    /* ===== Paleta e tokens locais (fallbacks) ===== */
+    /* =========================================================
+       Guia • Base + Header
+       ========================================================= */
+
+    /* Tokens com fallback */
     :root{
-      --bg:#0B0C10;
-      --text:#ffffff;
-      --border:#3d455c;
-      --primary:#7269E3;
-      --primary-strong:#625bd6;
-      --primary-contrast:#ffffff;
-      --accent:#98DEA3;
-      --mint:#98DEA3;
-      --purple:#7269E3;
-      --muted:#b9c0d0;
-      --shadow:0 10px 30px rgba(0,0,0,.18);
-      --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --font-heading:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --bg:#0B0C10; --dark:#272C39; --surface:transparent; --card:#32394d; --border:#3d455c;
+      --primary:#7269e3; --primary-strong:#625bd6; --primary-contrast:#ffffff;
+      --accent:#98dea3; --accent-strong:#7ed695; --accent-contrast:#0b0c10;
+      --text:#ffffff; --muted:#c4c8d4; --muted-strong:#9aa3b2;
+      --purple:#7269e3; --mint:#98dea3;
+      --radius-xl: 16px; --radius-2xl: 20px; --radius-3xl: 28px;
+      --shadow-lg: 0 10px 30px rgba(0,0,0,.35); --shadow-sm: 0 4px 12px rgba(0,0,0,.25);
+      --maxw: 1200px;
+      --font-heading: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    /* Tipografia base (força Inter no corpo e Poppins nos títulos) */
-    body { font-family: var(--font-body, "Inter"), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    h1, h2, h3, .h1, .headline {
-      font-family: var(--font-heading, "Poppins"), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-weight: 800;
-      letter-spacing:.02em;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg,#0B0C10);color:var(--text,#fff);font-family:var(--font-body, Inter), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6}
+    img{max-width:100%;height:auto;display:block}
+
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding:0 20px}
+    .section{padding:64px 0}
+    .card{background:var(--surface,transparent);border:1px solid var(--border,#3d455c);border-radius:var(--radius-2xl);box-shadow:var(--shadow-sm)}
+    .headline{
+      font-size: clamp(22px, 2.5vw, 36px);
+      color: var(--text, #fff);
+      margin: 0 0 16px 0;
+      font-family: var(--font-heading, "Poppins"), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      font-weight: 800; 
+      letter-spacing:.02em; 
       text-transform: uppercase;
-      color: var(--text);
     }
-    .subhead { color: var(--muted); }
 
     /* Utilitários */
     .text-center { text-align:center; }
@@ -63,484 +70,287 @@
       border-radius: 4px;
     }
 
-    /* Link "Pular para o conteúdo" acessível */
-    a[href="#conteudo"]{ position:absolute; left:-999px; top:auto; }
-    a[href="#conteudo"]:focus{
-      left:16px; top:16px; background:#fff; color:#000;
-      padding:8px 12px; border-radius:8px; z-index:1000;
-    }
+    /* Barra de progresso simples para sessões */
+    .subtitle{color:var(--muted,#c4c8d4);font-size:clamp(16px,1.6vw,18px);margin:0 0 24px 0}
 
-    /* Barra de prova social e depoimentos */
-    .social-proof-bar {
-      background: rgba(152, 222, 163, 0.06); /* mint suave */
-      border: 1px solid rgba(152, 222, 163, 0.2);
-      border-radius: 12px;
-      padding: 16px;
-      margin: 20px 0;
-      text-align: center;
-    }
-    .kpi { font-size: 24px; font-weight: 800; color: var(--accent, #98DEA3); }
-    .testimonial-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-    }
-    .testimonial-card .quote { font-style: italic; margin-bottom: 10px; }
-    .testimonial-card .author { color: var(--accent, #98DEA3); font-weight:700; font-size:14px; }
-    .value-prop { display:flex; align-items:center; gap:8px; color: var(--text); }
-    .value-prop::before { content:'✓'; color: var(--accent, #98DEA3); font-weight:900; }
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .hero .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(114,105,227,.15);border:1px solid rgba(114,105,227,.35);color:#fff;padding:8px 12px;border-radius:999px;font-size:14px}
+    .hero .title{font-size:clamp(28px,4vw,48px);margin:12px 0 8px 0}
+    .hero .lead{font-size:clamp(16px,1.8vw,20px);color:var(--muted,#c4c8d4);margin:0 0 24px 0}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:12px;border:1px solid transparent;background:var(--primary,#7269E3);color:#fff;font-weight:700;cursor:pointer;transition:transform .12s ease, opacity .2s ease}
+    .btn:hover{transform:translateY(-1px);opacity:.95}
+    .btn.secondary{background:transparent;border-color:var(--border,#3d455c);color:#fff}
+    .btn.ghost{background:transparent;border-color:transparent}
+    .muted{color:var(--muted,#c4c8d4)}
+    .tag{display:inline-flex;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px;font-size:12px;color:#fff}
 
-    /* Estilos simples para elementos mencionados mas não definidos aqui */
-    .caption{ color:var(--muted); font-size:12px; margin-top:2px; }
-    .tag{ display:inline-block; padding:4px 10px; border:1px solid var(--primary); border-radius:999px; font-size:12px; color:var(--primary); }
+    /* Cards de features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{padding:24px;border-radius:16px;border:1px solid var(--border,#3d455c);background:rgba(255,255,255, .02)}
+    .feature h3{margin:0 0 8px 0;font-size:18px;color:#fff}
+    .feature p{margin:0;color:var(--muted,#c4c8d4);font-size:15px}
 
-    /* Hero media wrapper (parallax) */
-    .hero-media-wrap img { will-change: transform; transition: transform .12s linear; }
+    /* Preços */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .plan{padding:24px;border-radius:20px;border:1px solid var(--border,#3d455c);background:rgba(255,255,255,.02)}
+    .plan .headline{font-size:20px;color:var(--purple,#7269E3)}
+    .plan .price{font-size:32px;margin:8px 0 12px 0}
+    .plan ul{margin:0;padding:0;list-style:none;color:var(--muted,#c4c8d4)}
+    .plan li{padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
+    .plan li:last-child{border-bottom:0}
+
+    /* FAQ */
+    .faq{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .faq .item{padding:20px;border:1px solid var(--border,#3d455c);border-radius:16px;background:rgba(255,255,255,.02)}
+    .faq h3{margin:0 0 6px 0;font-size:18px;color:var(--purple,#7269E3)}
+
+    /* Depoimentos */
+    .depo{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .quote{padding:24px;border:1px solid var(--border,#3d455c);border-radius:16px;background:rgba(255,255,255,.02)}
+
+    /* Responsivo */
+    @media (max-width: 1024px){
+      .hero-grid{grid-template-columns:1fr}
+      .features, .pricing, .faq, .depo{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .features, .pricing, .faq, .depo{grid-template-columns:1fr}
+      .hero .title{font-size:32px}
+      .hero .lead{font-size:16px}
+    }
+  </style>
+
+  <style>
+    .skip-link{position:absolute;left:-999px;top:-999px}
+    .skip-link:focus-visible{position:static;left:auto;top:auto;display:inline-block;margin:8px;z-index:1000}
   </style>
 </head>
-
 <body>
-  <a href="#conteudo" class="btn secondary">Pular para o conteúdo</a>
 
-  <!-- Header compartilhado -->
-  <div id="site-header"></div>
+  <!-- Skip link acessível -->
+  <a href="#conteudo" class="btn secondary skip-link">Pular para o conteúdo</a>
+
+  <!-- HEADER via JS (opcional) -->
+  <div id="header-root"></div>
   <script src="header.js" defer></script>
 
+  <!-- HERO -->
+  <header class="hero section">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge"><span aria-hidden="true">⚡</span> Versão 1.0 ativa</span>
+        <h1 class="title headline">Um novo jeito de atender no WhatsApp: simples, mais humano e inteligente</h1>
+        <p class="lead">Apresentamos o Agente Guia, um agente de IA criado para organizar seu atendimento, responder no tom da sua marca e dar mais tempo para o que importa: cuidar dos clientes.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#planos">Quero conhecer o Agente Guia</a>
+          <a class="btn secondary" href="#como-funciona">Como funciona</a>
+        </div>
+        <p class="muted" style="margin-top:8px">Respostas em segundos, 24 horas, com aprendizado contínuo</p>
+      </div>
+
+      <div>
+        <img id="roboHero" src="robo_hero.png" alt="Robô Agente Guia — imagem de capa" width="1280" height="960" style="border-radius:20px; box-shadow:var(--shadow-lg)" loading="eager">
+      </div>
+    </div>
+  </header>
+
   <main id="conteudo">
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-
-        <!-- Coluna do texto -->
-        <div class="hero-copy">
-          <span class="tag" style="color: var(--primary); border-color: var(--primary);">Versão 1.0</span>
-          <h1 class="headline">
-            Um novo jeito de atender no WhatsApp: simples, mais humano e inteligente
-          </h1>
-
-          <p class="hero-description">
-            Apresentamos o Agente Guia, um agente de IA criado para organizar seu atendimento, responder no tom da sua marca e dar mais tempo para o que importa: cuidar dos clientes.
-          </p>
-          <div class="actions">
-            <a class="btn primary" href="#planos">Quero conhecer o Agente Guia</a>
-          </div>
-        </div>
-
-        <!-- Coluna da imagem -->
-        <div class="hero-media-wrap">
-          <img id="roboHero" src="robo_hero.png"
-               alt="Robô Agente Guia — imagem de capa"
-               width="1200" height="1200" decoding="async" fetchpriority="high" loading="eager"
-               style="max-width: 100%; height: auto; display: block;" />
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PROVA SOCIAL (KPIs) -->
-    <section class="social-proof-bar" aria-label="Indicadores de prova social">
-      <div class="container" style="display:flex; justify-content:space-around; gap:20px; flex-wrap:wrap;">
-        <div><div class="kpi">120+</div><div class="caption">Empresas Atendidas</div></div>
-        <div><div class="kpi">98%</div><div class="caption">Satisfação</div></div>
-        <div><div class="kpi">24/7</div><div class="caption">Suporte Total</div></div>
-        <div><div class="kpi">40%</div><div class="caption">Aumento Médio de Vendas</div></div>
-      </div>
-    </section>
-
-    <!-- SOBRE A AGÊNCIA (RESUMO + CTA) -->
-    <section class="section" id="sobre-agencia" aria-labelledby="titulo-sobre">
-      <div class="container card" style="padding:32px;">
-        <h2 class="headline text-center" id="titulo-sobre">Por que o Agente Guia é diferente?</h2>
-        <p class="subhead text-center">Não criamos apenas um bot. Desenvolvemos um agente que aprende seu jeito de atender e evolui junto com seu negócio.</p>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin:20px 0;">
-          <div class="value-prop" style="justify-content:center;">Mais humano desde o início: responde no tom da sua marca e sabe quando passar para a sua equipe.</div>
-          <div class="value-prop" style="justify-content:center;">Configuração guiada: você não precisa entender de IA, nós cuidamos da implementação com você.</div>
-          <div class="value-prop" style="justify-content:center;">Clareza nos dados: relatórios simples que mostram onde melhorar sem complexidade.</div>
-          <div class="value-prop" style="justify-content:center;">Suporte real: equipe disponível para ajustar, treinar e acompanhar sua evolução.</div>
-        </div>
-
-        <div class="text-center">
-          <a class="btn primary" href="pagina_empresa.html">Conheça nossa história</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMO FUNCIONA — textos posicionados como na imagem (duas colunas laterais centralizadas) -->
-    <section class="section how-it-works" id="como-funciona" aria-labelledby="titulo-como">
-      <style>
-        /* ===== Variáveis locais ===== */
-        .how-it-works{
-          --col-gap: 56px;        /* distância lateral entre textos e celular */
-          --stack-gap: 54px;      /* distância vertical entre os dois textos de cada lado */
-          --card-max: 280px;      /* largura máxima dos cards (desktop) */
-          --phone-scale: .78;     /* escala do mockup no desktop */
-          background: var(--bg);
-          color: var(--text);
-          padding: 40px 16px 64px;
-          font-family: var(--font-body), sans-serif;
-        }
-        .how-it-works .container{ max-width:1120px; margin:0 auto; }
-
-        /* ===== Títulos ===== */
-        .how-it-works .title{
-          text-align:center;
-          margin: 0 0 14px;
-        }
-        .how-it-works .title h2{
-          font-family: var(--font-heading);
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing:.2px;
-          margin:0;
-          font-size: clamp(26px, 3.6vw, 44px);
-        }
-        .how-it-works .title h3{
-          font-family: var(--font-heading);
-          font-weight: 800;
-          text-transform: uppercase;
-          margin:.2rem 0 0;
-          font-size: clamp(20px, 2.8vw, 32px);
-          color: var(--mint);
-        }
-
-        /* ===== Layout principal ===== */
-        .how-it-works .grid{
-          display:grid;
-          grid-template-columns: 1fr minmax(260px, 400px) 1fr; /* esquerda | celular | direita */
-          grid-template-areas: "left phone right";
-          align-items: center;
-          column-gap: var(--col-gap);
-          row-gap: 0;
-          margin-top: 10px;
-        }
-
-        /* ===== Colunas laterais (pilhas centralizadas) ===== */
-        .how-it-works .col{
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-          justify-content:center;   /* centraliza a pilha verticalmente no eixo do celular */
-          gap: var(--stack-gap);
-        }
-        .how-it-works .col.left{ grid-area:left; }
-        .how-it-works .col.right{ grid-area:right; }
-
-        /* ===== Card ===== */
-        .how-it-works .card{
-          background: rgba(114,105,227,.06);  /* leve realce como na referência */
-          border-radius: 16px;
-          padding: 14px 16px;
-          max-width: var(--card-max);
-          text-align: center;
-          box-shadow: 0 10px 30px rgba(0,0,0,.18);
-          border: 1px solid rgba(255,255,255,.06);
-        }
-        .how-it-works .card .headline{
-          font-family: var(--font-heading);
-          font-weight: 800;
-          text-transform: uppercase;
-          color: var(--purple);
-          margin: 0 0 6px;
-          letter-spacing: .2px;
-          line-height: 1.12;
-          font-size: 17px;
-        }
-        .how-it-works .card .subhead{
-          margin: 0;
-          color: var(--muted);
-          font-size: 14px;
-          line-height: 1.35;
-          font-family: var(--font-body);
-        }
-
-        /* ===== Celular ===== */
-        .how-it-works .phone{
-          grid-area: phone;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-        }
-        .how-it-works .phone .phone-scale-wrapper{
-          transform: scale(var(--phone-scale));
-          transform-origin: center;
-        }
-        .how-it-works .phone-frame{
-          position:relative;
-          width: clamp(240px, 34vw, 400px);
-          filter: drop-shadow(0 10px 24px rgba(0,0,0,.55));
-        }
-        .how-it-works .phone-frame img{
-          width:100%; height:auto; display:block; user-select:none; pointer-events:none;
-        }
-        .how-it-works .phone-screen{
-          --inset-top:   7.5%;
-          --inset-right: 6%;
-          --inset-bottom:7.6%;
-          --inset-left:  6%;
-          position:absolute;
-          top:var(--inset-top); right:var(--inset-right);
-          bottom:var(--inset-bottom); left:var(--inset-left);
-          border-radius:26px; overflow:hidden; background:#000;
-          box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-        }
-        .how-it-works .phone-screen iframe{
-          position:absolute; inset:0; width:100%; height:100%; border:0; display:block;
-        }
-
-        /* ===== Responsivo ===== */
-        @media (max-width: 980px){
-          .how-it-works{
-            --phone-scale: 1;
-            --card-max: 560px;
-            --col-gap: 20px;
-            --stack-gap: 14px;
-          }
-          .how-it-works .grid{
-            grid-template-columns: 1fr;
-            grid-template-areas:
-              "title"
-              "phone"
-              "left"
-              "right";
-            row-gap: 14px;
-          }
-          .how-it-works .col{ align-items:center; }
-          .how-it-works .card{ background:transparent; box-shadow:none; border:0; }
-        }
-      </style>
-
+    <!-- POR QUE O AGENTE GUIA -->
+    <section class="section" id="porque">
       <div class="container">
-        <div class="title">
-          <h2 id="titulo-como">COMO TRANSFORMAMOS SEU WHATSAPP</h2>
-          <h3>EM UMA MÁQUINA DE VENDAS</h3>
-        </div>
+        <h2 class="headline text-center">POR QUE O AGENTE GUIA</h2>
+        <p class="subtitle text-center">Atendimento no seu tom de voz. Qualificação de leads. Integrações práticas. Tudo em um só lugar.</p>
 
-        <div class="grid">
-          <!-- Coluna esquerda -->
-          <div class="col left">
-            <article class="card">
-              <h3 class="headline">ANÁLISE ESTRATÉGICA</h3>
-              <p class="subhead">Mapeamos seu funil e identificamos oportunidades de automação que geram mais conversões.</p>
-            </article>
-
-            <article class="card">
-              <h3 class="headline">CONFIGURAÇÃO TÉCNICA</h3>
-              <p class="subhead">Simulamos conversas reais, ajustamos respostas e deixamos o agente pronto para lidar com situações do dia a dia.</p>
-            </article>
+        <div class="features">
+          <div class="feature">
+            <h3><span aria-hidden="true">🎯</span> Respostas no tom da sua marca</h3>
+            <p>Personalização de linguagem, vocabulário e contexto para manter consistência em cada mensagem.</p>
           </div>
-
-          <!-- Celular -->
-          <figure class="phone" role="group" aria-label="Simulação do Agente Guia em um smartphone">
-            <div class="phone-scale-wrapper">
-              <div class="phone-frame">
-                <img src="iphone_placeholder.png" alt="Mockup do iPhone exibindo o Agente Guia" width="800" height="1600" decoding="async" loading="lazy">
-                <div class="phone-screen" aria-label="Simulação WhatsApp">
-                  <iframe
-                    src="whats_app_chat_sim.html"
-                    title="Simulação de conversa WhatsApp — Agente Guia"
-                    loading="lazy"
-                    referrerpolicy="no-referrer"></iframe>
-                </div>
-              </div>
-            </div>
-          </figure>
-
-          <!-- Coluna direita -->
-          <div class="col right">
-            <article class="card">
-              <h3 class="headline">ACOMPANHAMENTO</h3>
-              <p class="subhead">Depois do lançamento, seguimos juntos: acompanhamos o desempenho e fazemos ajustes contínuos para evoluir o atendimento.</p>
-            </article>
-
-            <article class="card">
-              <h3 class="headline">IA TREINADA</h3>
-              <p class="subhead">Fluxos com o tom da sua marca que qualificam e nutrem leads automaticamente.</p>
-            </article>
+          <div class="feature">
+            <h3><span aria-hidden="true">🤝</span> Handover humano sem atrito</h3>
+            <p>Quando necessário, a conversa passa para um atendente humano com contexto preservado.</p>
+          </div>
+          <div class="feature">
+            <h3><span aria-hidden="true">📅</span> Integrações e agendamentos</h3>
+            <p>Conecta com agenda e CRM para marcar horários, registrar interesses e acompanhar jornadas.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <article class="card" style="padding:24px; display:flex; flex-direction:column; align-items:center; text-align:center;">
-      <p class="subhead" style="margin:0 0 8px;">Aumento no índice de satisfação (CSAT)</p>
-      <p class="headline" style="font-size:28px; margin:0; color:var(--purple)">+18%</p>
-      <div class="value-prop">Atendimento 24/7 sem falhas</div>
-    </article>
+    <!-- COMO FUNCIONA -->
+    <section class="section" id="como-funciona">
+      <div class="container card" style="padding:32px">
+        <h2 class="headline text-center">COMO FUNCIONA</h2>
+        <p class="subtitle text-center">Fluxo simples do primeiro oi até a conversão</p>
 
-    <!-- RECURSOS (v1.1) -->
-    <section class="section" id="recursos" aria-labelledby="titulo-recursos">
+        <div class="features">
+          <div class="feature">
+            <h3>Mapeamento do seu atendimento</h3>
+            <p>Entendemos as perguntas frequentes, objetivos e tom de voz para configurar o agente.</p>
+          </div>
+          <div class="feature">
+            <h3>Teste guiado em ambiente seguro</h3>
+            <p>Antes de ir ao ar, testamos com você e ajustamos respostas, ramificações e integrações.</p>
+          </div>
+          <div class="feature">
+            <h3>Publicação e melhoria contínua</h3>
+            <p>Entrou em produção. Monitoramos métricas e evoluímos o agente a cada semana.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULAÇÃO (iframe com título) -->
+    <section class="section" id="simulacao">
       <div class="container">
-        <h2 class="headline text-center" id="titulo-recursos">RECURSOS QUE AUMENTAM SUAS VENDAS</h2>
-
-        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:12px; text-align:center;">
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:20px; color:var(--primary);">
-              <span class="icone" aria-hidden="true" style="font-size: 40px;">🎯</span>
-              <span class="accent" style="color:var(--purple)">QUALIFICAÇÃO INTELIGENTE</span>
-            </h3>
-            <p class="subhead">Identifica clientes com maior potencial e prioriza atendimento humano.</p>
-          </div>
-
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:20px; color:var(--primary);">
-              <span class="icone" aria-hidden="true" style="font-size: 40px;">⚡</span>
-              <span class="accent" style="color:var(--purple)">RESPOSTAS INSTANTÂNEAS</span>
-            </h3>
-            <p class="subhead">Catálogo, preços e políticas em menos de 2 segundos.</p>
-          </div>
-
-          <div class="card" style="padding:20px">
-            <h3 class="headline" style="font-size:20px; color:var(--primary);">
-              <span class="icone" aria-hidden="true" style="font-size: 40px;">🤝</span>
-              <span class="accent" style="color:var(--purple)">HANDOVER INTELIGENTE</span>
-            </h3>
-            <p class="subhead">Transfere para humano na hora certa, com contexto completo.</p>
-          </div>
+        <h2 class="headline text-center">SIMULE O ATENDIMENTO</h2>
+        <p class="subtitle text-center">Veja um exemplo de conversa do Agente Guia</p>
+        <div class="card" style="padding:0; overflow:hidden">
+          <iframe src="whats_app_chat_sim.html" title="Simulação de conversa do Agente Guia no WhatsApp" style="width:100%;height:600px;border:0;display:block"></iframe>
         </div>
       </div>
     </section>
 
     <!-- PLANOS -->
-    <section class="section" id="planos" aria-labelledby="titulo-planos">
+    <section class="section" id="planos">
       <div class="container">
-        <h2 class="headline text-center" id="titulo-planos">ESCOLHA COMO COMEÇAR COM O AGENTE GUIA</h2>
-        <p class="subhead text-center">Oferecemos diferentes formas de iniciar, todas com implementação guiada e suporte próximo.</p>
+        <h2 class="headline text-center">PLANOS</h2>
+        <p class="subtitle text-center">Escolha o nível ideal para começar</p>
 
-        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:16px;">
-          <div class="card" style="padding:22px; display:flex; flex-direction:column; align-items:center; text-align:center;">
-            <h3 class="headline" style="font-size:20px; color:var(--purple)">PLANO ESSENCIAL</h3>
-            <p class="subhead">Configuração inicial do agente</p>
-            <p class="subhead">Respostas automáticas básicas</p>
-            <p class="subhead">Handover humano integrado</p>
-            <a class="btn primary" href="#contato" style="margin-top:8px">Quero começar pelo Essencial</a>
+        <div class="pricing">
+          <div class="plan">
+            <h3 class="headline" style="font-size:20px; color:var(--purple, #7269E3)">ESSENCIAL</h3>
+            <div class="price">R$ 497/mês</div>
+            <ul>
+              <li>Fluxos básicos de atendimento</li>
+              <li>Base de conhecimento inicial</li>
+              <li>Handover humano</li>
+              <li>Suporte por email</li>
+            </ul>
           </div>
 
-          <div class="card" style="padding:22px; border:2px solid var(--accent); display:flex; flex-direction:column; align-items:center; text-align:center;">
-            <h3 class="headline" style="font-size:20px; color:var(--purple)">PLANO PROFISSIONAL</h3>
-            <p class="subhead">Tudo do Essencial</p>
-            <p class="subhead">Fluxos personalizados</p>
-            <p class="subhead">Relatórios claros de desempenho</p>
-            <p class="subhead">Suporte dedicado</p>
-            <a class="btn primary" href="#contato" style="margin-top:8px">Quero o Profissional</a>
+          <div class="plan">
+            <h3 class="headline" style="font-size:20px; color:var(--purple, #7269E3)">PRO</h3>
+            <div class="price">R$ 997/mês</div>
+            <ul>
+              <li>Integração com agenda e CRM</li>
+              <li>Treinamento contínuo</li>
+              <li>Relatórios mensais</li>
+              <li>Suporte prioritário</li>
+            </ul>
           </div>
 
-          <div class="card" style="padding:22px; display:flex; flex-direction:column; align-items:center; text-align:center;">
-            <h3 class="headline" style="font-size:20px; color:var(--purple)">PLANO PERSONALIZADO</h3>
-            <p class="subhead">Consultoria estratégica</p>
-            <p class="subhead">Integrações avançadas</p>
-            <p class="subhead">Acompanhamento contínuo</p>
-            <p class="subhead">Ajustes exclusivos de fluxo</p>
-            <a class="btn primary" href="#contato" style="margin-top:8px">Falar sobre um projeto sob medida</a>
+          <div class="plan">
+            <h3 class="headline" style="font-size:20px; color:var(--purple, #7269E3)">EMPRESAS</h3>
+            <div class="price">Sob consulta</div>
+            <ul>
+              <li>Escopo customizado</li>
+              <li>SLAs e segurança</li>
+              <li>Onboarding dedicado</li>
+              <li>Integrações avançadas</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SEGURANÇA / LGPD (centralização visual simétrica) -->
-    <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
-      <style>
-        /* Padding lateral menor só nesta seção */
-        #seguranca .container{
-          padding-inline:12px;
-        }
-
-        /* Caixa da tabela */
-        #seguranca .sec-box{
-          margin:12px auto 0;
-          background:rgba(255,255,255,.045);
-          border:1px solid rgba(255,255,255,.12);
-          border-radius:16px;
-          box-shadow:var(--shadow);
-          padding:8px;
-          width:100%;
-          max-width:1080px;
-        }
-
-        /* Tabela centralizada visualmente */
-        #seguranca .table{
-          border-collapse:collapse;
-          width:auto;
-          margin:0 auto;
-        }
-        #seguranca .table th,
-        #seguranca .table td{
-          text-align:center;
-          padding:10px 20px;
-          vertical-align:middle;
-          color: var(--text);
-        }
-
-        /* Cabeçalho */
-        #seguranca .table thead th{
-          color:var(--purple);
-          font-family:var(--font-heading);
-          font-weight:800;
-          text-transform:uppercase;
-          letter-spacing:.2px;
-          border-bottom:1px solid rgba(255,255,255,.08);
-          white-space:nowrap;
-        }
-
-        /* Primeira coluna em negrito */
-        #seguranca .table td:first-child{
-          font-weight:700;
-          white-space:nowrap;
-        }
-
-        /* Mobile */
-        @media (max-width: 640px){
-          #seguranca .container{ padding-inline:10px; }
-          #seguranca .sec-box{ padding:8px; max-width:100%; }
-          #seguranca .table{ width:100%; }
-          #seguranca .table th,
-          #seguranca .table td{ padding:8px 10px; }
-        }
-      </style>
-
-      <div class="container">
-        <h2 class="headline text-center" id="titulo-seguranca">SEGURANÇA & COMPLIANCE</h2>
-        <p class="subhead text-center">Seus dados e de seus clientes protegidos de ponta a ponta.</p>
-
-        <div class="sec-box">
-          <table class="table" aria-label="Práticas de segurança e privacidade">
-            <thead>
-              <tr>
-                <th scope="col">Área</th>
-                <th scope="col">Nossa Proteção</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>LGPD/GDPR</td><td>Opt-in/opt-out automático e registros.</td></tr>
-              <tr><td>Dados</td><td>Criptografia em trânsito e em repouso; retenção configurável.</td></tr>
-              <tr><td>Infraestrutura</td><td>AWS/Azure com certificações de segurança.</td></tr>
-              <tr><td>Acesso</td><td>MFA e logs de auditoria.</td></tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- CTA -->
+    <section class="section" id="cta">
+      <div class="container card" style="padding:32px; text-align:center">
+        <h2 class="headline">PRONTO PARA COMEÇAR</h2>
+        <p class="subtitle">Vamos entender seu contexto e montar o agente certo para seu atendimento</p>
+        <a class="btn" href="https://wa.me/5511999999999" target="_blank" rel="noopener">Falar no WhatsApp</a>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq" aria-labelledby="titulo-faq">
+    <section class="section" id="faq">
       <div class="container">
-        <h2 class="headline text-center" id="titulo-faq">DÚVIDAS FREQUENTES</h2>
-
-        <!-- Grid do FAQ corrigido -->
-        <div style="display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:16px;">
-          <div class="card" style="padding:20px; text-align:center">
-            <div class="icone" style="font-size: 40px;" aria-hidden="true">🚀</div>
-            <h3 class="headline" style="font-size:18px; color:var(--purple)">Funciona em qualquer tipo de negócio?</h3>
-            <p class="subhead">Sim. O Agente Guia pode ser adaptado a diferentes rotinas, seja em lojas online, prestadores de serviço ou empresas locais.</p>
+        <h2 class="headline text-center">PERGUNTAS FREQUENTES</h2>
+        <div class="faq">
+          <div class="item">
+            <h3 class="headline" style="font-size:18px; color:var(--purple)">Em quanto tempo vejo resultados?</h3>
+            <p>Depende do volume de mensagens e da clareza dos fluxos. Em geral, os primeiros ganhos aparecem na primeira semana de operação.</p>
           </div>
-
-          <div class="card" style="padding:20px; text-align:center">
-            <div class="icone" style="font-size: 40px;" aria-hidden="true">📱</div>
+          <div class="item">
             <h3 class="headline" style="font-size:18px; color:var(--purple)">Funciona no meu número atual?</h3>
-            <p class="subhead">Sim, via WhatsApp Business API oficial, sem perder histórico.</p>
+            <p>Sim. Trabalhamos com o seu número. Também ajudamos na migração se necessário.</p>
           </div>
+          <div class="item">
+            <h3 class="headline" style="font-size:18px; color:var(--purple)">Preciso entender de tecnologia?</h3>
+            <p>Não. Cuidamos da configuração, integrações e manutenção. Você participa das decisões e acompanha métricas.</p>
+          </div>
+          <div class="item">
+            <h3 class="headline" style="font-size:18px; color:var(--purple)">E se eu quiser falar com um humano?</h3>
+            <p>Sem problema. O agente faz o handover para a sua equipe com o contexto da conversa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="card" style="padding:20px; text-align:center">
-            <div class="icone" style="font-size: 40px;" aria-hidden="true">🤖</div>
-            <h3 class="headline" style="
+    <!-- FORM CONTATO -->
+    <section class="section" id="contato">
+      <div class="container card" style="padding:32px">
+        <h2 class="headline text-center">FALE COM A GENTE</h2>
+        <form onsubmit="event.preventDefault(); alert('Recebemos seus dados. Entraremos em contato.');">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" autocomplete="name" required style="padding:12px;border-radius:10px;border:1px solid var(--border,#3d455c);background:rgba(255,255,255,.02);color:#fff">
+            <input type="email" id="email" name="email" placeholder="Seu email" autocomplete="email" required style="padding:12px;border-radius:10px;border:1px solid var(--border,#3d455c);background:rgba(255,255,255,.02);color:#fff">
+          </div>
+          <div style="margin-top:12px">
+            <input type="tel" id="telefone" name="telefone" inputmode="tel" placeholder="Seu WhatsApp" autocomplete="tel" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border,#3d455c);background:rgba(255,255,255,.02);color:#fff">
+          </div>
+          <div style="margin-top:16px">
+            <button class="btn" type="submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section" id="depoimentos">
+      <div class="container">
+        <h2 class="headline text-center" id="titulo-depoimentos">O QUE NOSSOS CLIENTES DIZEM</h2>
+        <div class="depo">
+          <blockquote class="quote">
+            <p>“O Agente Guia reduziu nosso tempo de resposta e aumentou as conversões no WhatsApp.”</p>
+            <small class="muted">Marina, E-commerce</small>
+          </blockquote>
+          <blockquote class="quote">
+            <p>“Conseguimos marcar horários direto pela conversa. O time ficou livre para o que importa.”</p>
+            <small class="muted">Rafael, Clínica</small>
+          </blockquote>
+          <blockquote class="quote">
+            <p>“A linguagem do bot parece a nossa. Os clientes elogiam a experiência.”</p>
+            <small class="muted">Carol, Educação</small>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER via JS (opcional) -->
+  <div id="footer-root"></div>
+  <script src="footer.js" defer></script>
+
+  <!-- Parallax suave no hero -->
+  <script>
+    const robo = document.getElementById('roboHero');
+    if(robo){
+      const wrapper = robo.closest('div');
+      if(wrapper){ wrapper.style.willChange = 'transform'; }
+      let y = 0;
+      window.addEventListener('scroll', () => {
+        const offset = window.scrollY || 0;
+        const damp = Math.min(20, Math.max(-20, offset * 0.03));
+        y = damp;
+        robo.style.transform = `translateY(${y}px)`;
+      }, {passive:true});
+    }
+  </script>
+</body>
+</html>
